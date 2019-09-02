@@ -2,7 +2,7 @@
 
 require 'app/lib/dev.php';
 
-use app\core\Router;
+use app\core\Model;
 //require 'app/core/Router.php';
 
 
@@ -14,8 +14,8 @@ spl_autoload_register(function ($class) {
 });
 
 
-$router = new Router();
-$router->run();
+$model = new Model();
+$model->migration();
 
 
 ?>
