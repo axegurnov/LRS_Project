@@ -13,15 +13,12 @@ by ImageSpark<br>
        <li> lib/</li>
        <li> models/</li>
        <li><ul>
-       <li>views/
-           <ul><li>layouts</li></ul>
-            </li>
-        </li>
-               <li>public/
+       <li>views/</li>
+        <ul><li>layouts</li></ul>
+        <li>public/<li>
                        <ul><li>css</li></ul>
                        <ul><li>js</li></ul
-                       </li></ul></li>
-            </ul></li> 
+                       </ul></li> 
             </ul>
 
   
