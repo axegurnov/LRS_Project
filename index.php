@@ -1,7 +1,7 @@
 <?php
 
 require 'app/config/Dev.php';
-require  'app/config/Migration.php';
+//require  'app/config/Migration.php';
 use app\core\Model;
 //require 'app/core/Router.php';
 

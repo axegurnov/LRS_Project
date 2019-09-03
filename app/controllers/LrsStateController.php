@@ -3,7 +3,8 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class LrsstateController extends Controller {
+class LrsStateController extends Controller {
 	protected $table = "lrs_state";
 }
+
 ?>
