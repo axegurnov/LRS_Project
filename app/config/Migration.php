@@ -9,7 +9,7 @@
 
 $DB_HOST = 'localhost';
 $DB_USER = 'root';
-$DB_PASS = '123';
+$DB_PASS = 'Narutovs';
 $DB_BASE = 'lrs';
 
 $db = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_BASE) or die ('error');

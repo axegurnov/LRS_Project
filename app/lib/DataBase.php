@@ -15,7 +15,7 @@ class DataBase
 {
     private static $DB_HOST = 'localhost';
     private static $DB_USER = 'root';
-    private static $DB_PASS = '123';
+    private static $DB_PASS = 'Narutovs';
     private static $DB_BASE = 'lrs';
 
     protected $db;
