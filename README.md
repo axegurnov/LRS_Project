@@ -4,19 +4,27 @@ by ImageSpark<br>
 В корневом каталоге LRS_Project находятся несколько подкаталогов app, js, css, img
  - подкаталог app содержит основной модуль приложения
  - подкаталог css содержит все общедоступные CSS-файлы;
- - подкаталог img содержит общедоступные изображения (.JPG, .PNG, .GIF, и т.д);
  - подкаталог js хранит общедоступные JavaScript-файлы;
-app/
-    config/
-    controllers/
-    core/
-    lib/
-    models/
-    views/
-        layouts
-css/
-img/
-js/
+ <ul>
+     <li>app/
+      <ul>
+       <li>controllers/</li>
+       <li>core/</li>
+       <li> lib/</li>
+       <li> models/</li>
+       <li><ul>
+       <li>views/
+           <ul><li>layouts</li></ul>
+            </li>
+        </li>
+               <li>public/
+                       <ul><li>css</li></ul>
+                       <ul><li>js</li></ul
+                       </li></ul></li>
+            </ul></li> 
+            </ul>
+
+  
 Директория app содержит подкаталоги config, controllers, core, lib, models, views
  - подкаталог config содержит вспомогательныу файлы для отладки ошибок и осуществления миграции базы данных
  - подкаталог controllers содержит все контроллеры
