@@ -6,14 +6,10 @@
 
 	class Router
 	{
-		protected $routes = [];
 		// хранит данные, какой вызвать контроллер и экшн
 		protected $params = [];
 
-
 		protected $argUri = [];
-
-		private $foundRoute = false;
 
 		public function __construct()
 		{
@@ -26,6 +22,7 @@
 
 			// записываем путь в uri
 			$routeUri = trim($_GET['route'], '/');
+			$foundRoute = false;
 
 			// перебираем роуты и ищем совпадение с введеным uri
 			// записываем параметры (controller, action)
@@ -33,10 +30,10 @@
 				if($routeUri == $key) {
 					$this->params = $value;
 					// debug($this->params);
-					$this->foundRoute = true;
+					$foundRoute = true;
 				}
 			}
-			if($this->foundRoute) {
+			if($foundRoute) {
 				$this->run();
 			}
 			else {
