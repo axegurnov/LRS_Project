@@ -1,8 +1,9 @@
 <?php
 
 require 'app/config/Dev.php';
-require  'app/config/Migration.php';
+// require  'app/config/Migration.php';
 use app\core\Model;
+use app\core\Router;
 //require 'app/core/Router.php';
 
 
@@ -14,9 +15,12 @@ spl_autoload_register(function ($class) {
 });
 
 
-$model = new Model();
-$model->migration();
-var_dump($_GET);
+// $model = new Model();
+// $model->migration();
+
+$router = new Router;
+// $router->run();
+
 
 
 ?>
