@@ -6,28 +6,24 @@
  * Time: 10:39
  */
 
-
 namespace app\lib;
-
 use mysqli;
+
 
 class DataBase
 {
-    private $DB_HOST = 'localhost';
-    private $DB_USER = 'root';
-    private $DB_PASS = 'Narutovs';
-    private $DB_BASE = 'lrs';
-
     protected $db;
-
-    static private $_instance = null;
+    private static $_instance = null;
 
     private function __construct()
     {
-        $this->db = new mysqli($this->DB_HOST, $this->DB_USER, $this->DB_PASS,$this->DB_BASE) or die ('error');
+        $config = require 'app/config/Database.php';
+        $this->db = new mysqli($config['host'], $config['user'], $config['password'],$config['base']) or die ('error');
+        //debug($this->db->error);
+        require 'install/Migration.php';
     }
 
-    static public function getInstance(){
+    public static function getInstance(){
         if(self::$_instance === null){
             self::$_instance = new DataBase();
         }
@@ -39,8 +35,5 @@ class DataBase
         return $this->db->query($sql);
     }
 
-    public function errorDatabase()
-    {
-        return $this->db->error;
-    }
+
 }
