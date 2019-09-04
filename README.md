@@ -5,21 +5,22 @@ by ImageSpark<br>
  - подкаталог app содержит основной модуль приложения
  - подкаталог css содержит все общедоступные CSS-файлы;
  - подкаталог js хранит общедоступные JavaScript-файлы;
- <ul>
-     <li>app/
-      <ul>
-       <li>controllers/</li>
-       <li>core/</li>
-       <li> lib/</li>
-       <li> models/</li>
-       <li><ul>
-       <li>views/</li>
-        <ul><li>layouts</li></ul>
-        <li>public/<li>
-                       <ul><li>css</li></ul>
-                       <ul><li>js</li></ul
-                       </ul></li> 
-            </ul>
+<ul>
+    <li>app/</li>
+    <ul>
+        <li>controllers/</li>
+        <li>core/</li>
+        <li> lib/</li>
+        <li> models/</li>
+        <li>public/</li>
+        <ul>
+            <li>views/</li>
+            <ul><li>layouts</li></ul>
+            <li>css</li>
+            <li>js</li>
+        </ul>
+    </ul>
+</ul>
 
   
 Директория app содержит подкаталоги config, controllers, core, lib, models, views
@@ -63,7 +64,7 @@ Migrations in file /app/config/Migration.php.
 Формат данных:
 3.1 $template - строка 
 3.1.1 'папка/файл' без расширения
-3.1.2 Пример: generate('user/index') /app/views/user/index.php
+3.1.2 Пример: generate('user/index') /app/public/views/user/index.php
 Принцип работы метода: 
 3.2 Проверяет наличие подключаемого макета (заданного методом setLayout($layout))
 3.3 Создает переменные и присваивает им значения из массива $vars[] по принципу $key => $value, вызывая функцию extract($vars)
@@ -73,3 +74,7 @@ Migrations in file /app/config/Migration.php.
 3.4.1 Если файл присутствует, подключает его
 3.4.2 Если файл отсутствует, выдает соответствующее сообщение пользователю
 3.5 Подключает макет, с которым подтягиваются интерфейс и данные
+
+Layout 'main' включает в себя вывод ошибок, используя суперглобальный массив $_POST['errors']
+Для отображения ошибок (e.g. введение некорректных данных в форму), передавать в этот массив соответствующее сообщение.
+$_POST['errors'][] = 'wrong name';

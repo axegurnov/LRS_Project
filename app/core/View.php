@@ -6,7 +6,7 @@ class View
 {
     static protected $_instance = null;
 
-    protected $_layout;
+    protected $_layout = 'main';
 
     static public function getInstance()
     {
@@ -37,10 +37,8 @@ class View
             }
             require 'app/views/layouts/' . $this->_layout . '.php';
         }
-    }
-
-    public function redirect($url)
-    {
-        header('Location: ' . $url, false);
+        else {
+            echo "file not found";
+        }
     }
 }
