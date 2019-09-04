@@ -36,7 +36,7 @@ abstract class Controller
 		$this->beforeAction();
 		$page = 0;
 		if (isset($_GET["page"])) {
-			$page = htmlspecialchars(urldecode(trim($_GET["page"])), ENT_QUOTES | ENT_HTML401);
+			$page = $_GET["page"];
 		}
 		$this->convert($this->model->index($this->table, $page));
 	}
@@ -48,9 +48,6 @@ abstract class Controller
 		$vars = [];
 		if (count($_GET) > 1) {
 			array_shift($_GET);
-			foreach ($_GET as $key => $value) {
-				$_GET[$key] = exceptionSqlAction($value);
-			}
 			$vars = $_GET;
 		}
 		$this->convert($this->model->add($this->table, $vars));
@@ -62,7 +59,7 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = exceptionSqlAction($_GET["id"]);
+			$id = $_GET["id"];
 		}
 		$this->convert($this->model->delete($this->table, $id));
 	}
@@ -73,7 +70,7 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = exceptionSqlAction($_GET["id"]);
+			$id = $_GET["id"];
 		}
 		$this->convert($this->model->editget($this->table, $id));
 	}
@@ -86,9 +83,6 @@ abstract class Controller
 		$vars = [];
 		if (isset($_GET["id"]) && (count($_GET) > 2)) {
 			array_shift($_GET);
-			foreach ($_GET as $key => $value) {
-				$_GET[$key] = exceptionSqlAction($value);
-			}
 			$id = array_shift($_GET);
 			$vars = $_GET;
 		}
@@ -100,11 +94,6 @@ abstract class Controller
 	{
 		$array = json_encode($array);
 		return $array;
-	}
-
-	//исключение sql-инъекций
-	public function exceptionSqlAction($value) {
-		return htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
 	}
 
 	public function redirect($url)
