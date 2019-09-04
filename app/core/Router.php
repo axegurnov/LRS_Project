@@ -40,7 +40,7 @@
 				$this->run();
 			}
 			else {
-				debug('wrong url');
+				echo 'wrong url';
 			}
 		}
 
@@ -51,7 +51,6 @@
 			if(class_exists($path)) {
 				$controller = new $path($this->params);
 				$action = $this->params['action'] . 'Action';
-				debug($action);
 				if(method_exists($path, $action)) {
 					if(isset($this->params['page'])) {
 						$controller->$action($this->params['page']);
