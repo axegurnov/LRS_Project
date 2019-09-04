@@ -9,7 +9,6 @@ abstract class Controller
 	protected $model = null;
 	protected $view = null;
 	protected $route = null;
-	protected $table = null;
 
 	protected function beforeAction()
 	{
@@ -38,7 +37,7 @@ abstract class Controller
 		if (isset($_GET["page"])) {
 			$page = $_GET["page"];
 		}
-		$this->convert($this->model->index($this->table, $page));
+		$this->convert($this->model->index($page));
 	}
 
 	//ADD
@@ -50,7 +49,7 @@ abstract class Controller
 			array_shift($_GET);
 			$vars = $_GET;
 		}
-		$this->convert($this->model->add($this->table, $vars));
+		$this->convert($this->model->add($vars));
 	}
 
 	//DELETE
@@ -61,7 +60,7 @@ abstract class Controller
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
 		}
-		$this->convert($this->model->delete($this->table, $id));
+		$this->convert($this->model->delete($id));
 	}
 
 	//EDITGET
@@ -72,11 +71,11 @@ abstract class Controller
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
 		}
-		$this->convert($this->model->editget($this->table, $id));
+		$this->convert($this->model->editget($id));
 	}
 
 	//EDITPUT
-	public function editputAction()
+	public function updateAction()
 	{
 		$this->beforeAction();
 		$id = 0;
@@ -86,7 +85,7 @@ abstract class Controller
 			$id = array_shift($_GET);
 			$vars = $_GET;
 		}
-		$this->convert($this->model->editput($this->table, $id, $vars));
+		$this->convert($this->model->editput($id, $vars));
 	}
 
 	//преобразование к формату json
