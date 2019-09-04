@@ -49,7 +49,7 @@ abstract class Controller
 		if (count($_GET) > 1) {
 			array_shift($_GET);
 			foreach ($_GET as $key => $value) {
-				$_GET[$key] = htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
+				$_GET[$key] = exceptionSqlAction($value);
 			}
 			$vars = $_GET;
 		}
@@ -62,7 +62,7 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = htmlspecialchars(urldecode(trim($_GET["id"])), ENT_QUOTES | ENT_HTML401);
+			$id = exceptionSqlAction($_GET["id"]);
 		}
 		$this->convert($this->model->delete($this->table, $id));
 	}
@@ -73,7 +73,7 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = htmlspecialchars(urldecode(trim($_GET["id"])), ENT_QUOTES | ENT_HTML401);
+			$id = exceptionSqlAction($_GET["id"]);
 		}
 		$this->convert($this->model->editget($this->table, $id));
 	}
@@ -87,7 +87,7 @@ abstract class Controller
 		if (isset($_GET["id"]) && (count($_GET) > 2)) {
 			array_shift($_GET);
 			foreach ($_GET as $key => $value) {
-				$_GET[$key] = htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
+				$_GET[$key] = exceptionSqlAction($value);
 			}
 			$id = array_shift($_GET);
 			$vars = $_GET;
@@ -99,7 +99,12 @@ abstract class Controller
 	public function convertToJson($array)
 	{
 		$array = json_encode($array);
-		echo $array;
+		return $array;
+	}
+
+	//исключение sql-инъекций
+	public function exceptionSqlAction($value) {
+		return htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
 	}
 
 	public function redirect($url)
