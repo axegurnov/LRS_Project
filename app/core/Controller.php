@@ -26,9 +26,7 @@ abstract class Controller
 	{
         $path = "app\models\\" . ucfirst($nameModel);
 
-        if (class_exists($path)) {
-            return $path::getInstance($nameModel);
-        }
+		return new $path;
 	}
 
 	//LIST
