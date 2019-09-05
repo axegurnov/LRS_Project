@@ -10,7 +10,7 @@
             <label for="inputPassword">Password</label>
             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter password">
         </div>
-        <button type="submit" name="submit" class="btn btn-success" value="2">Login</button>
+        <button type="submit" name="login" class="btn btn-success" value="2">Login</button>
     </form>
 </div>
 
