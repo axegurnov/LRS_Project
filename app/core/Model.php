@@ -6,9 +6,9 @@
  * Time: 18:07
  */
 
-namespace app\core;
+namespace app\core\DataBase;
 
-use app\lib\DataBase;
+
 
 class Model
 {

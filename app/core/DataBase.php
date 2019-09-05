@@ -7,7 +7,7 @@
  */
 
 
-namespace app\lib;
+namespace app\models;
 
 use mysqli;
 
@@ -15,7 +15,7 @@ class DataBase
 {
     private $DB_HOST = 'localhost';
     private $DB_USER = 'root';
-    private $DB_PASS = 'Narutovs';
+    private $DB_PASS = 'root';
     private $DB_BASE = 'lrs';
 
     protected $db;
