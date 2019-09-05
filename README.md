@@ -33,8 +33,8 @@ by ImageSpark<br>
 
 =======
 # Миграции
-
-1.Для осуществения миграции необходимо в index.php прописать,тем самым вызвать метод migrationAction
+1.Прописать в файле app/config/Database.php данные для подключения к базе данных.
+2.Для осуществения миграции необходимо в index.php прописать,тем самым вызвать метод migrationAction
 $migration = MigrationController::migrationAction();
 
 # Компонент Router
