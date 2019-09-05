@@ -1,12 +1,9 @@
 <?php
 
 require 'app/config/Dev.php';
-
+;
 use app\core\Model;
 use app\core\Router;
-
-
-
 
 spl_autoload_register(function ($class) {
     $path = str_replace('\\','/',$class.'.php');
@@ -14,7 +11,9 @@ spl_autoload_register(function ($class) {
         require $path;
     }
 });
-
+//$migration = new \app\controllers\MigrationController();
+//
+//$migration->migrationAction();
 
 // $model = new Model();
 // $model->migration();

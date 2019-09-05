@@ -59,10 +59,15 @@ class Model
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-WHERE `TABLE_SCHEMA`='lrs'
-        AND `TABLE_NAME`= $table";
+WHERE `TABLE_SCHEMA`='LRS'
+        AND `TABLE_NAME`='.$table.'";
+        $link = mysqli_connect('localhost','root','123','user')
+        or die("Ошибка " . mysqli_error($link));
+       $result = mysqli_query($link, $sql) or die("Ошибка " . mysqli_error($link));
 
-        $result = $this->db->query($sql);
+       // $result = $this->db->query($sql);
+        $result = mysqli_query($link,$sql);
+       // debug($result);
         $rows = mysqli_num_rows($result);
         $i = 0;
         $fieldsStr = '';
@@ -86,10 +91,14 @@ WHERE `TABLE_SCHEMA`='lrs'
 
     public function getAllRecords($fields)
     {
-        $sql = "SELECT $fields FROM $this->table";
+        //$sql = "SELECT ".$fields." FROM ".$table.";";
+//        echo $sql;echo "<br>";
+//        $sql = "SELECT $fields FROM $table ;";
+//        echo $sql;echo "<br>";
+      $sql = "SELECT $fields FROM $this->table;";
+      echo $sql;echo "<br>";
 
         $object = $this->db->query($sql);
-        //$object = mysqli_query($db,$sql);
         $rows = mysqli_num_rows($object);
         $i = 0;
         $allRecords = array();
