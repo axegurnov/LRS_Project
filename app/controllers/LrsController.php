@@ -13,13 +13,32 @@ class LrsController extends Controller {
 
         $this->model = $this->getModel($this->table);
         $users = $this->model->getFields($this->table);
-        $r="name";
+
         $table='lrs';
         $fields = $this->model->getAllRecords("name");
 
 echo $this->table;
         print_r($fields);
 
+    }
+
+
+    protected $nameModel = 'lrs';
+
+
+
+    public function lrsListAction(){
+
+        $this->model = $this->getModel($this->nameModel);
+        $users = $this->model->getFields($this->nameModel);
+
+        $vars = [
+            'title' => 'LRS List',
+            'lrsr' => $users
+        ];
+
+
+        $this->view->generate('lrs/list.tlp',$vars);
     }
 
 }

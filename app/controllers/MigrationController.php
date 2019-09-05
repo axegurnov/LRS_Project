@@ -5,7 +5,7 @@ use app\core\Controller;
 
 class MigrationController extends Controller {
 
-	public function migrationAction()
+	public static function migrationAction()
 	{
         $config = require 'app/config/Database.php';
         //получаем реальный путь к миграциям

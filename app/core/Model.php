@@ -59,6 +59,7 @@ class Model
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+<<<<<<< HEAD
 WHERE `TABLE_SCHEMA`='LRS'
         AND `TABLE_NAME`='.$table.'";
         $link = mysqli_connect('localhost','root','123','user')
@@ -68,6 +69,12 @@ WHERE `TABLE_SCHEMA`='LRS'
        // $result = $this->db->query($sql);
         $result = mysqli_query($link,$sql);
        // debug($result);
+=======
+WHERE `TABLE_SCHEMA`='lrs'
+        AND `TABLE_NAME`= '".$table."';";
+
+        $result = $this->db->query($sql);
+>>>>>>> 7f34ae5f991fa2b650bf5c14e5703706d18a4898
         $rows = mysqli_num_rows($result);
         $i = 0;
         $fieldsStr = '';
