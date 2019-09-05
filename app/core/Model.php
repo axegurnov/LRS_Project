@@ -9,6 +9,22 @@ class Model
     public $params = array();
     public $params_changed = array();
 
+    public $db;
+    private static $_instance = null;
+
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+
+    public static function getInstance($nameModel) {
+        $path = 'app\models\\' . $nameModel;
+        if (self::$_instance == null) {
+            self::$_instance = new $path();
+        }
+        return self::$_instance;
+    }
+
     protected static function buildUpdateSql($data,$table,$id) {
         $columns = "";
         $holders = "";
@@ -45,9 +61,8 @@ class Model
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
 WHERE `TABLE_SCHEMA`='lrs'
         AND `TABLE_NAME`= $table";
-        $db = DataBase::getInstance();
 
-        $result = $db->query($sql);
+        $result = $this->db->query($sql);
         $rows = mysqli_num_rows($result);
         $i = 0;
         $fieldsStr = '';
