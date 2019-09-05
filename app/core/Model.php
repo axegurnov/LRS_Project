@@ -3,7 +3,7 @@
 namespace app\core;
 use app\models\DataBase;
 
-class ParentModel
+class Model
 {
     public $table = null;
     public $params = array();
