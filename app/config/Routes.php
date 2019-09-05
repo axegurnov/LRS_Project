@@ -1,6 +1,12 @@
 <?php
 
 return [
+
+    '' => [
+      'controller' => '?',
+      'action' => '?'
+    ],
+     
   'login' => [
       'controller' => 'user',
       'action' => 'auth'

@@ -37,7 +37,7 @@ abstract class Controller
 		if (isset($_GET["page"])) {
 			$page = $_GET["page"];
 		}
-		$this->convert($this->model->index($page));
+		$this->convertToJson($this->model->index($page));
 	}
 
 	//ADD
@@ -49,7 +49,7 @@ abstract class Controller
 			array_shift($_GET);
 			$vars = $_GET;
 		}
-		$this->convert($this->model->add($vars));
+		$this->convertToJson($this->model->add($vars));
 	}
 
 	//DELETE
@@ -60,7 +60,7 @@ abstract class Controller
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
 		}
-		$this->convert($this->model->delete($id));
+		$this->convertToJson($this->model->delete($id));
 	}
 
 	//EDITGET
@@ -71,7 +71,7 @@ abstract class Controller
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
 		}
-		$this->convert($this->model->editget($id));
+		$this->convertToJson($this->model->editget($id));
 	}
 
 	//EDITPUT
@@ -85,7 +85,7 @@ abstract class Controller
 			$id = array_shift($_GET);
 			$vars = $_GET;
 		}
-		$this->convert($this->model->editput($id, $vars));
+		$this->convertToJson($this->model->editput($id, $vars));
 	}
 
 	//преобразование к формату json
