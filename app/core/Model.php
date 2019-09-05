@@ -1,7 +1,7 @@
 <?php
 
 namespace app\core;
-use app\models\DataBase;
+use app\core\DataBase;
 
 class Model
 {
@@ -38,13 +38,13 @@ class Model
     }
 
 
-    public function getFields()
+    public function getFields($table)
     {
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
 WHERE `TABLE_SCHEMA`='lrs' //Добавить переменную с именем БД
-        AND `TABLE_NAME`= $this->table";
+        AND `TABLE_NAME`= $table";
         $db = DataBase::getInstance();
 
         $result = $db->query($sql);
@@ -124,6 +124,14 @@ WHERE `TABLE_SCHEMA`='lrs' //Добавить переменную с имене
     public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed,$this->table);
+        $db = DataBase::getInstance();
+        $object = $db->query($sql);
+
+    }
+
+    public function dropRecord($id)
+    {
+        $sql = "DELETE FROM $this->table WHERE id=$id";
         $db = DataBase::getInstance();
         $object = $db->query($sql);
 
