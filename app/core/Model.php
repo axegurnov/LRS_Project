@@ -43,7 +43,7 @@ class Model
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-WHERE `TABLE_SCHEMA`='lrs' //Добавить переменную с именем БД
+WHERE `TABLE_SCHEMA`='lrs'
         AND `TABLE_NAME`= $table";
         $db = DataBase::getInstance();
 
