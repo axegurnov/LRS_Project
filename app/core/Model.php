@@ -1,7 +1,7 @@
 <?php
 
 namespace app\core;
-use app\core\DataBase;
+use app\core\Database;
 
 class Model
 {
@@ -87,8 +87,8 @@ WHERE `TABLE_SCHEMA`='lrs'
     public function getAllRecords($fields)
     {
         $sql = "SELECT $fields FROM $this->table";
-        $db = DataBase::getInstance();
-        $object = $db->query($sql);
+
+        $object = $this->db->query($sql);
         //$object = mysqli_query($db,$sql);
         $rows = mysqli_num_rows($object);
         $i = 0;
@@ -105,8 +105,8 @@ WHERE `TABLE_SCHEMA`='lrs'
     function select($id, $fields = '*')
     {
         $sql = "SELECT $fields FROM $this->table WHERE id= $id";
-        $db = DataBase::getInstance();
-        $object = $db->query($sql);
+
+        $object = $this->db->query($sql);
         return $this->params = mysqli_fetch_array($object);
 
     }
@@ -132,8 +132,8 @@ WHERE `TABLE_SCHEMA`='lrs'
     public function updateRecord($id)
     {
         $sql = self::buildUpdateSql($this->params_changed,$this->table,$id);
-        $db = DataBase::getInstance();
-        $object = $db->query($sql);
+
+        $object = $this->db->query($sql);
     }
 
     public function addRecord()
@@ -147,8 +147,7 @@ WHERE `TABLE_SCHEMA`='lrs'
     public function dropRecord($id)
     {
         $sql = "DELETE FROM $this->table WHERE id=$id";
-        $db = DataBase::getInstance();
-        $object = $db->query($sql);
+        $object = $this->db->query($sql);
 
     }
 
