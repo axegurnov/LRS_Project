@@ -7,12 +7,14 @@
     class Router
     {
         // хранит данные, какой вызвать контроллер и экшн
-        protected $params = [];
-
-        protected $argUri = [];
+        public $params = [];
+        //хранит аргументы (гет запроса)
+        public $argUri = [];
 
         public function __construct()
         {
+            $routeUri = trim(@array_shift($_GET), '/');
+            $this->argUri = $_GET;
             // debug($_GET);
             // debug($_GET['route']); // хранится uri
             // debug($_GET['arg_name']); // e.g. page = 123 
@@ -21,7 +23,6 @@
             $routesList = require 'app/config/Routes.php';
 
             // записываем путь в uri
-            $routeUri = trim(@$_GET['route'], '/');
             $foundRoute = false;
             
             // перебираем роуты и ищем совпадение с введеным uri
@@ -64,6 +65,5 @@
                 echo "Class not found: " . $path;
             }
         }
-
     }
 ?>
