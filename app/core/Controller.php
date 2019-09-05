@@ -22,12 +22,13 @@ abstract class Controller
 	}
 
 	//автоподключение модели
-	private function getModel($nameModel)
+	protected function getModel($nameModel)
 	{
-		$path = "app\models\\" . ucfirst($nameModel);
-		if (class_exists($path)) {
-			return $path::getInstance();
-		}
+        $path = "app\models\\" . ucfirst($nameModel);
+
+        if (class_exists($path)) {
+            return $path::getInstance($nameModel);
+        }
 	}
 
 	//LIST

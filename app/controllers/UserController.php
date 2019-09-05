@@ -9,11 +9,17 @@ use app\core\View;
 class UserController extends Controller {
 	
 	public function authAction() {
-		$this->view->generate('user/auth.tlp'); 
+	    $vars = [
+	        'title' => 'Auth'
+        ];
+		$this->view->generate('user/auth.tlp',$vars);
 	}
 
 	public function addAction() {
-		$this->view->generate("user/reg.tlp"); 
+        $vars = [
+            'title' => 'Add'
+        ];
+		$this->view->generate("user/reg.tlp",$vars);
 	}
 }
 ?>

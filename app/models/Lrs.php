@@ -7,9 +7,13 @@
  */
 
 namespace app\models;
+use app\core\Model;
 
-
-class Lrs
+class Lrs extends Model
 {
+    public $table = 'lrs';
 
+    public function getList(){
+        return $this->db->query("select * from " . $this->table);
+    }
 }
