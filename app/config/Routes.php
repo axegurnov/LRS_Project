@@ -2,7 +2,7 @@
 namespace app\config;
 class Routes
 {
-    public function getRoutes()
+   static public function getRoutes()
     {
         return [
             '' => [
