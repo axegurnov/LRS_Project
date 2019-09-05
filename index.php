@@ -2,16 +2,14 @@
 
 require 'app/config/Dev.php';
 include 'app/config/Autoload.php';
-// use app\core\Model;
 use app\core\Router;
+use app\controllers\MigrationController;
+
+//$migration = MigrationController::migrationAction();
 
 
-    // $asd = new User;
-// $model = new Model();
-// $model->migration();
-    $router = new Router;
+$router = new Router;
 
-// $router->run();
 
 
 

@@ -34,9 +34,8 @@ by ImageSpark<br>
 =======
 # Миграции
 
-1. How to use Migrations
-Create database name LRS. In file index.php uncommented //require 'app/config/Migration.php'.
-Migrations in file /app/config/Migration.php.
+1.Для осуществения миграции необходимо в index.php прописать,тем самым вызвать метод migrationAction
+$migration = MigrationController::migrationAction();
 
 # Компонент Router
 
