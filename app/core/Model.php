@@ -60,7 +60,7 @@ class Model
         $sql = "SELECT `COLUMN_NAME` 
 FROM `INFORMATION_SCHEMA`.`COLUMNS` 
 WHERE `TABLE_SCHEMA`='lrs'
-        AND `TABLE_NAME`= $table";
+        AND `TABLE_NAME`= '".$table."';";
 
         $result = $this->db->query($sql);
         $rows = mysqli_num_rows($result);

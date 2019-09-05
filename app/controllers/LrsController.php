@@ -13,8 +13,8 @@ class LrsController extends Controller {
     public function lrsListAction(){
 
         $this->model = $this->getModel($this->nameModel);
-        $users = $this->model->getList();
-        //debug($re);
+        $users = $this->model->getFields($this->nameModel);
+
         $vars = [
             'title' => 'LRS List',
             'lrsr' => $users
