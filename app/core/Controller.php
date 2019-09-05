@@ -22,7 +22,7 @@ abstract class Controller
 	}
 
 	//автоподключение модели
-	protected function getModel($nameModel)
+	public function getModel($nameModel)
 	{
         $path = "app\models\\" . ucfirst($nameModel);
 

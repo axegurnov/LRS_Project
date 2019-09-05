@@ -16,13 +16,7 @@ class LrsController extends Controller {
         $this->model = $this->getModel($this->nameModel);
         $users = $this->model->getFields($this->nameModel);
 
-        $vars = [
-            'title' => 'LRS List',
-            'lrsr' => $users
-        ];
-
-
-        $this->view->generate('lrs/list.tlp',$vars);
+        print_r($users);
     }
 
 }
