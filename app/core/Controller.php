@@ -9,7 +9,6 @@ abstract class Controller
 	protected $model = null;
 	protected $view = null;
 	protected $route = null;
-	protected $table = null;
 
 	protected function beforeAction()
 	{
@@ -36,9 +35,9 @@ abstract class Controller
 		$this->beforeAction();
 		$page = 0;
 		if (isset($_GET["page"])) {
-			$page = htmlspecialchars(urldecode(trim($_GET["page"])), ENT_QUOTES | ENT_HTML401);
+			$page = $_GET["page"];
 		}
-		$this->convert($this->model->index($this->table, $page));
+		$this->convert($this->model->index($page));
 	}
 
 	//ADD
@@ -48,12 +47,9 @@ abstract class Controller
 		$vars = [];
 		if (count($_GET) > 1) {
 			array_shift($_GET);
-			foreach ($_GET as $key => $value) {
-				$_GET[$key] = htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
-			}
 			$vars = $_GET;
 		}
-		$this->convert($this->model->add($this->table, $vars));
+		$this->convert($this->model->add($vars));
 	}
 
 	//DELETE
@@ -62,9 +58,9 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = htmlspecialchars(urldecode(trim($_GET["id"])), ENT_QUOTES | ENT_HTML401);
+			$id = $_GET["id"];
 		}
-		$this->convert($this->model->delete($this->table, $id));
+		$this->convert($this->model->delete($id));
 	}
 
 	//EDITGET
@@ -73,33 +69,30 @@ abstract class Controller
 		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
-			$id = htmlspecialchars(urldecode(trim($_GET["id"])), ENT_QUOTES | ENT_HTML401);
+			$id = $_GET["id"];
 		}
-		$this->convert($this->model->editget($this->table, $id));
+		$this->convert($this->model->editget($id));
 	}
 
 	//EDITPUT
-	public function editputAction()
+	public function updateAction()
 	{
 		$this->beforeAction();
 		$id = 0;
 		$vars = [];
 		if (isset($_GET["id"]) && (count($_GET) > 2)) {
 			array_shift($_GET);
-			foreach ($_GET as $key => $value) {
-				$_GET[$key] = htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
-			}
 			$id = array_shift($_GET);
 			$vars = $_GET;
 		}
-		$this->convert($this->model->editput($this->table, $id, $vars));
+		$this->convert($this->model->editput($id, $vars));
 	}
 
 	//преобразование к формату json
 	public function convertToJson($array)
 	{
 		$array = json_encode($array);
-		echo $array;
+		return $array;
 	}
 
 	public function redirect($url)
