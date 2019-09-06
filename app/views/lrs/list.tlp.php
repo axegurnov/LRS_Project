@@ -15,14 +15,14 @@
             <td>
                 <form action="/lrs/view/update" method="post">
                     <input type="hidden" name="id" value="<?= $lrs['id']?>">
-                    <button type="submit" class="btn btn-info">Edit</button>
+                    <button type="submit" class="btn btn-info ">Edit</button>
                 </form>
             </td>
 
             <td>
                 <form action="/lrs/del" method="post">
                     <input type="hidden" name="id" value="<?= $lrs['id']?>">
-                    <button type="submit" class="btn btn-danger">Remove</button>
+                    <button type="submit" class="btn btn-danger del_confirm">Remove</button>
                 </form>
             </td>
         </tr>
