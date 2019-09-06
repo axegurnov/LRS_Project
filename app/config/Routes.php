@@ -7,14 +7,12 @@ class Routes
         return [
             '' => [
               'controller' => '?',
-              'action' => '?'
+              'action' => '?',
             ],
-             
           'login' => [
               'controller' => 'user',
               'action' => 'auth'
             ],
-            
             'users'=>[
                 'controller' => 'user',
                 'action' => 'usersList'
@@ -31,10 +29,9 @@ class Routes
                 'controller' => 'user',
                 'action' => 'delete',
             ],
-
             'lrs/list' => [
                 'controller' => 'lrs',
-                'action' => 'lrsList'
+                'action' => 'lrsList',
             ],
             'lrs' => [
                 'controller' => 'lrs',
@@ -42,29 +39,28 @@ class Routes
             ],
             'lrs/add'  => [
                 'controller' => 'lrs',
-                'action' => 'lrsAdd'
+                'action' => 'lrsAdd',
             ],
             'lrs/del'  => [
                 'controller' => 'lrs',
-                'action' => 'lrsDel'
+                'action' => 'lrsDel',
             ],
             'lrs/view/update'  => [
                 'controller' => 'lrs',
-                'action' => 'lrsViewUpdate'
+                'action' => 'lrsViewUpdate',
             ],
             'lrs/update'  => [
                 'controller' => 'lrs',
-                'action' => 'lrsUpdate'
+                'action' => 'lrsUpdate',
             ],
-
             'lrs/client/add' => [
                 'controller' => 'lrsClient',
-                'action' => 'clientAdd'
+                'action' => 'clientAdd',
             ],
             'lrs/client/delete' => [
                 'controller' => 'lrsClient',
-                'action' => 'clientDel'
-            ]
+                'action' => 'clientDel',
+            ],
         ];
     }
 }

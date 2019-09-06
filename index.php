@@ -1,8 +1,6 @@
 <?php
 
 require 'app/config/Dev.php';
-
-
 include 'app/config/Autoload.php';
 
 use app\core\Model;

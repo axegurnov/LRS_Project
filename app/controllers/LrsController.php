@@ -9,14 +9,14 @@ class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
 
-
     public function __construct()
     {
         parent::__construct($this->route);
         $this->model = $this->getModel($this->nameModel);
     }
 
-    public function lrsListAction(){
+    public function lrsListAction()
+    {
         $fields = "*";
         $lrs = $this->model->getAllRecords($fields);
         $vars = [
@@ -26,13 +26,15 @@ class LrsController extends Controller {
         $this->view->generate('lrs/list.tlp',$vars);
     }
 
-    public function lrsDelAction(){
+    public function lrsDelAction()
+    {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
         $this->redirect('../lrs/list');
     }
 
-    public function lrsViewUpdateAction(){
+    public function lrsViewUpdateAction()
+    {
         $id = $_POST['id'];
         $str = "id=".$id;
         $data_field = $this->model->select($str);
@@ -43,7 +45,8 @@ class LrsController extends Controller {
         $this->view->generate('lrs/update.tlp',$vars);
     }
 
-    public function lrsUpdateAction(){
+    public function lrsUpdateAction()
+    {
         $id = $_POST['id'];
         $data_field = [
             'name' => $_POST['name'],
@@ -53,6 +56,5 @@ class LrsController extends Controller {
         $this->model->updateRecord($id);
         $this->redirect('../lrs/list');
     }
-
 
 }

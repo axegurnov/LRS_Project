@@ -8,8 +8,8 @@ class Model
     public $table = null;
     public $params = array();
     public $params_changed = array();
-
     public $db;
+    
     private static $_instance = null;
 
     public function __construct()
@@ -39,7 +39,6 @@ class Model
         }
         $sql = "UPDATE $table SET $columns WHERE id= $id";
         return $sql;
-
     }
 
     protected static function buildInsertSql($data,$table) 
@@ -100,16 +99,13 @@ class Model
     }
 
     function select($predictor,$fields = '*' )
-
     {
-        if ($predictor)
-        {
+        if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
         }
-        else
-        {
+        else {
             echo "Отсутствует условие!";
         }
     }

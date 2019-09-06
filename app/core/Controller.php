@@ -25,7 +25,6 @@ abstract class Controller
 	public function getModel($nameModel)
 	{
         $path = "app\models\\" . ucfirst($nameModel);
-
 		return new $path;
 	}
 
