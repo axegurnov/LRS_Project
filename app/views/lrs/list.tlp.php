@@ -2,29 +2,34 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">name</th>
+        <th scope="col">Course name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"><a href="/users"><img src="https://img.icons8.com/material-sharp/50/000000/settings.png" width="15px" height="15px"></a></th>
     </tr>
     </thead>
     <?php foreach ($lrsr as $lrs): ?>
         <tr>
             <th scope="row"><label><?= $lrs['id'] ?></label></th>
-            <td><?= $lrs['name'] ?></td>
+            <td><a href="/lrs/<?= $lrs['id'] ?>"><?= $lrs['name'] ?></a></td>
             <td>
-                <form action="/lrs/addEditUser" method="post">
-                    <input type="hidden" name="id" value="">
+                <form action="/lrs/view/update" method="post">
+                    <input type="hidden" name="id" value="<?= $lrs['id']?>">
                     <button type="submit" class="btn btn-info">Edit</button>
                 </form>
             </td>
 
             <td>
-                <form action="/users/del" method="post">
-                    <input type="hidden" name="id" value="">
+                <form action="/lrs/del" method="post">
+                    <input type="hidden" name="id" value="<?= $lrs['id']?>">
                     <button type="submit" class="btn btn-danger">Remove</button>
                 </form>
             </td>
         </tr>
     <?php endforeach;?>
+
 </table>
+
 <nav class="ml-md-5 mt-md-3">
     <ul class="pagination">
 

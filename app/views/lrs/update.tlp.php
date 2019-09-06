@@ -1,4 +1,4 @@
-<form action="/users/addEdit" method="post"> <?php
+<form action="/lrs/update" method="post"> <?php
     if (isset($errors)) { ?>
     <div class="alert alert-danger" role="alert">
         <?php

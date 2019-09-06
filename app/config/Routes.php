@@ -44,6 +44,18 @@ class Routes
                 'controller' => 'lrs',
                 'action' => 'lrsAdd'
             ],
+            'lrs/del'  => [
+                'controller' => 'lrs',
+                'action' => 'lrsDel'
+            ],
+            'lrs/view/update'  => [
+                'controller' => 'lrs',
+                'action' => 'lrsViewUpdate'
+            ],
+            'lrs/update'  => [
+                'controller' => 'lrs',
+                'action' => 'lrsUpdate'
+            ],
 
             'lrs/client/add' => [
                 'controller' => 'lrsClient',
