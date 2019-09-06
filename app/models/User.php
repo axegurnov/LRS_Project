@@ -7,14 +7,12 @@ class User extends Model
 {
     public $table = 'users';
 
-    public function auth() 
-    {
+    public function auth(){
     	$login = $_POST["login"];
     	$password = $_POST["password"];
     	if (($login == "") || ($password == "")) {
     		$_POST["errors"]["nodata"] = "Please, fill in the fields";
-    	} 
-    	else {
+    	} else{
 			$usernameclean = filter_var($login, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
 			//check if name exists
@@ -27,20 +25,17 @@ class User extends Model
 
 			if (!$namecheck) {
 				$_POST["errors"]["nores"] = "Name check query failed";
-			} 
-			else {
+			} else {
 				if (mysqli_num_rows($namecheck) != 1) {
 					$_POST["errors"]["noname"] = "Either no user with name, or more than one";
-				}
-				else {
+				} else {
 					//get login info from query
 					$existinginfo = $namecheck->fetch_array(MYSQLI_ASSOC);
 					$hash = $existinginfo["password"];
 
 					if (!password_verify($password, $hash)) {
 						$_POST["errors"]["nopass"] = "Incorrect password";
-					} 
-					else {
+					} else {
 						setcookie("user", "login_success", time() + 3600, "/");
 						/*
 						$_SESSION["auth"] = true;
