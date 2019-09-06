@@ -3,8 +3,8 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class MigrationController extends Controller {
-
+class MigrationController extends Controller 
+{
 	public static function migrationAction()
 	{
         $config = require 'app/config/Database.php';
