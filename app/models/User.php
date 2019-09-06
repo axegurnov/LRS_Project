@@ -16,10 +16,12 @@ class User extends Model
 			$usernameclean = filter_var($login, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
 			//check if name exists
-			$namecheckquery = "SELECT login, password FROM lrs.users WHERE login='" . $usernameclean . "'; ";
-			$this->select("login", "password");
+			//$namecheckquery = "SELECT login, password, status FROM lrs.users WHERE login='" . $usernameclean . "'; ";
+			//$namecheck = $this->db->query($namecheckquery);
 
-			$namecheck = $this->db->query($namecheckquery);
+			$value1 = "login, password, status";
+			$value2 = "login='" . $usernameclean . "'";
+			$namecheck = $this->select($value1, $value2);
 
 			if (!$namecheck) {
 				$_POST["errors"]["nores"] = "Name check query failed";
@@ -35,13 +37,19 @@ class User extends Model
 						$_POST["errors"]["nopass"] = "Incorrect password";
 					} else {
 						setcookie("user", "login_success", time() + 3600, "/");
+						/*
+						$_SESSION["auth"] = true;
+						$_SESSION["login"] = $existinginfo["login"];
+						$_SESSION["status"] = $existinginfo["status"];
+						*/
 					}
 				}
 			}
 		}
     }
 
-    public function exit() {
+    public function exit() 
+    {
     	setcookie("user", "login_success", time() - 3600, "/");
     }
 }
