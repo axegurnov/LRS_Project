@@ -99,11 +99,19 @@ class Model
         return $this->params = $allRecords;
     }
 
-    function select($id,$fields = '*')
+    function select($fields = '*', $predictor = NULL)
+
     {
-        $sql = "SELECT $fields FROM $this->table WHERE id= .$id";
-        $object = $this->db->query($sql);
-        return $this->params = mysqli_fetch_array($object);
+        if ($predictor)
+        {
+            $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
+            $object = $this->db->query($sql);
+            return $this->params = mysqli_fetch_array($object);
+        }
+        else
+        {
+            echo "Отсутствует условие!";
+        }
     }
 
 
