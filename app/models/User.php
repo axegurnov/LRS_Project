@@ -18,12 +18,8 @@ class User extends Model
 			$usernameclean = filter_var($login, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
 			//check if name exists
-			//$namecheckquery = "SELECT login, password, status FROM lrs.users WHERE login='" . $usernameclean . "'; ";
-			//$namecheck = $this->db->query($namecheckquery);
-
-			$value1 = "login, password, status";
-			$value2 = "login='" . $usernameclean . "'";
-			$namecheck = $this->select($value1, $value2);
+			$namecheckquery = "SELECT login, password, status FROM lrs.users WHERE login='" . $usernameclean . "'; ";
+			$namecheck = $this->db->query($namecheckquery);
 
 			if (!$namecheck) {
 				$_POST["errors"]["nores"] = "Name check query failed";
