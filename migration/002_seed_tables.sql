@@ -1,5 +1,5 @@
-insert into users (login, password, name, email) value ('admin','123','alex','google@gmail.com');
-insert into users (login, password, name, email) value ('adm2in2','1234','neron','gasd@gmail.com');
+insert into users (login, password, name, email) value ('admin','$2y$10$a2ZFoaZVvDMyuaLJmG2WDuNz./vXAv6HUyvfytnxTNqDOCd0beJD2','alex','google@gmail.com');
+insert into users (login, password, name, email) value ('adm2in2','$2y$10$A9Qoa.ISE.JiKmYak03NGOxuKAqdUeJE61rJYxZ2mK49sKXvhOvFS','neron','gasd@gmail.com');
 
 insert into lrs (name, description) value ('Course 1','about course 1');
 insert into lrs (name, description) value ('Course 2','about course 2');
