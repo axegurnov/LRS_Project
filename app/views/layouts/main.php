@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?=(!isset($title)) ? '' : $title?></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/bootstrap.css">
 </head>
 <body>
     <?php if (isset($_COOKIE["user"])): ?>
@@ -25,5 +25,7 @@
         echo $content;
     ?>
 
+    <script src="/public/js/jquery-3.4.1.slim.js"></script>
+    <script src="/public/js/warning.js"></script>
 </body>
 </html>
