@@ -9,7 +9,7 @@
 return [
     'host' => 'localhost',
     'user' => 'root',
-    'password' => '123',
+    'password' => 'Narutovs',
     'base' => 'lrs'
 ];
 
