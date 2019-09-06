@@ -8,7 +8,7 @@
 
 return [
     'host' => 'localhost',
-    'user' => 'dima',
+    'user' => 'root',
     'password' => '123',
     'base' => 'lrs'
 ];

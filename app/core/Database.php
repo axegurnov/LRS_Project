@@ -31,4 +31,10 @@ class Database
     {
         return $this->db->query($sql);
     }
+
+    public function __destruct() {
+        if ($this->db) {
+            $this->db->close();
+        }
+    }
 }
