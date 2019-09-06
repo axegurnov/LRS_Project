@@ -18,7 +18,6 @@ class LrsController extends Controller {
 
     public function lrsListAction(){
         $fields = "*";
-        $this->model = $this->getModel($this->nameModel);
         $lrs = $this->model->getAllRecords($fields);
         $vars = [
             'title' => 'LRS List',
@@ -29,14 +28,12 @@ class LrsController extends Controller {
 
     public function lrsDelAction(){
         $id = $_POST['id'];
-        $this->model = $this->getModel($this->nameModel);
         $this->model->dropRecord($id);
         $this->redirect('../lrs/list');
     }
 
     public function lrsViewUpdateAction(){
         $id = $_POST['id'];
-        $this->model = $this->getModel($this->nameModel);
         $data_field = $this->model->select($id);
         $vars = [
             'id' => $id,
@@ -51,13 +48,10 @@ class LrsController extends Controller {
             'name' => $_POST['name'],
             'description' => $_POST['description'],
         ];
-        $this->model = $this->getModel($this->nameModel);
         $this->model->setValues($data_field);
         $this->model->updateRecord($id);
         $this->redirect('../lrs/list');
     }
-
-
 
 
 }
