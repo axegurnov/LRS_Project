@@ -100,10 +100,9 @@ WHERE `TABLE_SCHEMA`='lrs'
 
     }
 
-    function select($id, $fields = '*')
+    function select($fields = '*',$predictor = '')
     {
-        $sql = "SELECT $fields FROM $this->table WHERE id= $id";
-
+        $sql = "SELECT $fields FROM $this->table WHERE".$predictor.";";
         $object = $this->db->query($sql);
         return $this->params = mysqli_fetch_array($object);
 
