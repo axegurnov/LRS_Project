@@ -22,8 +22,8 @@
         </div>
 
         <div class="col-md-6">
-            <input type="hidden" class="form-control edit_confirm" name="id" value="<?= $data_field['id']??""?>">
-            <button type="submit" class="btn btn-primary">
+            <input type="hidden" class="form-control " name="id" value="<?= $data_field['id']??""?>">
+            <button type="submit" class="btn btn-primary edit_confirm">
                Update
             </button>
         </div>
