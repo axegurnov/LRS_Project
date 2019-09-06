@@ -32,7 +32,7 @@ class Model
             $columns .= ($columns == "") ? "" : ", ";
             $columns .= $column."=";
             $holders .= $holders;
-            $columns .= $value.$holders;
+            $columns .= "'".$value."'".$holders;
 
         }
         $sql = "UPDATE $table SET $columns WHERE id= $id";
@@ -47,7 +47,7 @@ class Model
             $columns .= ($columns == "") ? "" : ", ";
             $columns .= $column;
             $holders .= ($holders == "") ? "" : ", ";
-            $holders .= $value;
+            $holders .= "'".$value."'";
         }
         $sql = "INSERT INTO $table ($columns) VALUES ($holders)";
         return $sql;
@@ -84,7 +84,7 @@ WHERE `TABLE_SCHEMA`='lrs'
         return $this->params = $result;
     }
 
-    public function getAllRecords($fields)
+    public function getAllRecords($fields = '*')
     {
       $sql = "SELECT $fields FROM $this->table;";
         $object = $this->db->query($sql);
@@ -120,23 +120,32 @@ WHERE `TABLE_SCHEMA`='lrs'
         }
     }
 
-    public function setValue($item, $value)
+    public function setOneValue($item, $value)
     {
         $this->params_changed[$item] = $value;
         return $this->params[$item] = $value;
+
+    }
+    public function setValues($data)
+    {
+        foreach ($data as $value){
+            htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
+        }
+
+        return $this->params_changed = $data;
 
     }
 
     public function updateRecord($id)
     {
         $sql = self::buildUpdateSql($this->params_changed,$this->table,$id);
-
         $object = $this->db->query($sql);
     }
 
     public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed,$this->table);
+
         $db = DataBase::getInstance();
         $object = $db->query($sql);
 
