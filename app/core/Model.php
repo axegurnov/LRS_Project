@@ -99,7 +99,7 @@ class Model
         return $this->params = $allRecords;
     }
 
-    function select($fields = '*', $predictor = NULL)
+    function select($predictor,$fields = '*' )
 
     {
         if ($predictor)

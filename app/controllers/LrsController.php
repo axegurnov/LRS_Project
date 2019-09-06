@@ -34,7 +34,8 @@ class LrsController extends Controller {
 
     public function lrsViewUpdateAction(){
         $id = $_POST['id'];
-        $data_field = $this->model->select($id);
+        $str = "id=".$id;
+        $data_field = $this->model->select($str);
         $vars = [
             'id' => $id,
             'data_field' => $data_field
