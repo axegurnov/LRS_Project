@@ -120,7 +120,7 @@ WHERE `TABLE_SCHEMA`='lrs'
         }
     }
 
-    public function setOneValue($item, $value)
+    public function setValue($item, $value)
     {
         $this->params_changed[$item] = $value;
         return $this->params[$item] = $value;
