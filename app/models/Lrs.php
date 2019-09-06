@@ -13,7 +13,8 @@ class Lrs extends Model
 {
     public $table = 'lrs';
 
-    public function getList(){
+    public function getList()
+    {
         return $this->db->query("select * from " . $this->table);
     }
 }

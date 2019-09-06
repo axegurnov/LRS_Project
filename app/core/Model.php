@@ -17,7 +17,8 @@ class Model
         $this->db = Database::getInstance();
     }
 
-    public static function getInstance($nameModel) {
+    public static function getInstance($nameModel) 
+    {
         $path = 'app\models\\' . $nameModel;
         if (self::$_instance == null) {
             self::$_instance = new $path();
@@ -25,7 +26,8 @@ class Model
         return self::$_instance;
     }
 
-    protected static function buildUpdateSql($data,$table,$id) {
+    protected static function buildUpdateSql($data,$table,$id) 
+    {
         $columns = "";
         $holders = "";
         foreach ($data as $column => $value) {
@@ -40,7 +42,8 @@ class Model
 
     }
 
-    protected static function buildInsertSql($data,$table) {
+    protected static function buildInsertSql($data,$table) 
+    {
         $columns = "";
         $holders = "";
         foreach ($data as $column => $value) {
@@ -58,8 +61,8 @@ class Model
     {
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
-FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-WHERE `TABLE_SCHEMA`='lrs'
+        FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+        WHERE `TABLE_SCHEMA`='lrs'
         AND `TABLE_NAME`= '".$table."';";
 
         $result = $this->db->query($sql);
@@ -69,49 +72,44 @@ WHERE `TABLE_SCHEMA`='lrs'
         while ($i != $rows) {
             $row = mysqli_fetch_row($result);
             $fields[$i] = $row[0];
-                if ($i==0)
-                {
-                    $fieldsStr = "$row[0]";
-                }
-                else
-                {
-                    $fieldsStr = "$fieldsStr".', '."$row[0]";
-                }
-                $i++;
-
+            if ($i==0) {
+                $fieldsStr = "$row[0]";
             }
-            $result = array('str'=>$fieldsStr,'array'=>$fields);
+            else {
+                $fieldsStr = "$fieldsStr".', '."$row[0]";
+            }
+            $i++;
+        }
+        $result = array('str'=>$fieldsStr,'array'=>$fields);
         return $this->params = $result;
     }
 
     public function getAllRecords($fields = '*')
     {
-      $sql = "SELECT $fields FROM $this->table;";
+        $sql = "SELECT $fields FROM $this->table;";
         $object = $this->db->query($sql);
         $rows = mysqli_num_rows($object);
         $i = 0;
         $allRecords = array();
-        while($i!= $rows){
+        while($i!= $rows) {
             $row = mysqli_fetch_array($object,MYSQLI_ASSOC);
             $allRecords[$i] = $row;
             $i++;
         }
         return $this->params = $allRecords;
-
     }
 
-    function select($fields = '*',$predictor = '')
+    function select($id,$fields = '*')
     {
-        $sql = "SELECT $fields FROM $this->table WHERE".$predictor.";";
+        $sql = "SELECT $fields FROM $this->table WHERE id= .$id";
         $object = $this->db->query($sql);
         return $this->params = mysqli_fetch_array($object);
-
     }
 
 
     public function getValue($item)
     {
-        if(!empty($this->params)){
+        if(!empty($this->params)) {
             return $this->params[$item];
         }
         else {
@@ -123,16 +121,14 @@ WHERE `TABLE_SCHEMA`='lrs'
     {
         $this->params_changed[$item] = $value;
         return $this->params[$item] = $value;
-
     }
+
     public function setValues($data)
     {
-        foreach ($data as $value){
+        foreach ($data as $value) {
             htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
         }
-
         return $this->params_changed = $data;
-
     }
 
     public function updateRecord($id)
@@ -144,18 +140,13 @@ WHERE `TABLE_SCHEMA`='lrs'
     public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed,$this->table);
-
         $db = DataBase::getInstance();
         $object = $db->query($sql);
-
     }
 
     public function dropRecord($id)
     {
         $sql = "DELETE FROM $this->table WHERE id=$id";
         $object = $this->db->query($sql);
-
     }
-
-
 }

@@ -7,7 +7,8 @@ use app\core\View;
 
 class UserController extends Controller {
 	
-	public function authAction() {
+	public function authAction() 
+	{
 		if (isset($_POST["loginButton"])) {
 			$this->callModel();
 			$this->model->auth();
@@ -23,7 +24,8 @@ class UserController extends Controller {
 		$this->view->generate('user/auth.tlp'); 
 	}
 
-	public function addAction() {
+	public function addAction() 
+	{
 		if (isset($_POST["submitButton"])) {
 			$nameModel = "user";
 			$this->model = $this->getModel($nameModel);
@@ -32,7 +34,8 @@ class UserController extends Controller {
 		$this->view->generate("user/reg.tlp"); 
 	}
 
-	private function callModel() {
+	private function callModel() 
+	{
 		$this->model = "user";
 		$this->model = $this->getModel($this->model);
 	} 
