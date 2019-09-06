@@ -86,13 +86,7 @@ WHERE `TABLE_SCHEMA`='lrs'
 
     public function getAllRecords($fields)
     {
-        //$sql = "SELECT ".$fields." FROM ".$table.";";
-//        echo $sql;echo "<br>";
-//        $sql = "SELECT $fields FROM $table ;";
-//        echo $sql;echo "<br>";
       $sql = "SELECT $fields FROM $this->table;";
-      echo $sql;echo "<br>";
-
         $object = $this->db->query($sql);
         $rows = mysqli_num_rows($object);
         $i = 0;
