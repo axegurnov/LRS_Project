@@ -12,7 +12,7 @@ class UserController extends Controller {
 			$login = $_POST["login"];
     		$password = $_POST["password"];
 			$this->model->validAuth($login, $password);
-			if (!isset($_POST["errors"])) {
+			if (!isset($_SESSION["errors"])) {
 				return $this->redirect("/lrs/list");
 			}
 		}

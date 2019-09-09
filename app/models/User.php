@@ -16,7 +16,7 @@ class User extends Model
     	$this->login = $login;
     	$this->password = $password;
     	if (($this->login == "") || ($this->password == "")) {
-    		$_POST["errors"]["nodata"] = "Please, fill in the fields";
+    		$_SESSION["errors"]["nodata"] = "Please, fill in the fields";
     	} 
     	else {
     		$this->oneUserCheck();
@@ -28,19 +28,19 @@ class User extends Model
     {
 		$usernameclean = filter_var($this->login, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
-		$namecheckquery = "SELECT login, password, status FROM lrs.users WHERE login='" . $usernameclean . "'; ";
+		$namecheckquery = "SELECT login, password FROM lrs.users WHERE login='" . $usernameclean . "'; ";
 		$this->namecheck = $this->db->query($namecheckquery);
 
 		if (!$this->namecheck) {
-			$_POST["errors"]["nores"] = "Name check query failed";
+			$_SESSION["errors"]["nores"] = "Name check query failed";
 		} 
 		else {
-			if (mysqli_num_rows($this->namecheck) != 1) {
-					$_POST["errors"]["noname"] = "Either no user with name, or more than one";
-				} 
-				else {
-					$this->passwordCheck();
-				}
+            if (mysqli_num_rows($this->namecheck) != 1) {
+                    $_SESSION["errors"]["noname"] = "Either no user with name, or more than one";
+                }
+            else {
+                $this->passwordCheck();
+            }
 		}
 	}
 
@@ -51,9 +51,10 @@ class User extends Model
 		$existinginfo = $this->namecheck->fetch_array(MYSQLI_ASSOC);
 		$hash = $existinginfo["password"];
 		if (!password_verify($this->password, $hash)) {
-			$_POST["errors"]["nopass"] = "Incorrect password";
+			$_SESSION["errors"]["nopass"] = "Incorrect password";
 		} 
 		else {
+		    unset($_SESSION["errors"]);
 			setcookie("user", "login_success", time() + 3600, "/");
 			/*
 			$_SESSION["auth"] = true;

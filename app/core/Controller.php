@@ -99,5 +99,10 @@ abstract class Controller
 	{
 		header('Location: ' . $url, false);
 	}
+
+	public function logout()
+    {
+        unset($_SESSION);
+    }
 }
 ?>

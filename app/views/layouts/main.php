@@ -12,9 +12,10 @@
         </form>
     <?php endif; ?>
     <?php
-        if(isset($_POST['errors'])) {
+    var_dump($_SESSION);
+    if(isset($_SESSION['errors'])) {
             echo "<div class='alert alert-danger'>";
-            foreach($_POST['errors'] as $value) {
+            foreach($_SESSION['errors'] as $value) {
                 echo "$value";                
                 echo '<br>';                
             }
