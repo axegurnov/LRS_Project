@@ -7,10 +7,6 @@ class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
 
-    private function callModel()
-    {
-        $this->model = $this->getModel($this->nameModel);
-    }
 
     public function lrsListAction($params)
     {
@@ -19,7 +15,6 @@ class LrsController extends Controller {
         if (empty($params['page'])) {
             $params['page'] = 1;
         };
-        $this->callModel();
         $start_from = ($params['page'] - 1) * $limit;
         $lrs = $this->model->pagination($start_from, $limit);
         $count_id = $this->model->countId();
@@ -36,7 +31,6 @@ class LrsController extends Controller {
     public function lrsDelAction()
     {
         $id = $_POST['id'];
-        $this->callModel();
         $this->model->dropRecord($id);
         $this->redirect('../lrs/list');
     }
@@ -47,7 +41,6 @@ class LrsController extends Controller {
         $lrs = '';
         if (isset($_POST['id'])) {
             $str = "id=".$_POST['id'];
-            $this->callModel();
             $lrs = $this->model->select($str);
         }
         $vars = [
@@ -65,7 +58,6 @@ class LrsController extends Controller {
             'name' => $_POST['name'],
             'description' => $_POST['description'],
         ];
-        $this->callModel();
         if (!empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->updateRecord($id);
