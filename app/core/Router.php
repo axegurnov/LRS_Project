@@ -39,7 +39,7 @@ class Router
             }
         }
         if(!$foundRoute) {
-            include($_SERVER['DOCUMENT_ROOT'] . '/app/views/404.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/app/views/errors/404.tlp.php');
         }
     }
 

@@ -11,16 +11,16 @@ abstract class Controller
 	protected function beforeAction()
 	{
 		if (empty($_SESSION["auth"]) && ($this->route['controller'] != "user") && ($this->route['action'] != "auth")) {
-			include($_SERVER['DOCUMENT_ROOT'] . '/app/views/403.php');
-			//return $this->redirect("/login");
+			$this->view->generate("errors/403.tlp"); 
+			exit();
         }
 	}
 
 	public function __construct($route)
 	{
 		$this->route = $route;
-		$this->beforeAction();
 		$this->view = View::getInstance();
+		$this->beforeAction();
 		$this->model = $this->getModel($this->route['controller']);
 	}
 

@@ -15,9 +15,6 @@
 </div>
 
 <?php else: ?>
-    <?php
-        
-    ?>
     <br>
     <p>Пользователь уже авторизован.</p>
     <form action="/lrs/list" method="post">
