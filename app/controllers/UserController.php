@@ -4,6 +4,11 @@ namespace app\controllers;
 use app\core\Controller;
 
 class UserController extends Controller {
+
+    public function indexAction()
+    {
+        $this->view->generate('user/index.tlp');
+    }
 	
 	//форма авторизации и попытка залогиниться
 	public function authAction() 

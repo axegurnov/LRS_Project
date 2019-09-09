@@ -7,7 +7,6 @@ class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
 
-
     public function lrsListAction($params)
     {
         $limit = 3;
@@ -37,7 +36,6 @@ class LrsController extends Controller {
 
     public function lrsViewUpdateAction()
     {
-
         $lrs = '';
         if (isset($_POST['id'])) {
             $str = "id=".$_POST['id'];
@@ -52,7 +50,6 @@ class LrsController extends Controller {
 
     public function lrsUpdateAction()
     {
-
         $id = $_POST['id'];
         $data_field = [
             'name' => $_POST['name'],
@@ -62,7 +59,8 @@ class LrsController extends Controller {
             $this->model->setValues($data_field);
             $this->model->updateRecord($id);
             $this->redirect('../lrs/list');
-        } elseif (empty($_POST['id'])) {
+        }
+        elseif (empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
             $this->redirect('../lrs/list');

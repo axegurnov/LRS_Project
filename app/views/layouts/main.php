@@ -12,7 +12,6 @@
         </form>
     <?php endif; ?>
     <?php
-    var_dump($_SESSION);
     if(isset($_SESSION['errors'])) {
             echo "<div class='alert alert-danger'>";
             foreach($_SESSION['errors'] as $value) {
