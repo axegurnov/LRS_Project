@@ -7,13 +7,28 @@ class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
 
-    public function lrsListAction()
+    private function callModel()
     {
-        $fields = "*";
-        $lrs = $this->model->getAllRecords($fields);
+        $this->model = $this->getModel($this->nameModel);
+    }
+
+    public function lrsListAction($params)
+    {
+        $limit = 3;
+
+        if (empty($params['page'])) {
+            $params['page'] = 1;
+        };
+        $this->callModel();
+        $start_from = ($params['page'] - 1) * $limit;
+        $lrs = $this->model->pagination($start_from, $limit);
+        $count_id = $this->model->countId();
+        $ttl = $count_id[0];
+        $pages = ceil($ttl / $limit);
         $vars = [
             'title' => 'LRS List',
-            'lrsr' => $lrs
+            'lrsr' => $lrs,
+            'pages' => $pages
         ];
         $this->view->generate('lrs/list.tlp',$vars);
     }
@@ -21,32 +36,45 @@ class LrsController extends Controller {
     public function lrsDelAction()
     {
         $id = $_POST['id'];
+        $this->callModel();
         $this->model->dropRecord($id);
         $this->redirect('../lrs/list');
     }
 
     public function lrsViewUpdateAction()
     {
-        $id = $_POST['id'];
-        $str = "id=".$id;
-        $data_field = $this->model->select($str);
+
+        $lrs = '';
+        if (isset($_POST['id'])) {
+            $str = "id=".$_POST['id'];
+            $this->callModel();
+            $lrs = $this->model->select($str);
+        }
         $vars = [
-            'id' => $id,
-            'data_field' => $data_field
+            'title' => 'LRS form',
+            'data_field' => $lrs
         ];
         $this->view->generate('lrs/update.tlp',$vars);
     }
 
     public function lrsUpdateAction()
     {
+
         $id = $_POST['id'];
         $data_field = [
             'name' => $_POST['name'],
             'description' => $_POST['description'],
         ];
-        $this->model->setValues($data_field);
-        $this->model->updateRecord($id);
-        $this->redirect('../lrs/list');
+        $this->callModel();
+        if (!empty($_POST['id'])) {
+            $this->model->setValues($data_field);
+            $this->model->updateRecord($id);
+            $this->redirect('../lrs/list');
+        } elseif (empty($_POST['id'])) {
+            $this->model->setValues($data_field);
+            $this->model->addRecord();
+            $this->redirect('../lrs/list');
+        }
     }
 
 }
