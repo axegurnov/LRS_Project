@@ -2,7 +2,6 @@
 
 namespace app\core;
 
-use app\config\Dev;
 use app\config\Routes;
 
 class Router
@@ -56,7 +55,7 @@ class Router
                 if(!isset($this->argUri)) { // если аргументы не заданы, вызываем экшн контроллера
                     $controller->$action();
                 }
-                else { // передаем в экшн, массив аргументов для последующей обработки
+                else { // передаем в экшн массив аргументов для последующей обработки
                     $controller->$action($this->argUri);
                 }
             }

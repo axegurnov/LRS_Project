@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label for="inputEmail">Email address</label>
-            <input type="email" name="email "class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" value="<?=(empty($_POST['email'])) ? '' : $_POST['email']?>">
+            <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" value="<?=(empty($_POST['email'])) ? '' : $_POST['email']?>">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
