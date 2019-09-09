@@ -29,6 +29,10 @@ class Routes
                 'controller' => 'user',
                 'action' => 'delete',
             ],
+            'user/exit' => [
+                'controller' => 'user',
+                'action' => 'exit',
+            ],
             'lrs/list' => [
                 'controller' => 'lrs',
                 'action' => 'lrsList',

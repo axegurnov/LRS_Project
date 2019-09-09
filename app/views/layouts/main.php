@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php if (isset($_COOKIE["user"])): ?>
-        <form action="/login" method="post">
+        <form action="/user/exit" method="post">
             <button type="submit" name="exit" class="btn btn-danger">Выход</button>
         </form>
     <?php endif; ?>

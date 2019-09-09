@@ -7,23 +7,22 @@ use app\core\View;
 
 class UserController extends Controller {
 	
+	//форма авторизации и попытка залогиниться
 	public function authAction() 
 	{
 		if (isset($_POST["loginButton"])) {
+			$login = $_POST["login"];
+    		$password = $_POST["password"];
 			$this->callModel();
-			$this->model->auth();
+			$this->model->validAuth($login, $password);
 			if (!isset($_POST["errors"])) {
-				$this->redirect("/lrs/list");
+				return $this->redirect("/lrs/list");
 			}
 		}
-		if (isset($_POST["exit"])) {
-			$this->callModel();
-			$this->model->exit();
-			$this->redirect("/login");
-		}
-		$this->view->generate('user/auth.tlp'); 
+		$this->view->generate('user/auth.tlp');
 	}
 
+	//функция для будущего users crud (создание нового пользователя) 
 	public function addAction() 
 	{
 		if (isset($_POST["submitButton"])) {
@@ -34,10 +33,19 @@ class UserController extends Controller {
 		$this->view->generate("user/reg.tlp"); 
 	}
 
+	//разлогирование и выход на экран авторизации
+	public function exitAction() 
+	{
+		$this->callModel();
+		$this->model->exit();
+		$this->redirect("/login");
+	}
+
+	//вызов модели
 	private function callModel() 
 	{
 		$this->model = "user";
 		$this->model = $this->getModel($this->model);
-	} 
+	}
 }
 ?>

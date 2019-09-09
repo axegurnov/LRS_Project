@@ -15,5 +15,9 @@
 </div>
 
 <?php else: ?>
-    <p>Пользователь авторизован</p>
+    <br>
+    <p>Пользователь уже авторизован.</p>
+    <form action="/lrs/list" method="post">
+        <button type="submit" name="exit" class="btn btn-primary">Перейти в главное меню</button>
+    </form>
 <?php endif; ?>
