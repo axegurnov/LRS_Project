@@ -24,5 +24,6 @@
             <input type="number" name="phone" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Enter phone" value="<?=(empty($_POST['phone'])) ? '' : $_POST['phone']?>">
         </div>
         <button type="submit" name="submitButton" class="btn btn-primary" value="1">Submit</button>
+        <a href="/users" class="btn btn-secondary float-right">Cancel</a>
     </form>
 </div>

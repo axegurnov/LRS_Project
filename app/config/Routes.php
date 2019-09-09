@@ -6,8 +6,8 @@ class Routes
     {
         return [
             '' => [
-              'controller' => '?',
-              'action' => '?',
+              'controller' => 'checkRoutes',
+              'action' => 'checkRoutes',
             ],
 
             'login' => [
@@ -22,17 +22,17 @@ class Routes
 
             'user/add' => [
                 'controller' => 'user',
-                'action' => 'add',
+                'action' => 'userAdd',
             ],
 
             'user/update' => [
                 'controller' => 'user',
-                'action' => 'update',
+                'action' => 'userUpdate',
             ],
 
-            'user/delete' => [
+            'user/del' => [
                 'controller' => 'user',
-                'action' => 'delete',
+                'action' => 'userDel',
             ],
 
             'user/exit' => [

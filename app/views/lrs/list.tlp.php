@@ -37,3 +37,4 @@
             <li class="page-item"><a class="page-link" href="/lrs/list?page=<?= $i; ?>"><?= $i; ?></a></li>
         <?php endfor; ?>
     </ul>
+</nav>

@@ -6,6 +6,7 @@ use app\core\Controller;
 class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
+    protected $table = 'lrs';
 
     public function lrsListAction($params)
     {
@@ -14,8 +15,8 @@ class LrsController extends Controller {
         if (empty($params['page'])) {
             $params['page'] = 1;
         };
-        $start_from = ($params['page'] - 1) * $limit;
-        $lrs = $this->model->pagination($start_from, $limit);
+        $offset = ($params['page'] - 1) * $limit;
+        $lrs = $this->model->pagination($offset, $limit, $this->table);
         $count_id = $this->model->countId();
         $ttl = $count_id[0];
         $pages = ceil($ttl / $limit);

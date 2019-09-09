@@ -152,9 +152,9 @@ class Model
         $object = $this->db->query($sql);
     }
 
-    public function pagination($startForm, $limit)
+    public function pagination($offset, $limit, $table)
     {
-        $rsResult = $this->db->query("SELECT * FROM lrs ORDER BY id asc LIMIT $startForm, $limit");
+        $rsResult = $this->db->query("SELECT * FROM $table ORDER BY id asc LIMIT $offset, $limit");
         return $rsResult;
     }
 

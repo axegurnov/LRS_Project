@@ -20,4 +20,5 @@
     <form action="/lrs/list" method="post">
         <button type="submit" name="exit" class="btn btn-primary">Перейти в главное меню</button>
     </form>
+
 <?php endif; ?>
