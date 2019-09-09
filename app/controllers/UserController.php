@@ -4,15 +4,13 @@ namespace app\controllers;
 use app\core\Controller;
 
 class UserController extends Controller {
-
-    public function indexAction()
-    {
-        $this->view->generate('user/index.tlp');
-    }
 	
 	//форма авторизации и попытка залогиниться
 	public function authAction() 
 	{
+		if (!empty($_SESSION["auth"])) {
+			return $this->redirect("/lrs/list");
+		}
 		if (isset($_POST["loginButton"])) {
 			$login = $_POST["login"];
     		$password = $_POST["password"];

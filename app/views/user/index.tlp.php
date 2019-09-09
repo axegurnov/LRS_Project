@@ -1,39 +1,27 @@
-<a href="/user/add" class="btn btn-info btn-sm ml-md-5 mt-md-3">Create User</a>
-<table class="table-bordered table-sm ml-md-5 mt-md-3">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">LRS name</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"><a href="/users"><img src="https://img.icons8.com/material-sharp/50/000000/settings.png" width="15px" height="15px"></a></th>
-    </tr>
-    </thead>
-    <?php foreach ($lrsr as $lrs): ?>
-        <tr>
-            <th scope="row"><label><?= $lrs['id'] ?></label></th>
-            <td><a href="/lrs/<?= $lrs['id'] ?>"><?= $lrs['name'] ?></a></td>
-            <td>
-                <form action="/lrs/view/update" method="post">
-                    <input type="hidden" name="id" value="<?= $lrs['id']?>">
-                    <button type="submit" class="btn btn-info">Edit</button>
-                </form>
-            </td>
-
-            <td>
-                <form action="/lrs/del" method="post">
-                    <input type="hidden" name="id" value="<?= $lrs['id']?>">
-                    <button type="submit" class="btn btn-danger classWarning">Remove</button>
-                </form>
-            </td>
-        </tr>
-    <?php endforeach;?>
-</table>
-
-<nav class="ml-md-5 mt-md-3">
-    <ul class="pagination">
-
-        <?php for ($i = 1; $i <= $pages; $i++): ?>
-            <li class="page-item"><a class="page-link" href="/lrs/list?page=<?= $i; ?>"><?= $i; ?></a></li>
-        <?php endfor; ?>
-    </ul>
+<div class="container mt-4">
+    <h1>New User</h1>
+    <form action="/user/add" method="post">
+        <div class="form-group">
+            <label for="inputLogin">Login</label>
+            <input type="text" name="login" class="form-control" id="inputLogin" aria-describedby="loginHelp" placeholder="Enter login" value="<?=(empty($_POST['login'])) ? '' : $_POST['login']?>">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" name="email "class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" value="<?=(empty($_POST['email'])) ? '' : $_POST['email']?>">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp" placeholder="Enter name" value="<?=(empty($_POST['name'])) ? '' : $_POST['name']?>">
+        </div>
+        <div class="form-group">
+            <label for="inputPhone">Phone</label>
+            <input type="number" name="phone" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Enter phone" value="<?=(empty($_POST['phone'])) ? '' : $_POST['phone']?>">
+        </div>
+        <button type="submit" name="submitButton" class="btn btn-primary" value="1">Submit</button>
+    </form>
+</div>

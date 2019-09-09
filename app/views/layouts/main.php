@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/public/css/bootstrap.css">
 </head>
 <body>
-    <?php if (isset($_COOKIE["user"])): ?>
+    <?php if (isset($_SESSION["auth"])): ?>
         <form action="/user/exit" method="post">
             <button type="submit" name="exit" class="btn btn-danger">Выход</button>
         </form>

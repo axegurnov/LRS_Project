@@ -1,4 +1,4 @@
-<?php if (!isset($_COOKIE["user"])): ?>
+<?php if (!isset($_SESSION["auth"])): ?>
 <div class="container mt-4">
     <h1>Authorization</h1>
     <form action="/login" method="post">
@@ -15,6 +15,9 @@
 </div>
 
 <?php else: ?>
+    <?php
+        
+    ?>
     <br>
     <p>Пользователь уже авторизован.</p>
     <form action="/lrs/list" method="post">

@@ -55,18 +55,13 @@ class User extends Model
 		} 
 		else {
 		    unset($_SESSION["errors"]);
-			setcookie("user", "login_success", time() + 3600, "/");
-			/*
-			$_SESSION["auth"] = true;
-			$_SESSION["login"] = $existinginfo["login"];
-			$_SESSION["status"] = $existinginfo["status"];
-			*/
+			$_SESSION["auth"] =  $existinginfo["login"];
 		}
 	}
 
-    public function exit() 
+    public function exit()
     {
-    	setcookie("user", "login_success", time() - 3600, "/");
+    	unset($_SESSION["auth"]);
     }
 }
 ?>

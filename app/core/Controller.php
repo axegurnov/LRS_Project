@@ -10,14 +10,18 @@ abstract class Controller
 
 	protected function beforeAction()
 	{
-
+		if (empty($_SESSION["auth"]) && ($this->route['controller'] != "user") && ($this->route['action'] != "auth")) {
+			include($_SERVER['DOCUMENT_ROOT'] . '/app/views/403.php');
+			//return $this->redirect("/login");
+        }
 	}
 
 	public function __construct($route)
 	{
 		$this->route = $route;
+		$this->beforeAction();
 		$this->view = View::getInstance();
-		$this->model = $this->getModel($route['controller']);
+		$this->model = $this->getModel($this->route['controller']);
 	}
 
 	//автоподключение модели
@@ -32,7 +36,6 @@ abstract class Controller
 	//LIST
 	public function listAction()
 	{
-		$this->beforeAction();
 		$page = 0;
 		if (isset($_GET["page"])) {
 			$page = $_GET["page"];
@@ -43,7 +46,6 @@ abstract class Controller
 	//ADD
 	public function addAction()
 	{
-		$this->beforeAction();
 		$vars = [];
 		if (count($_GET) > 1) {
 			array_shift($_GET);
@@ -55,7 +57,6 @@ abstract class Controller
 	//DELETE
 	public function deleteAction()
 	{
-		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
@@ -66,7 +67,6 @@ abstract class Controller
 	//EDITGET
 	public function editgetAction()
 	{
-		$this->beforeAction();
 		$id = 0;
 		if (isset($_GET["id"])) {
 			$id = $_GET["id"];
@@ -77,7 +77,6 @@ abstract class Controller
 	//EDITPUT
 	public function updateAction()
 	{
-		$this->beforeAction();
 		$id = 0;
 		$vars = [];
 		if (isset($_GET["id"]) && (count($_GET) > 2)) {
@@ -99,10 +98,5 @@ abstract class Controller
 	{
 		header('Location: ' . $url, false);
 	}
-
-	public function logout()
-    {
-        unset($_SESSION);
-    }
 }
 ?>
