@@ -3,6 +3,7 @@ create table if not exists users (
   login varchar (20) not null,
   password varchar (100) not null,
   name varchar (20) not null,
+  second_name varchar (20) not null,
   email varchar (50) not null,
   primary key (id)
 );
