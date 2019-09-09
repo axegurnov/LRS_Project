@@ -144,8 +144,7 @@ class Model
     public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed,$this->table);
-        $db = DataBase::getInstance();
-        $object = $db->query($sql);
+        $object = $this->db->query($sql);
     }
 
     public function dropRecord($id)
@@ -153,4 +152,17 @@ class Model
         $sql = "DELETE FROM $this->table WHERE id=$id";
         $object = $this->db->query($sql);
     }
+
+    public function pagination($startForm, $limit)
+    {
+        $rsResult = $this->db->query("SELECT * FROM lrs ORDER BY id asc LIMIT $startForm, $limit");
+        return $rsResult;
+    }
+
+    public function countId()
+    {
+        $countId = $this->db->query("SELECT COUNT(id) from {$this->table}")->fetch_row();
+        return $countId;
+    }
+
 }
