@@ -2,18 +2,10 @@
 namespace app\controllers;
 
 use app\core\Controller;
-use app\core\Model;
-use app\core\View;
 
 class LrsController extends Controller {
 
     protected $nameModel = 'lrs';
-
-    public function __construct()
-    {
-        parent::__construct($this->route);
-        $this->model = $this->getModel($this->nameModel);
-    }
 
     public function lrsListAction()
     {

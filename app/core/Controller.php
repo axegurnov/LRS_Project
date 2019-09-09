@@ -1,12 +1,10 @@
 <?php
 namespace app\core;
-use app\core\View;
-use app\core\Model;
 
 abstract class Controller
 {
-
-	protected $model = null;
+    protected $nameModel = null;
+    protected $model = null;
 	protected $view = null;
 	protected $route = null;
 
@@ -19,13 +17,16 @@ abstract class Controller
 	{
 		$this->route = $route;
 		$this->view = View::getInstance();
+		$this->model = $this->getModel($route['controller']);
 	}
 
 	//автоподключение модели
-	public function getModel($nameModel)
+	public function getModel($name)
 	{
-        $path = "app\models\\" . ucfirst($nameModel);
-		return new $path;
+        $path = 'app\models\\' . ucfirst($name);
+        if(class_exists($path)) {
+            return new $path;
+        }
 	}
 
 	//LIST
