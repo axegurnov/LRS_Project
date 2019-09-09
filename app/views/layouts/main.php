@@ -6,15 +6,15 @@
     <link rel="stylesheet" href="/public/css/bootstrap.css">
 </head>
 <body>
-    <?php if (isset($_COOKIE["user"])): ?>
+    <?php if (isset($_SESSION["auth"])): ?>
         <form action="/user/exit" method="post">
             <button type="submit" name="exit" class="btn btn-danger">Выход</button>
         </form>
     <?php endif; ?>
     <?php
-        if(isset($_POST['errors'])) {
+    if(isset($_SESSION['errors'])) {
             echo "<div class='alert alert-danger'>";
-            foreach($_POST['errors'] as $value) {
+            foreach($_SESSION['errors'] as $value) {
                 echo "$value";                
                 echo '<br>';                
             }
