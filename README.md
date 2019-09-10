@@ -36,49 +36,46 @@ by ImageSpark<br>
 1.Прописать в файле app/config/Database.php данные для подключения к базе данных.
 2.Для осуществения миграции необходимо в index.php прописать $migration = MigrationController::migrationAction(); тем самым вызвать метод migrationAction.
 
-База данных LRS.
+База данных LRS.<br>
+<br>
+Таблица users - Содержит данные о пользователе<br>
+id - id Пользователя,primary key<br>
+login - Логин пользователя<br>
+password - Пароль пользователя<br>
+name - Имя пользователя<br>
+email - Email пользователя<br>
+<br>
+Таблица lrs - Содержит названия курсов обучения и их описание.<br>
+id - id LRS,primary key<br>
+name -  Название LRS<br>
+description - Описание LRS<br>
+<br>
+Таблица lrs_client - Клиенты LRS<br>
+id - id клиента курса, primary key<br>
+lrs_id - id LRS<br>
+login - Логин клиента LRS<br>
+password - пароль клиента<br>
+description - ФИО пользователя <br>
+<br>
+Таблица lrs_statements - Хранятся все учебные события.<br>
+id - id утверждения (события), primary key <br>
+irs id - id LRS<br>
+lrs_client_id - id клиента LRS<br>
+actor - актер<br>
+verb - дейстие<br>
+activity - задача<br>
+content - содержимое<br>
+<br>
+Таблица lrs_state - Данные по ключам <br>
+id - id state, primary key<br>
+lrs id - id lrs<br>
+lrs client id - id клиента<br>
+state_key<br>
+value - значение<br>
+activity - задача<br>
+registration<br>
 
-Таблица users - Содержит данные о пользователе
-id - id Пользователя,primary key
-login - Логин пользователя
-password - Пароль пользователя
-name - Имя пользователя
-email - Email пользователя
-
-
-Таблица lrs - Содержит названия курсов обучения и их описание.
-id - id Курса,primary key
-name -  Название курса
-description - Описание курса
-
-
-Таблица lrs_client - Клиенты LRS
-id - id клиента курса, primary key
-lrs_id - id курса
-login - Логин клиента курса
-password - пароль клиента
-description - ФИО пользователя 
-
-
-Таблица lrs_statements - Хранятся все учебные события.
-id - id утверждения (события), primary key 
-irs id - id курса
-lrs_client_id - id клиента
-actor - актер
-verb - дейстие
-activity - задача
-content - содержимое 
-
-Таблица lrs_state - Данные по ключам.
-id - id state, primary key
-lrs id - id lrs
-lrs client id - id клиента
-state_key 
-value - значение
-activity - задача
-registration
-
-<img src="i.imgur.com/bCaxi38.png">
+![Alt text](http://i.imgur.com/bCaxi38.png "Database")
 
 # Компонент Router
 
