@@ -39,7 +39,9 @@ class Router
             }
         }
         if(!$foundRoute) {
-            include($_SERVER['DOCUMENT_ROOT'] . '/app/views/errors/404.tlp.php');
+            $this->params['controller'] = "error";
+            $this->params['action'] = "notFound";
+            $this->run();
         }
     }
 
