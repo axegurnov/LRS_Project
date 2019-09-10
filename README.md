@@ -38,7 +38,7 @@ by ImageSpark<br>
 
 База данных LRS.
 
-Таблица users - Содержит данные о пользователе.
+Таблица users - Содержит данные о пользователе
 id - id Пользователя,primary key
 login - Логин пользователя
 password - Пароль пользователя
@@ -78,7 +78,7 @@ value - значение
 activity - задача
 registration
 
-![alt text](i.imgur.com/bCaxi38.png)
+<img src="i.imgur.com/bCaxi38.png">
 
 # Компонент Router
 
