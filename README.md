@@ -45,7 +45,7 @@ password - Пароль пользователя<br>
 name - Имя пользователя<br>
 email - Email пользователя<br>
 <br>
-Таблица lrs - Содержит названия курсов обучения и их описание.<br>
+Таблица lrs - Содержит названия LRS обучения и их описание.<br>
 id - id LRS,primary key<br>
 name -  Название LRS<br>
 description - Описание LRS<br>
