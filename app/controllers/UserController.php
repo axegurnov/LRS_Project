@@ -30,6 +30,9 @@ class UserController extends Controller {
 	//форма авторизации и попытка залогиниться
 	public function authAction() 
 	{
+        if (!empty($_SESSION["auth"])) {
+            return $this->redirect("/lrs/list");
+        }
 		if (isset($_POST["loginButton"])) {
 			$login = $_POST["login"];
     		$password = $_POST["password"];
@@ -49,7 +52,7 @@ class UserController extends Controller {
 			//$this->model = $this->getModel($nameModel);
 			//$this->model->list();
 		}
-		$this->view->generate("user/reg.tlp"); 
+		$this->view->generate("user/add.tlp");
 	}
 
 	//разлогирование и выход на экран авторизации
