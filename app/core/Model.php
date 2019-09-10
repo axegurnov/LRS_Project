@@ -60,7 +60,6 @@ class Model
     public function getFields($table)
     {
         $config = require 'app/config/Database.php';
-        $f = $config['base'];
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
         FROM `INFORMATION_SCHEMA`.`COLUMNS` 
