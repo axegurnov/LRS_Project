@@ -70,10 +70,19 @@ class Routes
                 'action' => 'clientAdd',
             ],
 
+            'lrs/client/update' => [
+                'controller' => 'lrsClient',
+                'action' => 'clientUpdate',
+            ],
+            'lrs/client/view/update' => [
+                'controller' => 'lrsClient',
+                'action' => 'clientUpdateView',
+            ],
             'lrs/client/delete' => [
                 'controller' => 'lrsClient',
                 'action' => 'clientDel',
             ],
+
         ];
     }
 }

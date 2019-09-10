@@ -11,7 +11,6 @@ class LrsController extends Controller {
     public function lrsListAction($params)
     {
         $limit = 3;
-
         if (empty($params['page'])) {
             $params['page'] = 1;
         };
@@ -26,6 +25,20 @@ class LrsController extends Controller {
             'pages' => $pages
         ];
         $this->view->generate('lrs/list.tlp',$vars);
+    }
+
+    public function lrsShowAction($params){
+        if(empty($params['view'])) $params['view']=1;
+        $predictor = "lrs_id=".$params['view'];
+        $lrs_id = "id=".$params['view'];
+        $clients = $this->model->getValueTable("lrs_client",$predictor);
+        $lrs = $lrs = $this->model->select($lrs_id);
+        $vars =[
+            'title' => 'LRS '.$params['view'],
+            'lrs' => $lrs,
+            'clients' => $clients
+        ];
+        $this->view->generate('lrs/view.tlp',$vars);
     }
 
     public function lrsDelAction()
@@ -51,6 +64,7 @@ class LrsController extends Controller {
 
     public function lrsUpdateAction()
     {
+
         $id = $_POST['id'];
         $data_field = [
             'name' => $_POST['name'],
@@ -60,8 +74,7 @@ class LrsController extends Controller {
             $this->model->setValues($data_field);
             $this->model->updateRecord($id);
             $this->redirect('../lrs/list');
-        }
-        elseif (empty($_POST['id'])) {
+        } elseif (empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
             $this->redirect('../lrs/list');

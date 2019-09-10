@@ -98,15 +98,16 @@ class Model
         return $this->params = $allRecords;
     }
 
-    function select($predictor, $fields = '*')
+    function select($predictor,$fields = '*' )
     {
         if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
         }
-        echo "Отсутствует условие!";
-
+        else {
+            echo "Отсутствует условие!";
+        }
     }
 
 
@@ -151,6 +152,12 @@ class Model
         $sql = "DELETE FROM $this->table WHERE id=$id";
         $object = $this->db->query($sql);
 
+    }
+
+    public function getValueTable($table,$predictor)
+    {
+        $getValues = $this->db->query("select * from $table where $predictor");
+        return $getValues;
     }
 
     public function pagination($offset, $limit, $table)
