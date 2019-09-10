@@ -9,6 +9,6 @@ use app\controllers\MigrationController;
 
 $router = new Router;
 
-// $migration = MigrationController::migrationAction();
+//$migration = MigrationController::migrationAction();
 
 ?>

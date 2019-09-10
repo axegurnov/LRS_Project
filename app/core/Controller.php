@@ -87,11 +87,20 @@ abstract class Controller
 		$this->convertToJson($this->model->editput($id, $vars));
 	}
 
+	protected function hashPassword($var)
+    {
+        return password_hash($var, PASSWORD_BCRYPT);
+    }
+
+    protected function filterVar($var)
+    {
+        return filter_var($var, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+    }
+
 	//преобразование к формату json
 	public function convertToJson($array)
 	{
-		$array = json_encode($array);
-		return $array;
+		return json_encode($array);
 	}
 
 	public function redirect($url)

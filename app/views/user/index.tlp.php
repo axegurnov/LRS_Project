@@ -1,4 +1,5 @@
-<a href="/user/add" class="btn btn-info btn-sm ml-md-5 mt-md-3">Create User</a>
+<a href="/lrs/list" class="btn btn-info">Back to lrs list</a>
+<a href="/user/view/update" class="btn btn-info btn-sm ml-md-5 mt-md-3">Create User</a>
 <table class="table-bordered table-sm ml-md-5 mt-md-3">
     <thead>
     <tr>
@@ -13,7 +14,7 @@
             <th scope="row"><label><?= $user['id'] ?></label></th>
             <td><a href="/user/<?= $user['id'] ?>"><?= $user['name'] ?></a></td>
             <td>
-                <form action="/user/update" method="post">
+                <form action="/user/view/update" method="post">
                     <input type="hidden" name="id" value="<?= $user['id']?>">
                     <button type="submit" class="btn btn-info">Edit</button>
                 </form>

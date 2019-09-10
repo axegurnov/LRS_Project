@@ -34,7 +34,7 @@ class UserController extends Controller {
             return $this->redirect("/lrs/list");
         }
 		if (isset($_POST["loginButton"])) {
-			$login = $_POST["login"];
+			$login = $this->filterVar($_POST['login']);
     		$password = $_POST["password"];
 			$this->model->validAuth($login, $password);
 			if (!isset($_SESSION["errors"])) {
@@ -44,16 +44,51 @@ class UserController extends Controller {
 		$this->view->generate('user/auth.tlp');
 	}
 
-	//функция для будущего users crud (создание нового пользователя) 
-	public function userAddAction()
+	public function userViewUpdateAction()
+    {
+        $userInfo = '';
+        if (isset($_POST['id'])) {
+            $str = "id=".$_POST['id'];
+            $userInfo = $this->model->select($str);
+        }
+        $vars = [
+            'title' => 'User form',
+            'data_field' => $userInfo
+        ];
+        $this->view->generate('user/update.tlp',$vars);
+    }
+
+	public function userUpdateAction()
 	{
-		if (isset($_POST["submitButton"])) {
-			//$nameModel = "user";
-			//$this->model = $this->getModel($nameModel);
-			//$this->model->list();
-		}
-		$this->view->generate("user/add.tlp");
+        $id = $_POST['id'];
+        $login = $this->filterVar($_POST['login']);
+        $password = $this->hashPassword($_POST['password']);
+        $data_field = [
+            'login' => $login,
+            'name' => $_POST['name'],
+            'second_name' => $_POST['second_name'],
+            'email' => $_POST['email'],
+            'password' => $password,
+        ];
+
+        if (!empty($_POST['id'])) {
+            $this->model->setValues($data_field);
+            $this->model->updateRecord($id);
+            $this->redirect('../users');
+        }
+        elseif (empty($_POST['id'])) {
+            $this->model->setValues($data_field);
+            $this->model->addRecord();
+            $this->redirect('../users');
+        }
 	}
+
+    public function userDelAction()
+    {
+        $id = $_POST['id'];
+        $this->model->dropRecord($id);
+        $this->redirect('../users');
+    }
 
 	//разлогирование и выход на экран авторизации
 	public function exitAction() 
