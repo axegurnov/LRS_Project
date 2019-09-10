@@ -59,11 +59,12 @@ class Model
 
     public function getFields($table)
     {
+        $config = require 'app/config/Database.php';
+        $f = $config['base'];
         $fields = array();
         $sql = "SELECT `COLUMN_NAME` 
         FROM `INFORMATION_SCHEMA`.`COLUMNS` 
-        WHERE `TABLE_SCHEMA`='lrs'
-        AND `TABLE_NAME`= '" . $table . "';";
+        WHERE `TABLE_SCHEMA`='" . $config['base'] . "'AND `TABLE_NAME`= '" . $table . "';";
 
         $result = $this->db->query($sql);
         $rows = mysqli_num_rows($result);
@@ -105,7 +106,7 @@ class Model
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
         }
-            echo "Отсутствует условие!";
+        echo "Отсутствует условие!";
 
     }
 
