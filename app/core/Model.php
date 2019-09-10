@@ -181,7 +181,8 @@ class Model
 
         if ($error)
         {
-            return $error;
+            return $_SESSION['errors'] = $error;
+
         }
         else
         {
@@ -257,7 +258,7 @@ class Model
                 }
             }
 
-            return $error;
+            return $_SESSION['errors'] = $error;
 
         }
     }
