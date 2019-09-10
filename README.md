@@ -32,10 +32,50 @@ by ImageSpark<br>
  - подкаталог views содержит все необходимые представления
 
 =======
-# Миграции
+# Миграции и база данных
 1.Прописать в файле app/config/Database.php данные для подключения к базе данных.
-2.Для осуществения миграции необходимо в index.php прописать,тем самым вызвать метод migrationAction
-$migration = MigrationController::migrationAction();
+2.Для осуществения миграции необходимо в index.php прописать $migration = MigrationController::migrationAction(); тем самым вызвать метод migrationAction.
+
+База данных LRS.<br>
+<br>
+Таблица users - Содержит данные о пользователе<br>
+id - id Пользователя,primary key<br>
+login - Логин пользователя<br>
+password - Пароль пользователя<br>
+name - Имя пользователя<br>
+email - Email пользователя<br>
+<br>
+Таблица lrs - Содержит названия LRS обучения и их описание.<br>
+id - id LRS,primary key<br>
+name -  Название LRS<br>
+description - Описание LRS<br>
+<br>
+Таблица lrs_client - Клиенты LRS<br>
+id - id клиента курса, primary key<br>
+lrs_id - id LRS<br>
+login - Логин клиента LRS<br>
+password - пароль клиента<br>
+description - ФИО пользователя <br>
+<br>
+Таблица lrs_statements - Хранятся все учебные события.<br>
+id - id утверждения (события), primary key <br>
+irs id - id LRS<br>
+lrs_client_id - id клиента LRS<br>
+actor - актер<br>
+verb - дейстие<br>
+activity - задача<br>
+content - содержимое<br>
+<br>
+Таблица lrs_state - Данные по ключам <br>
+id - id state, primary key<br>
+lrs id - id lrs<br>
+lrs client id - id клиента<br>
+state_key<br>
+value - значение<br>
+activity - задача<br>
+registration<br>
+
+![Alt text](http://i.imgur.com/bCaxi38.png "Database")
 
 # Компонент Router
 
