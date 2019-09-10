@@ -33,7 +33,7 @@
 
         <div class="col-md-6">
             <input type="hidden" class="form-control" name="id" value="<?= $data_field['id']??""?>">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary edit_confirm">
                 <?=isset($data_field['id'])?"Update":"Create"?>
             </button>
             <a href="/users" class="btn btn-secondary float-right">Cancel</a>
