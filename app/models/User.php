@@ -26,9 +26,7 @@ class User extends Model
     //проверка существования пользователя
     public function oneUserCheck() 
     {
-		$usernameclean = filter_var($this->login, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
-
-		$namecheckquery = "SELECT login, password FROM lrs.users WHERE login='" . $usernameclean . "'; ";
+		$namecheckquery = "SELECT login, password FROM lrs.users WHERE login='" . $this->login . "'; ";
 		$this->namecheck = $this->db->query($namecheckquery);
 
 		if (!$this->namecheck) {

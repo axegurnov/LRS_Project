@@ -8,26 +8,24 @@
         }
         echo "</div>" ?>
         <div class="form-group">
-            <label for="email_address" class="col-md-4 col-form-label ">Name</label>
+            <label for="name" class="col-md-4 col-form-label ">Name</label>
             <div class="col-md-6">
                 <input type="text" id="name" class="form-control" name="name" value="<?= $data_field['name']??""?>" autofocus>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="name" class="col-md-4 col-form-label">Description</label>
+            <label for="description" class="col-md-4 col-form-label">Description</label>
             <div class="col-md-6">
                 <input type="text" id="description" class="form-control" name="description" value="<?=$data_field['description']??"" ?>">
             </div>
         </div>
 
         <div class="col-md-6">
-            <input type="hidden" class="form-control" name="id" value="<?= $data_field['id']??""?>">
+            <input type="hidden" class="form-control" name="id" value="<?=$data_field['id']??""?>">
             <button type="submit" class="btn btn-primary">
                 <?=isset($data_field['id'])?"Update":"Create"?>
             </button>
-            <a href="/lrs/list" class="btn btn-secondary float-right">
-                Cancel
-            </a>
+            <a href="/lrs/list" class="btn btn-secondary float-right">Cancel</a>
         </div>
 </form>

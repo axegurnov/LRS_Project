@@ -1,24 +1,34 @@
-<form action="/user/update" method="post"> <?php
+<form action="/user/update" method="post">
+<?php
     if (isset($errors)) { ?>
     <div class="alert alert-danger" role="alert">
         <?php
         foreach ($errors as $error) {
             echo $error . '<br>';
         }
-        }
-        echo "</div>" ?>
+    }
+?>
+    </div>
         <div class="form-group">
-            <label for="email_address" class="col-md-4 col-form-label ">Name</label>
-            <div class="col-md-6">
-                <input type="text" id="name" class="form-control" name="name" value="<?= $data_field['name']??""?>" autofocus>
-            </div>
+            <label for="inputLogin">Login</label>
+            <input type="text" name="login" class="form-control" id="inputLogin" aria-describedby="loginHelp" placeholder="Enter login" value="<?=$data_field['login']??"" ?>">
         </div>
-
         <div class="form-group">
-            <label for="name" class="col-md-4 col-form-label">Description</label>
-            <div class="col-md-6">
-                <input type="text" id="description" class="form-control" name="description" value="<?=$data_field['description']??"" ?>">
-            </div>
+            <label for="inputName">Name</label>
+            <input type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp" placeholder="Enter name" value="<?=$data_field['name']??"" ?>">
+        </div>
+        <div class="form-group">
+            <label for="inputSecondName">Surname</label>
+            <input type="text" name="second_name" class="form-control" id="inputSecondName" aria-describedby="secondNameHelp" placeholder="Enter surname" value="<?=$data_field['second_name']??"" ?>">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" name="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" value="<?=$data_field['email']??"" ?>">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter password">
         </div>
 
         <div class="col-md-6">

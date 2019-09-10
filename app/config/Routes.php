@@ -20,14 +20,14 @@ class Routes
                 'action' => 'index',
             ],
 
-            'user/add' => [
-                'controller' => 'user',
-                'action' => 'userAdd',
-            ],
-
             'user/update' => [
                 'controller' => 'user',
                 'action' => 'userUpdate',
+            ],
+
+            'user/view/update' => [
+                'controller' => 'user',
+                'action' => 'userViewUpdate',
             ],
 
             'user/del' => [
@@ -39,6 +39,7 @@ class Routes
                 'controller' => 'user',
                 'action' => 'exit',
             ],
+
             'lrs/list' => [
                 'controller' => 'lrs',
                 'action' => 'lrsList',
@@ -49,10 +50,6 @@ class Routes
                 'action' => 'lrsShow'
             ],
 
-            'lrs/add'  => [
-                'controller' => 'lrs',
-                'action' => 'lrsAdd',
-            ],
             'lrs/del'  => [
                 'controller' => 'lrs',
                 'action' => 'lrsDel',
