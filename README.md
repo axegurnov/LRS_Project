@@ -32,10 +32,53 @@ by ImageSpark<br>
  - подкаталог views содержит все необходимые представления
 
 =======
-# Миграции
+# Миграции и база данных
 1.Прописать в файле app/config/Database.php данные для подключения к базе данных.
-2.Для осуществения миграции необходимо в index.php прописать,тем самым вызвать метод migrationAction
-$migration = MigrationController::migrationAction();
+2.Для осуществения миграции необходимо в index.php прописать $migration = MigrationController::migrationAction(); тем самым вызвать метод migrationAction.
+
+База данных LRS.
+
+Таблица users - Содержит данные о пользователе.
+id - id Пользователя,primary key
+login - Логин пользователя
+password - Пароль пользователя
+name - Имя пользователя
+email - Email пользователя
+
+
+Таблица lrs - Содержит названия курсов обучения и их описание.
+id - id Курса,primary key
+name -  Название курса
+description - Описание курса
+
+
+Таблица lrs_client - Клиенты LRS
+id - id клиента курса, primary key
+lrs_id - id курса
+login - Логин клиента курса
+password - пароль клиента
+description - ФИО пользователя 
+
+
+Таблица lrs_statements - Хранятся все учебные события.
+id - id утверждения (события), primary key 
+irs id - id курса
+lrs_client_id - id клиента
+actor - актер
+verb - дейстие
+activity - задача
+content - содержимое 
+
+Таблица lrs_state - Данные по ключам.
+id - id state, primary key
+lrs id - id lrs
+lrs client id - id клиента
+state_key 
+value - значение
+activity - задача
+registration
+
+![alt text](i.imgur.com/bCaxi38.png)
 
 # Компонент Router
 
