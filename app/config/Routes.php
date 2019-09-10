@@ -6,8 +6,8 @@ class Routes
     {
         return [
             '' => [
-              'controller' => 'checkRoutes',
-              'action' => 'checkRoutes',
+              'controller' => 'user',
+              'action' => 'auth',
             ],
 
             'login' => [
