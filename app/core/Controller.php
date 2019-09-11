@@ -11,7 +11,7 @@ abstract class Controller
 	protected function beforeAction()
 	{
 		if (empty($_SESSION["auth"]) && ($this->route['controller'] != "user") && ($this->route['action'] != "auth")) {
-			$this->view->generate("errors/403.tlp"); 
+			$this->view->generate("errors/403.tlp");
 			exit();
         }
 	}
@@ -20,7 +20,7 @@ abstract class Controller
 	{
 		$this->route = $route;
 		$this->view = View::getInstance();
-		$this->beforeAction();
+		//$this->beforeAction();
 		$this->model = $this->getModel($this->route['controller']);
 	}
 
@@ -102,6 +102,12 @@ abstract class Controller
 	{
 		return json_encode($array);
 	}
+
+	//преобразование к формату json
+    public function convertFromJson($array)
+    {
+        return json_decode($array);
+    }
 
 	public function redirect($url)
 	{
