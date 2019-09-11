@@ -7,7 +7,6 @@ use app\core\Controller;
 class LrsClientController extends Controller
 {
 
-    protected $nameModel = 'lrsClient';
 
     public function clientUpdateViewAction()
     {
