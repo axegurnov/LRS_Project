@@ -62,24 +62,46 @@ class UserController extends Controller {
 	{
         $id = $_POST['id'];
         $login = $this->filterVar($_POST['login']);
-        $password = $this->hashPassword($_POST['password']);
-        $data_field = [
-            'login' => $login,
-            'name' => $_POST['name'],
-            'second_name' => $_POST['second_name'],
-            'email' => $_POST['email'],
-            'password' => $password,
-        ];
+        $data_field = $_POST;
 
         if (!empty($_POST['id'])) {
-            $this->model->setValues($data_field);
+           $valid = $this->model->setValues($data_field);
+           if($valid){
+            $password = $this->hashPassword($_POST['password']);
+            $this->model->setValue('password',$password);
             $this->model->updateRecord($id);
             $this->redirect('../users');
+           }
+           else {
+               $userInfo = $data_field;
+               $vars = [
+                   'title' => 'User form',
+                   'data_field' => $userInfo
+               ];
+               $this->view->generate('user/update.tlp',$vars);
+           }
+            unset ($_SESSION['errors']);
         }
         elseif (empty($_POST['id'])) {
-            $this->model->setValues($data_field);
-            $this->model->addRecord();
-            $this->redirect('../users');
+            array_pop($data_field);
+
+            $valid = $this->model->setValues($data_field);
+
+            if($valid) {
+                $password = $this->hashPassword($_POST['password']);
+                $this->model->setValue('password',$password);
+                $this->model->addRecord();
+                $this->redirect('../users');
+            }
+            else{
+                $userInfo = $data_field;
+                $vars = [
+                    'title' => 'User form',
+                    'data_field' => $userInfo
+                ];
+                $this->view->generate('user/update.tlp',$vars);
+            }
+            unset ($_SESSION['errors']);
         }
 	}
 

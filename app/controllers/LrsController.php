@@ -71,14 +71,39 @@ class LrsController extends Controller {
             'description' => $_POST['description'],
         ];
         if (!empty($_POST['id'])) {
-            $this->model->setValues($data_field);
-            $this->model->updateRecord($id);
-            $this->redirect('../lrs/list');
+            $valid = $this->model->setValues($data_field);
+            if($valid) {
+                $this->model->setValues($data_field);
+                $this->model->updateRecord($id);
+                $this->redirect('../lrs/list');
+            }
+            else{
+                $vars = [
+                    'title' => 'LRS form',
+                    'data_field' => $data_field
+                ];
+                $this->view->generate('lrs/update.tlp',$vars);
+
+            }
+            unset ($_SESSION['errors']);
         } elseif (empty($_POST['id'])) {
+            $valid = $this->model->setValues($data_field);
+            if($valid) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
             $this->redirect('../lrs/list');
+            }
+            else{
+                $vars = [
+                    'title' => 'LRS form',
+                    'data_field' => $data_field
+                ];
+                $this->view->generate('lrs/update.tlp',$vars);
+
+            }
+
         }
+        unset ($_SESSION['errors']);
     }
 
 }

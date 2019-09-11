@@ -3,6 +3,7 @@
 namespace app\core;
 
 use app\core\Database;
+use app\core\Validation;
 
 class Model
 {
@@ -38,7 +39,7 @@ class Model
             $columns .= "'" . $value . "'" . $holders;
 
         }
-        $sql = "UPDATE $table SET $columns WHERE id= $id";
+        $sql = "UPDATE $table SET $columns WHERE id= $id;";
         return $sql;
     }
 
@@ -52,7 +53,7 @@ class Model
             $holders .= ($holders == "") ? "" : ", ";
             $holders .= "'" . $value . "'";
         }
-        $sql = "INSERT INTO $table ($columns) VALUES ($holders)";
+        $sql = "INSERT INTO $table ($columns) VALUES ($holders);";
         return $sql;
     }
 
@@ -98,14 +99,13 @@ class Model
         return $this->params = $allRecords;
     }
 
-    function select($predictor,$fields = '*' )
+    function select($predictor, $fields = '*')
     {
         if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
-        }
-        else {
+        } else {
             echo "Отсутствует условие!";
         }
     }
@@ -116,7 +116,6 @@ class Model
         if (!empty($this->params)) {
             return $this->params[$item];
         }
-
         echo 'Нет данных в записи!';
 
     }
@@ -129,10 +128,14 @@ class Model
 
     public function setValues($data)
     {
-        foreach ($data as $value) {
-            htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
+        $valid = Validation::Validate($data);
+        if (empty($_SESSION['errors'])) {
+            foreach ($data as $value) {
+                htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
+            }
+            return $this->params_changed = $data;
         }
-        return $this->params_changed = $data;
+        return false;
     }
 
     public function updateRecord($id)
@@ -154,7 +157,7 @@ class Model
 
     }
 
-    public function getValueTable($table,$predictor)
+    public function getValueTable($table, $predictor)
     {
         $getValues = $this->db->query("select * from $table where $predictor");
         return $getValues;

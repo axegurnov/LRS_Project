@@ -4,9 +4,9 @@ $(document).ready(function() {
 			return false;
 		}
 	});
-	$(document).on("click", ".edit_confirm", function() {
-		if (!confirm("Вы уверены, что хотите сохранить изменения?")) {
-			return false;
-		}
-	});
+	// $(document).on("click", ".edit_confirm", function() {
+	// 	if (!confirm("Вы уверены, что хотите сохранить изменения?")) {
+	// 		return false;
+	// 	}
+	// });
 });

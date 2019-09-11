@@ -6,12 +6,18 @@ namespace app\core;
 
 class Validation
 {
-    public function Validate($data)
+    public static function check_length($value = "", $min, $max)
+    {
+        $result = (mb_strlen(trim($value)) >= $min && mb_strlen(trim($value)) < $max);
+        return $result;
+    }
+    public static function Validate($data)
     {
         $error = array();
-        $pattern = "/^[а-яА-ЯёЁa-zA-Z]+$/";
+        $pattern = "/^[а-яА-ЯёЁ]+$/";
         $email_pattern = "/^[a-z0-9_.\-]+$/i";
-        $desc_pattern = "/^[а-яА-ЯёЁa-zA-Z0-9 ]+$/";
+        $desc_pattern = "/^[а-яА-ЯёЁa-zA-Z0-9 ]+$/i";
+       // $desc_pattern = "/^[a-z0-9]+$/i";
 
         foreach ($data as $key => $value) {
             $value = trim($value);
@@ -27,13 +33,6 @@ class Validation
         }
         else
         {
-            function check_length($value = "", $min, $max)
-            {
-                $result = (mb_strlen($value) >= $min && mb_strlen($value) < $max);
-                return $result;
-            }
-
-
             if (isset($data['login'])) {
                 $login = !preg_match($email_pattern, trim($data['login']));
 
@@ -47,28 +46,31 @@ class Validation
             if (isset($data['password'])) {
                 $min = 8;
                 $max = 25;
-                if (!check_length(trim($data['password']), $min, $max)) {
+                $length = self::check_length($data['password'],$min, $max);
+                if (!$length) {
                     $error['password'] = "Пароль должен содержать от восьми до двадцати пяти символов!";
                 }
-            } else {
+            }
                 if (isset($data['name'])) {
-                    $name = !preg_match($pattern, trim($data['name']));
+                    //debug($data);
+                    $name = !preg_match($desc_pattern, trim($data['name']));
                     if ($name) {
-                        $error['name'] = "Имя введено неверно. Допустимо использвать только латинские буквы и/или кириллицу";
-                    }
-                    $num_words = explode(" ", trim($data['name']));
-                    if (sizeof($num_words) > 1) {
-                        $error['name'] = $error['name'] . " Имя должно состоять из одного слова";
+                        $error['name'] = "Имя введено неверно. Допустимо использовать только латинские буквы .";
+
+                        $num_words = explode(" ", trim($data['name']));
+                        if (sizeof($num_words) > 1) {
+                            $error['name'] = $error['name'] . " Имя должно состоять из одного слова";
+                        }
                     }
 
                 }
-            }
+
             if (isset($data['second_name'])) {
-                $name = !preg_match($pattern, trim($data['name']));
+                $name = !preg_match($email_pattern, trim($data['second_name']));
                 if ($name) {
-                    $error['second_name'] = "Фамилия введена неверно. Допустимо использвать только латинские буквы и/или кириллицу";
+                    $error['second_name'] = "Фамилия введена неверно. Допустимо использовать только латинские буквы.";
                 }
-                $num_words = explode(" ", trim($data['name']));
+                $num_words = explode(" ", trim($data['second_name']));
                 if (sizeof($num_words) > 1) {
                     $error['second_name'] = $error['second_name'] . " Фамилия должна состоять из одного слова";
                 }
@@ -95,7 +97,7 @@ class Validation
             if (isset($data['description'])) {
                 $description = !preg_match($desc_pattern, trim($data['description']));
                 if ($description) {
-                    $error['description'] = "Имя должно состоять из трех слов";
+                    $error['description'] = "Некорректно введено описание. Допустимо использовать только латинские буквы";
                 }
             }
 
