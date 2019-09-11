@@ -58,7 +58,7 @@ class LrsController extends Controller {
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect('../lrs/list');
+        $this->redirect('/lrs/list');
     }
 
     public function lrsViewUpdateAction()
@@ -86,11 +86,11 @@ class LrsController extends Controller {
         if (!empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->updateRecord($id);
-            $this->redirect('../lrs/list');
+            $this->redirect('/lrs/list');
         } elseif (empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
-            $this->redirect('../lrs/list');
+            $this->redirect('/lrs/list');
         }
     }
 

@@ -74,12 +74,12 @@ class UserController extends Controller {
         if (!empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->updateRecord($id);
-            $this->redirect('../users');
+            $this->redirect('/users');
         }
         elseif (empty($_POST['id'])) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
-            $this->redirect('../users');
+            $this->redirect('/users');
         }
 	}
 
@@ -87,7 +87,7 @@ class UserController extends Controller {
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect('../users');
+        $this->redirect('/users');
     }
 
 	//разлогирование и выход на экран авторизации
