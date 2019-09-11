@@ -10,6 +10,7 @@
         <form action="/user/exit" method="post">
             <button type="submit" name="exit" class="btn btn-danger">Выход</button>
         </form>
+        <br>
     <?php endif; ?>
     <?php
     if(isset($_SESSION['errors'])) {

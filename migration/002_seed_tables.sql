@@ -10,10 +10,10 @@ insert into lrs (name, description) value ('LRS 6','about LRS 6');
 insert into lrs (name, description) value ('LRS 7','about LRS 7');
 insert into lrs (name, description) value ('LRS 8','about LRS 8');
 
-insert into lrs_client (lrs_id, login, password, description) value ('4','vasya','123','Vasya');
-insert into lrs_client (lrs_id, login, password, description) value ('3','petya','123','Petya');
-insert into lrs_client (lrs_id, login, password, description) value ('2','vova','123','Vova');
-insert into lrs_client (lrs_id, login, password, description) value ('1','nastya','123','Nastya');
+insert into lrs_client (lrs_id, login, password, description) value ('4','vasya','$2y$10$4/thOSfOaZSmS95DMU1vQu.GZ2y3SKWgHZIVceqJcwq32FWifd7ce','Vasya');
+insert into lrs_client (lrs_id, login, password, description) value ('3','petya','$2y$10$8aTT2KkEQ5uD3YSbPs0USO9DzDCDM7jEWbt8cTueQa9NG8aYsUnEW','Petya');
+insert into lrs_client (lrs_id, login, password, description) value ('2','vova','$2y$10$fQNCj.3KTYmSyLqdIWko7uo8MOleJH1R6kXX/XIc3PDgajLH31B6q','Vova');
+insert into lrs_client (lrs_id, login, password, description) value ('1','nastya','$2y$10$y4LwTikT4M5M0cw6dY0Jm.UblbTUrlNruAUpsQEKaCaOUxExqsyPa','Nastya');
 
 
 insert into lrs_statements (actor, verb, activity, content, lrs_id,lrs_client_id) value ('vasya','watching','video','video 1','2','4');

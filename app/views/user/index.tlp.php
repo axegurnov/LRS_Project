@@ -23,7 +23,7 @@
             <td>
                 <form action="/user/del" method="post">
                     <input type="hidden" name="id" value="<?= $user['id']?>">
-                    <button type="submit" class="btn btn-danger classWarning">Remove</button>
+                    <button type="submit" class="btn btn-danger del_confirm">Remove</button>
                 </form>
             </td>
         </tr>

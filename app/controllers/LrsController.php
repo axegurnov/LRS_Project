@@ -28,15 +28,23 @@ class LrsController extends Controller {
     }
 
     public function lrsShowAction($params){
-        if(empty($params['view'])) $params['view']=1;
-        $predictor = "lrs_id=".$params['view'];
-        $lrs_id = "id=".$params['view'];
+        if(empty($params['view'])) {
+            $id = 1;
+        } else {
+            $id = $params['view'];
+        }
+
+        $states = $this->model->innerJoin($id);
+
+        $predictor = "lrs_id=".$id;
+        $lrs_id = "id=".$id;
         $clients = $this->model->getValueTable("lrs_client",$predictor);
-        $lrs = $lrs = $this->model->select($lrs_id);
+        $lrs = $this->model->select($lrs_id);
         $vars =[
-            'title' => 'LRS '.$params['view'],
+            'title' => 'LRS '.$id,
             'lrs' => $lrs,
-            'clients' => $clients
+            'clients' => $clients,
+            'states' => $states
         ];
         $this->view->generate('lrs/view.tlp',$vars);
     }
@@ -45,7 +53,7 @@ class LrsController extends Controller {
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect('../lrs/list');
+        $this->redirect('/lrs/list');
     }
 
     public function lrsViewUpdateAction()
@@ -71,6 +79,7 @@ class LrsController extends Controller {
             'description' => $_POST['description'],
         ];
         if (!empty($_POST['id'])) {
+
             $valid = $this->model->setValues($data_field);
             if($valid) {
                 $this->model->setValues($data_field);
@@ -86,6 +95,11 @@ class LrsController extends Controller {
 
             }
             unset ($_SESSION['errors']);
+
+            $this->model->setValues($data_field);
+            $this->model->updateRecord($id);
+            $this->redirect('/lrs/list');
+
         } elseif (empty($_POST['id'])) {
             $valid = $this->model->setValues($data_field);
             if($valid) {
@@ -102,6 +116,7 @@ class LrsController extends Controller {
 
             }
 
+            $this->redirect('/lrs/list');
         }
         unset ($_SESSION['errors']);
     }

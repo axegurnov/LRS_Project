@@ -70,6 +70,7 @@ class UserController extends Controller {
             $password = $this->hashPassword($_POST['password']);
             $this->model->setValue('password',$password);
             $this->model->updateRecord($id);
+
             $this->redirect('../users');
            }
            else {
@@ -102,6 +103,13 @@ class UserController extends Controller {
                 $this->view->generate('user/update.tlp',$vars);
             }
             unset ($_SESSION['errors']);
+            $this->redirect('/users');
+        }
+        elseif (empty($_POST['id'])) {
+            $this->model->setValues($data_field);
+            $this->model->addRecord();
+            $this->redirect('/users');
+
         }
 	}
 
@@ -109,7 +117,7 @@ class UserController extends Controller {
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect('../users');
+        $this->redirect('/users');
     }
 
 	//разлогирование и выход на экран авторизации
