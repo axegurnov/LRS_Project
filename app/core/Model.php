@@ -143,7 +143,7 @@ class Model
         $this->db->query($sql);
     }
 
-    public function addRecord()git
+    public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed, $this->table);
         $this->db->query($sql);
