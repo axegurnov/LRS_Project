@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require 'app/config/Dev.php';
-include 'app/config/Autoload.php';
+require 'app/core/Dev.php';
+include 'app/core/Autoload.php';
 
 use app\core\Router;
 use app\controllers\MigrationController;
