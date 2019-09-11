@@ -99,10 +99,6 @@ class LrsController extends Controller {
             }
             unset ($_SESSION['errors']);
 
-            $this->model->setValues($data_field);
-            $this->model->updateRecord($id);
-            $this->redirect('/lrs/list');
-
         } elseif (empty($_POST['id'])) {
             $valid = $this->model->setValues($data_field);
             if($valid) {
