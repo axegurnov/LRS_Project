@@ -143,7 +143,7 @@ class Model
         $this->db->query($sql);
     }
 
-    public function addRecord()
+    public function addRecord()git
     {
         $sql = self::buildInsertSql($this->params_changed, $this->table);
         $this->db->query($sql);
@@ -161,9 +161,9 @@ class Model
         return $this->db->query("select * from $table where $predictor");
     }
 
-    public function pagination($offset, $limit, $table)
+    public function pagination($offset, $limit)
     {
-        return $this->db->query("SELECT * FROM $table ORDER BY id asc LIMIT $offset, $limit");
+        return $this->db->query("SELECT * FROM $this->table ORDER BY id asc LIMIT $offset, $limit");
     }
 
     public function countId()
