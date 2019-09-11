@@ -98,16 +98,14 @@ class Model
         return $this->params = $allRecords;
     }
 
-    function select($predictor,$fields = '*' )
+    function select($predictor, $fields = '*' )
     {
         if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
         }
-        else {
-            echo "Отсутствует условие!";
-        }
+        echo "Отсутствует условие!";
     }
 
 
@@ -116,9 +114,7 @@ class Model
         if (!empty($this->params)) {
             return $this->params[$item];
         }
-
         echo 'Нет данных в записи!';
-
     }
 
     public function setValue($item, $value)
@@ -138,38 +134,35 @@ class Model
     public function updateRecord($id)
     {
         $sql = self::buildUpdateSql($this->params_changed, $this->table, $id);
-        $object = $this->db->query($sql);
+        $this->db->query($sql);
     }
 
     public function addRecord()
     {
         $sql = self::buildInsertSql($this->params_changed, $this->table);
-        $object = $this->db->query($sql);
+        $this->db->query($sql);
     }
 
     public function dropRecord($id)
     {
         $sql = "DELETE FROM $this->table WHERE id=$id";
-        $object = $this->db->query($sql);
+        $this->db->query($sql);
 
     }
 
-    public function getValueTable($table,$predictor)
+    public function getValueTable($table, $predictor)
     {
-        $getValues = $this->db->query("select * from $table where $predictor");
-        return $getValues;
+        return $this->db->query("select * from $table where $predictor");
     }
 
     public function pagination($offset, $limit, $table)
     {
-        $rsResult = $this->db->query("SELECT * FROM $table ORDER BY id asc LIMIT $offset, $limit");
-        return $rsResult;
+        return $this->db->query("SELECT * FROM $table ORDER BY id asc LIMIT $offset, $limit");
     }
 
     public function countId()
     {
-        $countId = $this->db->query("SELECT COUNT(id) from {$this->table}")->fetch_row();
-        return $countId;
+        return $this->db->query("SELECT COUNT(id) from {$this->table}")->fetch_row();
     }
 
 
