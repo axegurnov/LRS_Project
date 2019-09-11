@@ -115,8 +115,6 @@ class LrsController extends Controller {
                 $this->view->generate('lrs/update.tlp',$vars);
 
             }
-
-            $this->redirect('/lrs/list');
         }
         unset ($_SESSION['errors']);
     }
