@@ -26,7 +26,6 @@ create table if not exists lrs_client (
 );
 create table if not exists lrs_statements (
   id int not null AUTO_INCREMENT,
-  actor varchar (20) not null,
   verb varchar (200) not null,
   activity varchar (200) not null,
   content varchar (200) not null,

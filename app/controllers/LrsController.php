@@ -84,7 +84,7 @@ class LrsController extends Controller {
             if($valid) {
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
-                $this->redirect('../lrs/list');
+                $this->redirect('/lrs/list');
             }
             else{
                 $vars = [
@@ -105,7 +105,7 @@ class LrsController extends Controller {
             if($valid) {
             $this->model->setValues($data_field);
             $this->model->addRecord();
-            $this->redirect('../lrs/list');
+            $this->redirect('/lrs/list');
             }
             else{
                 $vars = [

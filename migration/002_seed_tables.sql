@@ -16,10 +16,10 @@ insert into lrs_client (lrs_id, login, password, description) value ('2','vova',
 insert into lrs_client (lrs_id, login, password, description) value ('1','nastya','$2y$10$y4LwTikT4M5M0cw6dY0Jm.UblbTUrlNruAUpsQEKaCaOUxExqsyPa','Nastya');
 
 
-insert into lrs_statements (actor, verb, activity, content, lrs_id,lrs_client_id) value ('vasya','watching','video','video 1','2','4');
-insert into lrs_statements (actor, verb, activity, content, lrs_id,lrs_client_id) value ('petya','read','course','course 1','3','1');
-insert into lrs_statements (actor, verb, activity, content, lrs_id,lrs_client_id) value ('vova','complete','course','course 3','2','2');
-insert into lrs_statements (actor, verb, activity, content, lrs_id,lrs_client_id) value ('nasya','open','course','course 2','3','4');
+insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 1','2','4');
+insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('read','course','course 1','3','1');
+insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','2');
+insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('open','course','course 2','3','4');
 
 
 insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('2','4','432dfqw','var1','video','200');
