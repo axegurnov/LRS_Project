@@ -12,13 +12,14 @@
         <th scope="col">Value</th>
     </tr>
     </thead>
-    <?php foreach ($clients as $client): ?>
+    
+    <?php foreach ($states as $state): ?>
         <tr>
-            <th scope="row"><label><?= $client['id'] ?></label></th>
-            <td><?= $client['login'] ?></td>
-            <td><?= $client['description'] ?></td>
-            <td><?= $client['login'] ?></td>
-            <td><?= $client['login'] ?></td>
+            <th scope="row"><label><?= $state['id'] ?></label></th>
+            <td><?= $state['login'] ?></td>
+            <td><?= $state['activity'] ?></td>
+            <td><?= $state['state_key'] ?></td>
+            <td><?= $state['value'] ?></td>
         </tr>
     <?php endforeach; ?>
 </table><br>

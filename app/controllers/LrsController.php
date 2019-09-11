@@ -29,27 +29,22 @@ class LrsController extends Controller {
 
     public function lrsShowAction($params){
         if(empty($params['view'])) {
-            $params['view']=1;
+            $id = 1;
+        } else {
+            $id = $params['view'];
         }
-/*
-        $predictor = "lrs_id=".$params['view'];
-        $lrs_id = "id=".$params['view'];
+
+        $states = $this->model->innerJoin($id);
+
+        $predictor = "lrs_id=".$id;
+        $lrs_id = "id=".$id;
         $clients = $this->model->getValueTable("lrs_client",$predictor);
         $lrs = $this->model->select($lrs_id);
         $vars =[
-            'title' => 'LRS '.$params['view'],
+            'title' => 'LRS '.$id,
             'lrs' => $lrs,
-            'clients' => $clients
-        ];
-*/
-        $predictor = "lrs_id=".$params['view'];
-        $lrs_id = "id=".$params['view'];
-        $clients = $this->model->getValueTable("lrs_client",$predictor);
-        $lrs = $this->model->select($lrs_id);
-        $vars =[
-            'title' => 'LRS '.$params['view'],
-            'lrs' => $lrs,
-            'clients' => $clients
+            'clients' => $clients,
+            'states' => $states
         ];
         $this->view->generate('lrs/view.tlp',$vars);
     }
