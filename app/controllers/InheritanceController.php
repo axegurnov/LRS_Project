@@ -28,10 +28,4 @@ class InheritanceController extends Controller{
         return $vars;
     }
 
-
-    public function showLrsUsers(){
-
-    }
-
-
 }
