@@ -59,6 +59,12 @@ class Routes
                 'action' => 'lrsStateShow'
             ],
 
+            'lrs/statements' => [
+                'name' => 'lrs_statements',
+                'controller' => 'lrs',
+                'action' => 'lrsStatements'
+            ],
+
             'lrs' => [
                 'name' => 'lrs',
                 'controller' => 'lrs',
@@ -111,11 +117,7 @@ class Routes
                 'name' => 'api_lrs_statements',
                 'controller' => 'LrsStatementsApi',
                 'action' => 'index',
-            ],
-            'lrs/statements' => [
-                'controller' => 'lrs',
-                'action' => 'lrsStatements'
-            ],
+            ]
         ];
     }
 }

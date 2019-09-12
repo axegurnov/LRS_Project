@@ -16,14 +16,14 @@
         <th scope="col">Value</th>
     </tr>
     </thead>
-    
-    <?php foreach ($states as $state): ?>
+
+    <?php $i=1; foreach ($states as $state): ?>
         <tr>
-            <th scope="row"><label><?= $state['id'] ?></label></th>
+            <th scope="row"><label><?= $i ?></label></th>
             <td><?= $state['login'] ?></td>
             <td><?= $state['activity'] ?></td>
             <td><?= $state['state_key'] ?></td>
             <td><?= $state['value'] ?></td>
         </tr>
-    <?php endforeach; ?>
+        <?php $i++; endforeach; ?>
 </table>
