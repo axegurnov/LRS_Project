@@ -31,9 +31,7 @@ class LrsController extends Controller {
             $id = $params['view'];
         }
 
-        $states = $this->model->innerJoin($id);
         $statements = $this->model->Statements($id);
-       // debug($statements);
 
         $predictor = "lrs_id=".$id;
         $lrs_id = "id=".$id;
@@ -43,7 +41,6 @@ class LrsController extends Controller {
             'title' => 'LRS '.$id,
             'lrs' => $lrs,
             'clients' => $clients,
-            'states' => $states,
             'statements'=>$statements
         ];
         $this->view->generate('lrs/view.tlp',$vars);

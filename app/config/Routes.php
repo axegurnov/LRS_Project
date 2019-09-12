@@ -45,6 +45,11 @@ class Routes
                 'action' => 'lrsList',
             ],
 
+            'lrs/state' => [
+                'controller' => 'lrsState',
+                'action' => 'lrsStateShow',
+            ],
+
             'lrs' => [
                 'controller' => 'lrs',
                 'action' => 'lrsShow'
@@ -82,7 +87,6 @@ class Routes
                 'controller' => 'lrsClient',
                 'action' => 'clientDel',
             ],
-
 
             'api' => [
                 'controller' => 'LrsStatementsApi',

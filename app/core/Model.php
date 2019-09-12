@@ -106,9 +106,8 @@ class Model
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
-        } else {
-            echo "Отсутствует условие!";
         }
+        echo "Отсутствует условие!";
     }
 
     public function getValue($item)

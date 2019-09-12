@@ -21,7 +21,7 @@
                     <?php foreach ($lrsr as $lrs): ?>
                         <tr>
                             <th scope="row"><?= $lrs['id'] ?></th>
-                            <td><a href="/lrs?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></td>
+                            <td><a href="/lrs?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></a></td>
                             <td><?= $lrs['name'] ?></td>
                             <td><?= $lrs['description'] ?></td>
                             <td>

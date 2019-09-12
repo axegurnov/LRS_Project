@@ -1,25 +1,3 @@
-<div class="mx-md-5"><h3>LRS State</h3></div>
-<table class="table-bordered table-sm ml-md-5 mt-md-3">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Actor</th>
-        <th scope="col">Activity</th>
-        <th scope="col">Key</th>
-        <th scope="col">Value</th>
-    </tr>
-    </thead>
-    
-    <?php foreach ($states as $state): ?>
-        <tr>
-            <th scope="row"><label><?= $state['id'] ?></label></th>
-            <td><?= $state['login'] ?></td>
-            <td><?= $state['activity'] ?></td>
-            <td><?= $state['state_key'] ?></td>
-            <td><?= $state['value'] ?></td>
-        </tr>
-    <?php endforeach; ?>
-</table><br>
 <div class="mx-md-5"><h3>LRS Statements</h3></div>
 <table class="table-bordered table-sm ml-md-5 mt-md-3">
     <thead>
@@ -34,7 +12,7 @@
 
     <?php foreach ($statements as $statement): ?>
         <tr>
-            <th scope="row"><label><?= $state['id'] ?></label></th>
+            <th scope="row"><label></label></th>
             <td><?= $statement['login'] ?></td>
             <td><?= $statement['verb'] ?></td>
             <td><?= $statement['activity'] ?></td>
@@ -58,7 +36,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <a class="link pages" href="state.php">State</a>
+                <a href="/lrs/state?view=<?= $lrs['id'] ?>" class="link">State</a>
                 <a class="link pages" href="statements.php">Statements</a>
             </div>
         </div>
