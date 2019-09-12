@@ -66,6 +66,22 @@ class LrsController extends Controller {
         ];
         $this->view->generate('lrs/update.tlp',$vars);
     }
+    public function lrsStatementsAction($params){
+          if(empty($params['lrs'])) {
+            $id = 1;
+        } else {
+            $id = $params['lrs'];
+        }
+ $statements = $this->model->Statements($id);
+$vars =[
+            'title' => 'LRS '.$id,
+            'statements'=>$statements
+        ];
+        $this->view->generate('lrs/statements.tlp',$vars);
+
+
+
+}
 
     public function lrsUpdateAction()
     {
