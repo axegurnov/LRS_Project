@@ -13,10 +13,10 @@ class LrsController extends InheritanceController {
         $lrs = $this->model->pagination($pagination['offset'], $limit);
         $vars = [
             'title' => 'Lrs List',
-            'users' => $lrs,
+            'lrsr' => $lrs,
             'pages' => $pagination['pages']
         ];
-        $this->view->generate('user/index.tlp', $vars);
+        $this->view->generate('lrs/list.tlp', $vars);
     }
 
     public function lrsShowAction($params){
