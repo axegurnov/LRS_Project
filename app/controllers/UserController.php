@@ -5,8 +5,11 @@ use app\core\Controller;
 
 class UserController extends Controller {
 
+<<<<<<< HEAD
     protected $nameModel = 'users';
   //  protected $table = 'users';
+=======
+>>>>>>> edf3f1c45efcc3ee6365aa37a8937e056bc58f9d
 
     public function indexAction($params)
     {
@@ -15,7 +18,7 @@ class UserController extends Controller {
             $params['page'] = 1;
         };
         $offset = ($params['page'] - 1) * $limit;
-        $users = $this->model->pagination($offset, $limit, $this->nameModel);
+        $users = $this->model->pagination($offset, $limit);
         $count_id = $this->model->countId();
         $ttl = $count_id[0];
         $pages = ceil($ttl / $limit);

@@ -5,7 +5,6 @@ use app\core\Controller;
 
 class LrsStatementsController extends Controller 
 {
-    protected $nameModel = null;
 
 }
 

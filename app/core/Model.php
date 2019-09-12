@@ -106,9 +106,8 @@ class Model
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
             return $this->params = mysqli_fetch_array($object);
-        } else {
-            echo "Отсутствует условие!";
         }
+        echo "Отсутствует условие!";
     }
 
     public function getValue($item)
@@ -161,9 +160,9 @@ class Model
         return $this->db->query("select * from $table where $predictor");
     }
 
-    public function pagination($offset, $limit, $table)
+    public function pagination($offset, $limit)
     {
-        return $this->db->query("SELECT * FROM $table ORDER BY id asc LIMIT $offset, $limit");
+        return $this->db->query("SELECT * FROM $this->table ORDER BY id asc LIMIT $offset, $limit");
     }
 
     public function countId()
