@@ -5,11 +5,9 @@ use app\core\Controller;
 
 class UserController extends Controller {
 
-<<<<<<< HEAD
+
     protected $nameModel = 'users';
   //  protected $table = 'users';
-=======
->>>>>>> edf3f1c45efcc3ee6365aa37a8937e056bc58f9d
 
     public function indexAction($params)
     {
@@ -29,9 +27,9 @@ class UserController extends Controller {
         ];
         $this->view->generate('user/index.tlp', $vars);
     }
-	
+
 	//форма авторизации и попытка залогиниться
-	public function authAction() 
+	public function authAction()
 	{
         if (!empty($_SESSION["auth"])) {
             return $this->redirect("/lrs/list");
@@ -121,7 +119,7 @@ class UserController extends Controller {
     }
 
 	//разлогирование и выход на экран авторизации
-	public function exitAction() 
+	public function exitAction()
 	{
 		$this->model->exit();
 		$this->redirect("/login");
