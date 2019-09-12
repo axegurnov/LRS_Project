@@ -21,12 +21,12 @@
                             <th scope="row"><?= $user['id'] ?></th>
                             <td><?= $user['name'] ?></td>
                             <td>
-                                <form action="/user/view/update" method="post">
+                                <form action="<?= route('user_view_update'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $user['id']?>">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
                                                 class="far fa-edit" aria-hidden="true"></i></button>
                                 </form>
-                                <form action="/user/del" method="post">
+                                <form action="<?= route('user_del'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $user['id']?>">
                                     <button type="submit" class="btn btn-sm del_confirm" style="background-color:transparent;"><i
                                                 class="fas fa-minus-circle" aria-hidden="true"></i></button>

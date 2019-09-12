@@ -21,16 +21,16 @@
                     <?php foreach ($lrsr as $lrs): ?>
                         <tr>
                             <th scope="row"><?= $lrs['id'] ?></th>
-                            <td><a href="/lrs?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></td>
+                            <td><a href="/lrs?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></a></td>
                             <td><?= $lrs['name'] ?></td>
                             <td><?= $lrs['description'] ?></td>
                             <td>
-                                <form action="/lrs/view/update" method="post">
+                                <form action="<?= route('lrs_view_update'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $lrs['id'] ?>">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
                                                 class="far fa-edit" aria-hidden="true"></i></button>
                                 </form>
-                                <form action="/lrs/del" method="post">
+                                <form action="<?= route('lrs_del'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $lrs['id'] ?>">
                                     <button type="submit" class="btn btn-sm del_confirm" style="background-color:transparent;"><i
                                                 class="fas fa-minus-circle" aria-hidden="true"></i></button>

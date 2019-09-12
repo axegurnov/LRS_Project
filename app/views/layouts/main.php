@@ -25,7 +25,7 @@
                     <ul class="navbar-nav ml-auto">
                         <?php if (isset($_SESSION["auth"])): ?>
                             <li class="nav-item float-right">
-                                <form action="/user/exit" method="post">
+                                <form action="<?= route('user_exit'); ?>" method="post">
                                     <button type="submit" name="exit" class="btn btn-danger">Выход</button>
                                 </form>
                             </li>

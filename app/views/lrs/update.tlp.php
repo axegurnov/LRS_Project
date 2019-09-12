@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form action="/lrs/update" method="post">
+                <form action="<?= route('lrs_update'); ?>" method="post">
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
