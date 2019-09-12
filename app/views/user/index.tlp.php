@@ -20,7 +20,7 @@
                         <tr>
                             <th scope="row"><?= $user['id'] ?></th>
                             <td><?= $user['name'] ?></td>
-                            <td>
+                            <td class="row">
                                 <form action="<?= route('user_view_update'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $user['id']?>">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i

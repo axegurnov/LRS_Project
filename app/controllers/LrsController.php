@@ -1,9 +1,11 @@
 <?php
+
 namespace app\controllers;
 
 use app\core\Controller;
 
-class LrsController extends InheritanceController {
+class LrsController extends InheritanceController
+{
 
     public function lrsListAction($params)
     {
@@ -19,8 +21,9 @@ class LrsController extends InheritanceController {
         $this->view->generate('lrs/list.tlp', $vars);
     }
 
-    public function lrsShowAction($params){
-        if(empty($params['view'])) {
+    public function lrsShowAction($params)
+    {
+        if (empty($params['view'])) {
             $id = 1;
         } else {
             $id = $params['view'];
@@ -28,17 +31,17 @@ class LrsController extends InheritanceController {
 
         $statements = $this->model->Statements($id);
 
-        $predictor = "lrs_id=".$id;
-        $lrs_id = "id=".$id;
-        $clients = $this->model->getValueTable("lrs_client",$predictor);
+        $predictor = "lrs_id=" . $id;
+        $lrs_id = "id=" . $id;
+        $clients = $this->model->getValueTable("lrs_client", $predictor);
         $lrs = $this->model->select($lrs_id);
-        $vars =[
-            'title' => 'LRS '.$id,
+        $vars = [
+            'title' => 'LRS ' . $id,
             'lrs' => $lrs,
             'clients' => $clients,
-            'statements'=>$statements
+            'statements' => $statements
         ];
-        $this->view->generate('lrs/view.tlp',$vars);
+        $this->view->generate('lrs/view.tlp', $vars);
     }
 
     public function lrsDelAction()
@@ -52,31 +55,40 @@ class LrsController extends InheritanceController {
     {
         $lrs = '';
         if (isset($_POST['id'])) {
-            $str = "id=".$_POST['id'];
+            $str = "id=" . $_POST['id'];
             $lrs = $this->model->select($str);
         }
         $vars = [
             'title' => 'LRS form',
             'data_field' => $lrs
         ];
-        $this->view->generate('lrs/update.tlp',$vars);
+        $this->view->generate('lrs/update.tlp', $vars);
     }
-    public function lrsStatementsAction($params){
-          if(empty($params['lrs'])) {
+
+    public function lrsStatementsAction($params)
+    {
+        $lrs ='';
+        if (empty($params['lrs'])) {
             $id = 1;
         } else {
             $id = $params['lrs'];
         }
- $statements = $this->model->Statements($id);
-$vars =[
-            'title' => 'LRS '.$id,
-            'statements'=>$statements
+        $statements = $this->model->Statements($id);
+        $predictor = "id=".$id;
+
+        $lrss= $this->model->getValueTable("lrs",$predictor);
+        foreach ($lrss as $lrs2){
+            $lrs = $lrs2;
+        }
+
+        $vars = [
+            'statements' => $statements,
+            'lrs' => $lrs
         ];
-        $this->view->generate('lrs/statements.tlp',$vars);
+        $this->view->generate('lrs/statements.tlp', $vars);
 
 
-
-}
+    }
 
     public function lrsUpdateAction()
     {
@@ -89,34 +101,32 @@ $vars =[
         if (!empty($_POST['id'])) {
 
             $valid = $this->model->setValues($data_field);
-            if($valid) {
+            if ($valid) {
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
                 $this->redirect('/lrs/list');
-            }
-            else{
+            } else {
                 $vars = [
                     'title' => 'LRS form',
                     'data_field' => $data_field
                 ];
-                $this->view->generate('lrs/update.tlp',$vars);
+                $this->view->generate('lrs/update.tlp', $vars);
 
             }
             unset ($_SESSION['errors']);
 
         } elseif (empty($_POST['id'])) {
             $valid = $this->model->setValues($data_field);
-            if($valid) {
-            $this->model->setValues($data_field);
-            $this->model->addRecord();
-            $this->redirect('/lrs/list');
-            }
-            else{
+            if ($valid) {
+                $this->model->setValues($data_field);
+                $this->model->addRecord();
+                $this->redirect('/lrs/list');
+            } else {
                 $vars = [
                     'title' => 'LRS form',
                     'data_field' => $data_field
                 ];
-                $this->view->generate('lrs/update.tlp',$vars);
+                $this->view->generate('lrs/update.tlp', $vars);
 
             }
         }

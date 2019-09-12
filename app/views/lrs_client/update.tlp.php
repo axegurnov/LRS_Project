@@ -35,8 +35,8 @@
                             <input type="hidden" class="form-control" name="client_id"
                                    value="<?= $data_field['id'] ?? "" ?>">
                             <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="<?= route('lrs_list'); ?>" class="btn btn-secondary float-right">Cancel</a>
                         </div>
-                        <a href="<?= route('lrs_list'); ?>" class="btn btn-secondary float-right">Cancel</a>
                     </div>
                 </form>
             </div>

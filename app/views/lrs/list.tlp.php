@@ -18,13 +18,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($lrsr as $lrs): ?>
+                    <?php $i = 1; foreach ($lrsr as $lrs): ?>
                         <tr>
-                            <th scope="row"><?= $lrs['id'] ?></th>
+                            <th scope="row"><?= $i ?></th>
                             <td><a href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></a></td>
                             <td><?= $lrs['name'] ?></td>
                             <td><?= $lrs['description'] ?></td>
-                            <td>
+                            <td class="row">
                                 <form action="<?= route('lrs_view_update'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $lrs['id'] ?>">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
@@ -37,7 +37,7 @@
                                 </form>
                             </td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php $i++; endforeach; ?>
                     </tbody>
                 </table>
             </div>
