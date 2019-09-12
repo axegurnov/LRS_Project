@@ -3,25 +3,20 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class LrsController extends Controller {
+class LrsController extends InheritanceController {
 
     public function lrsListAction($params)
     {
         $limit = 3;
-        if (empty($params['page'])) {
-            $params['page'] = 1;
-        };
-        $offset = ($params['page'] - 1) * $limit;
-        $lrs = $this->model->pagination($offset, $limit);
         $count_id = $this->model->countId();
-        $ttl = $count_id[0];
-        $pages = ceil($ttl / $limit);
+        $pagination = $this->pagination($params, $limit, $count_id);
+        $lrs = $this->model->pagination($pagination['offset'], $limit);
         $vars = [
-            'title' => 'LRS List',
-            'lrsr' => $lrs,
-            'pages' => $pages
+            'title' => 'Lrs List',
+            'users' => $lrs,
+            'pages' => $pagination['pages']
         ];
-        $this->view->generate('lrs/list.tlp',$vars);
+        $this->view->generate('user/index.tlp', $vars);
     }
 
     public function lrsShowAction($params){

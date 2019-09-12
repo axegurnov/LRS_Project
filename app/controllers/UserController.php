@@ -3,27 +3,23 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class UserController extends Controller {
+class UserController extends InheritanceController {
 
     public function indexAction($params)
     {
         $limit = 3;
-        if (empty($params['page'])) {
-            $params['page'] = 1;
-        };
-        $offset = ($params['page'] - 1) * $limit;
-        $users = $this->model->pagination($offset, $limit);
         $count_id = $this->model->countId();
-        $ttl = $count_id[0];
-        $pages = ceil($ttl / $limit);
+        $pagination = $this->pagination($params, $limit, $count_id);
+        $users = $this->model->pagination($pagination['offset'], $limit);
         $vars = [
             'title' => 'User',
             'users' => $users,
-            'pages' => $pages
+            'pages' => $pagination['pages']
         ];
         $this->view->generate('user/index.tlp', $vars);
+
     }
-	
+
 	//форма авторизации и попытка залогиниться
 	public function authAction() 
 	{
