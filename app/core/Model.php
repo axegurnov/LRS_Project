@@ -62,8 +62,8 @@ class Model
     {
         $config = require 'app/config/Database.php';
         $fields = array();
-        $sql = "SELECT `COLUMN_NAME` 
-        FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+        $sql = "SELECT `COLUMN_NAME`
+        FROM `INFORMATION_SCHEMA`.`COLUMNS`
         WHERE `TABLE_SCHEMA`='" . $config['base'] . "'AND `TABLE_NAME`= '" . $table . "';";
 
         $result = $this->db->query($sql);

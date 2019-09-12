@@ -4,10 +4,10 @@ namespace app\controllers;
 
 use app\core\Controller;
 
+
 class LrsClientController extends Controller
 {
-
-
+  protected $nameModel = 'lrs_client';
     public function clientUpdateViewAction()
     {
         $clients = '';
@@ -31,24 +31,50 @@ class LrsClientController extends Controller
     {
         $lrs_id = $_POST['lrs_id'];
         $client_id = $_POST['client_id'] ?? "";
-
         $login = $this->filterVar($_POST['login']);
-        $password = $this->hashPassword($_POST['password']);
-
-        $data_field = [
-            'lrs_id' => $lrs_id,
-            'login' => $login,
-            'password ' => $password,
-            'description' => $_POST['description'],
-        ];
+        $data_field = $_POST;
+        array_pop($data_field);
         if (!empty($client_id)) {
-            $this->model->setValues($data_field);
+
+          $valid = $this->model->setValues($data_field);
+
+          if($valid){
+            $password = $this->hashPassword($_POST['password']);
+            $this->model->setValue('password',$password);
             $this->model->updateRecord($client_id);
             $this->redirect('/lrs/list');
+
+          }
+          else {
+            $vars = [
+                'title' => 'Client form',
+                'data_field' => $data_field,
+                'lrs_id' => $lrs_id,
+            ];
+
+           $this->view->generate('lrs_client/update.tlp', $vars);
+          }unset($_SESSION['errors']);
         } elseif (empty($client_id)) {
-            $this->model->setValues($data_field);
+
+          $valid = $this->model->setValues($data_field);
+
+          if($valid) {
+              $password = $this->hashPassword($_POST['password']);
+              $this->model->setValue('password',$password);
             $this->model->addRecord();
             $this->redirect('/lrs/list');
+          }
+          else {
+            $vars = [
+                'title' => 'Client form',
+                'data_field' => $data_field,
+                'lrs_id' => $lrs_id,
+            ];
+           $this->view->generate('lrs_client/update.tlp', $vars);
+
+          }
+          unset($_SESSION['errors']);
+
         }
     }
 
@@ -58,8 +84,6 @@ class LrsClientController extends Controller
         $this->model->dropRecord($id);
         $this->redirect('/lrs/list');
     }
-
-
 }
 
 ?>
