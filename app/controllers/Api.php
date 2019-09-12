@@ -7,18 +7,43 @@ use app\core\Controller;
 
 class Api extends Controller
 {
-    protected $requestMethod = '';
     protected $nameModel = '';
+    protected $action = '';
+    protected $requestMethod = '';
+    protected $args = null;
 
     public function __construct($route)
     {
         header('Content-type: application/json');
-
         $this->route = $route;
-        debug($this->route);
-
+        //$this->action = $route['action'];
         $this->model = $this->getModel($this->nameModel);
         $this->requestMethod = $_SERVER['REQUEST_METHOD'];
+    }
+
+    protected function getAction($args = null)
+    {
+        $method = $this->requestMethod;
+        switch ($method) {
+            case 'GET':
+                if($args){
+                    return $this->action = 'viewAction';
+                } else {
+                    return $this->action = 'showAllAction';
+                }
+                break;
+            case 'POST':
+                return $this->action = 'createAction';
+                break;
+            case 'PUT':
+                return $this->action = 'updateAction';
+                break;
+            case 'DELETE':
+                return $this->action = 'deleteAction';
+                break;
+            default:
+                return null;
+        }
     }
 
     protected function response($data, $status = 500)

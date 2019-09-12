@@ -4,7 +4,9 @@
 namespace app\models;
 
 
-class LrsStatements
+use app\core\Model;
+
+class LrsStatements extends Model
 {
     public $table = 'lrs_statements';
 

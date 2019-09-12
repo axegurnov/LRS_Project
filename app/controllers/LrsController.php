@@ -5,8 +5,6 @@ use app\core\Controller;
 
 class LrsController extends Controller {
 
-    protected $nameModel = 'lrs';
-
     public function lrsListAction($params)
     {
         $limit = 3;
@@ -14,7 +12,7 @@ class LrsController extends Controller {
             $params['page'] = 1;
         };
         $offset = ($params['page'] - 1) * $limit;
-        $lrs = $this->model->pagination($offset, $limit, $this->nameModel);
+        $lrs = $this->model->pagination($offset, $limit);
         $count_id = $this->model->countId();
         $ttl = $count_id[0];
         $pages = ceil($ttl / $limit);
@@ -33,8 +31,8 @@ class LrsController extends Controller {
             $id = $params['view'];
         }
 
-        $states = $this->model->innerJoin($id);
         $statements = $this->model->Statements($id);
+
         $predictor = "lrs_id=".$id;
         $lrs_id = "id=".$id;
         $clients = $this->model->getValueTable("lrs_client",$predictor);
@@ -43,27 +41,10 @@ class LrsController extends Controller {
             'title' => 'LRS '.$id,
             'lrs' => $lrs,
             'clients' => $clients,
-            'states' => $states,
             'statements'=>$statements
         ];
         $this->view->generate('lrs/view.tlp',$vars);
     }
-    public function lrsStatementsAction($params){
-          if(empty($params['lrs'])) {
-            $id = 1;
-        } else {
-            $id = $params['lrs'];
-        }
- $statements = $this->model->Statements($id);
-$vars =[
-            'title' => 'LRS '.$id,
-            'statements'=>$statements
-        ];
-        $this->view->generate('lrs/statements.tlp',$vars);
-
-
-
-}
 
     public function lrsDelAction()
     {
@@ -130,5 +111,4 @@ $vars =[
         }
         unset ($_SESSION['errors']);
     }
-
 }

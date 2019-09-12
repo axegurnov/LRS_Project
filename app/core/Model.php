@@ -105,7 +105,7 @@ class Model
         if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
-            return $this->params = mysqli_fetch_array($object);
+            return $this->params = mysqli_fetch_array($object, MYSQLI_ASSOC);
         }
         echo "Отсутствует условие!";
     }
