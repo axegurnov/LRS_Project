@@ -88,9 +88,9 @@ class Routes
                 'action' => 'clientDel',
             ],
 
-            'api' => [
+            'api/lrs/statements' => [
                 'controller' => 'LrsStatementsApi',
-                'action' => 'some',
+                'action' => 'index',
             ],
 
         ];

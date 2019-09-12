@@ -111,5 +111,4 @@ class LrsController extends Controller {
         }
         unset ($_SESSION['errors']);
     }
-
 }
