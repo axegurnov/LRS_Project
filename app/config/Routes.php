@@ -49,6 +49,10 @@ class Routes
                 'controller' => 'lrs',
                 'action' => 'lrsShow'
             ],
+            'lrs/statements' => [
+                'controller' => 'lrs',
+                'action' => 'lrsStatements'
+            ],
 
             'lrs/del'  => [
                 'controller' => 'lrs',

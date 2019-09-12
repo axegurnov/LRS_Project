@@ -21,28 +21,6 @@
     <?php endforeach; ?>
 </table><br>
 <div class="mx-md-5"><h3>LRS Statements</h3></div>
-<table class="table-bordered table-sm ml-md-5 mt-md-3">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Actor</th>
-        <th scope="col">Verb</th>
-        <th scope="col">Activity</th>
-        <th scope="col">Content</th>
-    </tr>
-    </thead>
-
-    <?php foreach ($statements as $statement): ?>
-        <tr>
-            <th scope="row"><label><?= $state['id'] ?></label></th>
-            <td><?= $statement['login'] ?></td>
-            <td><?= $statement['verb'] ?></td>
-            <td><?= $statement['activity'] ?></td>
-            <td><?= $statement['content'] ?></td>
-        </tr>
-    <?php endforeach; ?>
-</table><br>
-
 <div class="container-fluid">
     <div class="container">
         <div class="row align-items-center">
@@ -59,7 +37,7 @@
             <div class="col-md-12">
 
                 <a class="link pages" href="state.php">State</a>
-                <a class="link pages" href="statements.php">Statements</a>
+                <a class="link pages" href="/lrs/statements?lrs=<?= $lrs['id']?>" class="link">Statements</a>
             </div>
         </div>
         <div class="row align-items-center">

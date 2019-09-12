@@ -5,8 +5,8 @@ use app\core\Controller;
 
 class UserController extends Controller {
 
-    protected $nameModel = 'User';
-    protected $table = 'users';
+    protected $nameModel = 'users';
+  //  protected $table = 'users';
 
     public function indexAction($params)
     {

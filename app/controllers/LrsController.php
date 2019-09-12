@@ -35,8 +35,6 @@ class LrsController extends Controller {
 
         $states = $this->model->innerJoin($id);
         $statements = $this->model->Statements($id);
-       // debug($statements);
-
         $predictor = "lrs_id=".$id;
         $lrs_id = "id=".$id;
         $clients = $this->model->getValueTable("lrs_client",$predictor);
@@ -50,6 +48,22 @@ class LrsController extends Controller {
         ];
         $this->view->generate('lrs/view.tlp',$vars);
     }
+    public function lrsStatementsAction($params){
+          if(empty($params['lrs'])) {
+            $id = 1;
+        } else {
+            $id = $params['lrs'];
+        }
+ $statements = $this->model->Statements($id);
+$vars =[
+            'title' => 'LRS '.$id,
+            'statements'=>$statements
+        ];
+        $this->view->generate('lrs/statements.tlp',$vars);
+
+
+
+}
 
     public function lrsDelAction()
     {
