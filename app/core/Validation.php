@@ -8,7 +8,7 @@ class Validation
 {
     public static function check_length($value = "", $min, $max)
     {
-        $result = (mb_strlen(trim($value)) >= $min && mb_strlen(trim($value)) < $max);
+        $result = (strlen(trim($value)) >= $min && strlen(trim($value)) < $max);
         return $result;
     }
     public static function Validate($data)
