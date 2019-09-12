@@ -52,7 +52,7 @@
                             <input type="hidden" class="form-control" name="id" value="<?= $data_field['id'] ?? "" ?>">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
-                        <a href="/users" class="btn btn-secondary float-right">Cancel</a>
+                        <a href="<?= route('users'); ?>" class="btn btn-secondary float-right">Cancel</a>
                     </div>
                 </form>
             </div>

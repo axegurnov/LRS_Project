@@ -36,7 +36,7 @@
                                    value="<?= $data_field['id'] ?? "" ?>">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
-                        <a href="/lrs/list" class="btn btn-secondary float-right">Cancel</a>
+                        <a href="<?= route('lrs_list'); ?>" class="btn btn-secondary float-right">Cancel</a>
                     </div>
                 </form>
             </div>

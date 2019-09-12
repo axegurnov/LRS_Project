@@ -13,8 +13,8 @@
         <div class="row">
             <div class="col-md-12">
 
-                <a href="/lrs/state?view=<?= $lrs['id'] ?>" class="link">State</a>
-                <a class="link pages" href="/lrs/statements?lrs=<?= $lrs['id']?>" class="link">Statements</a>
+                <a href="<?= route('lrs_state'); ?>?view=<?= $lrs['id'] ?>" class="link">State</a>
+                <a class="link pages" href="<?= route('lrs_statements'); ?>?lrs=<?= $lrs['id']?>" class="link">Statements</a>
             </div>
         </div>
         <div class="row align-items-center">
