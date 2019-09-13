@@ -18,8 +18,9 @@ class Validation
         $value = trim($value);
         if (isset($config['empty'][$key])){
             unset($data[$key]);
-            }
-            if (empty($value)) {
+        }
+
+        if ((empty($value))&&(!isset($config['empty'][$key]))) {
                 $error[$key] = "Значение $key не введено!";
             }
         }
