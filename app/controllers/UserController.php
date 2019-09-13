@@ -81,9 +81,7 @@ class UserController extends InheritanceController {
             unset ($_SESSION['errors']);
         }
         elseif (empty($_POST['id'])) {
-            array_pop($data_field);
             $valid = $this->model->setValues($data_field);
-
             if($valid) {
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password',$password);
@@ -100,11 +98,7 @@ class UserController extends InheritanceController {
             }
             unset ($_SESSION['errors']);
         }
-        elseif (empty($_POST['id'])) {
-            $this->model->setValues($data_field);
-            $this->model->addRecord();
-            $this->redirect('/users');
-        }
+
 	}
 
     public function userDelAction()
