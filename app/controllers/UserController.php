@@ -59,6 +59,7 @@ class UserController extends InheritanceController {
         $id = $_POST['id'];
         $login = $this->filterVar($_POST['login']);
         $data_field = $_POST;
+        array_pop($data_field);
 
         if (!empty($_POST['id'])) {
            $valid = $this->model->setValues($data_field);
@@ -75,7 +76,7 @@ class UserController extends InheritanceController {
                    'title' => 'User form',
                    'data_field' => $userInfo
                ];
-               $this->view->generate('user/update.tlp',$vars);
+              $this->view->generate('user/update.tlp',$vars);
            }
             unset ($_SESSION['errors']);
         }
@@ -95,7 +96,7 @@ class UserController extends InheritanceController {
                     'title' => 'User form',
                     'data_field' => $userInfo
                 ];
-                $this->view->generate('user/update.tlp',$vars);
+              $this->view->generate('user/update.tlp',$vars);
             }
             unset ($_SESSION['errors']);
         }
