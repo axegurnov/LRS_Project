@@ -16,7 +16,8 @@ class Validation
 
     foreach ($data as $key => $value) {
         $value = trim($value);
-        if (isset($config['empty'][$key])){
+        if ((isset($config['empty'][$key]))||(!isset($config['patterns'][$key])))
+        {
             unset($data[$key]);
         }
 
@@ -43,6 +44,7 @@ class Validation
                 if(isset($config['patterns'][$key])){
                 $pattern = $config['patterns'][$key];
                 $fail = !preg_match($pattern, trim($data[$key]));
+
                 }
 
         if ($fail){
