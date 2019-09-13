@@ -1,6 +1,4 @@
 <?php
-
-
 namespace app\controllers;
 
 class LrsStatementsApiController extends Api
@@ -8,3 +6,4 @@ class LrsStatementsApiController extends Api
     protected $nameModel = 'LrsStatements';
 
 }
+?>

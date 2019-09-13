@@ -1,11 +1,9 @@
 <?php
-
-
 namespace app\controllers;
 
 use app\core\Controller;
 
-class Api extends Controller
+class Api extends GetModelController
 {
     protected $nameModel = '';
     protected $action = ''; // экшн, который нужно вызвать в апи контроллере

@@ -1,5 +1,4 @@
 <?php
-
 namespace app\core;
 
 use app\core\Database;
@@ -170,3 +169,4 @@ class Model
         return $this->db->query("SELECT COUNT(id) from {$this->table}")->fetch_row();
     }
 }
+?>

@@ -3,7 +3,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class LrsStateController extends Controller 
+class LrsStateController extends GetModelController 
 {
 	
     public function lrsStateShowAction($params){
@@ -19,7 +19,7 @@ class LrsStateController extends Controller
 
         $predictor = "id=".$id;
 
-        $lrss= $this->model->getValueTable("lrs",$predictor);
+        $lrss= $this->model->getValueTable("lrs", $predictor);
         foreach ($lrss as $lrs2){
             $lrs = $lrs2;
         }

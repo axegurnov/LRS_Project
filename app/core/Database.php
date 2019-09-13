@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 05.09.19
- * Time: 11:12
- */
-
 namespace app\core;
 use mysqli;
 
@@ -40,3 +33,4 @@ class Database
         }
     }
 }
+?>
