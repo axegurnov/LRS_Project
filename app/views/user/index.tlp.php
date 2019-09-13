@@ -46,7 +46,7 @@
         <nav class="mt-md-3">
             <ul class="pagination">
                 <?php for ($i = 1; $i <= $pages; $i++): ?>
-                    <li class="page-item"><a class="page-link" href="<?= route('users'); ?>?page=<?= $i; ?>"><?= $i; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?= route('lrs_list'); ?>?page=<?= $i; ?>"><?= $i; ?></a></li>
                 <?php endfor; ?>
             </ul>
         </nav>

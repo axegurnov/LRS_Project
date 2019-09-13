@@ -23,7 +23,7 @@ class Validation
         if ((empty($value))&&(!isset($config['empty'][$key]))) {
                 $error[$key] = "Значение $key не введено!";
             }
-        }
+    }
 
         if ($error)
         {
@@ -33,21 +33,23 @@ class Validation
         {
             foreach ($data as $key => $value) {
                 $value = trim($value);
+
+                if ($key == "password"){
+                $min = 8;
+                $max = 25;
+                $fail = !self::checkLength($value,$min,$max);
+                }
+
                 if(isset($config['patterns'][$key])){
-                    if ($key == "password"){
-                    $min = 8;
-                    $max = 25;
-                    $fail = !self::checkLength($value,$min,$max);
-                    }
-                else{
-                    $pattern = $config['patterns'][$key];
-                    $fail = !preg_match($pattern, trim($data[$key]));
-                    }
+                $pattern = $config['patterns'][$key];
+                $fail = !preg_match($pattern, trim($data[$key]));
+                }
+                
         if ($fail){
             $error[$key] = $config['messages'][$key];  }
         }
           return $_SESSION['errors'] = $error;
         }
     }
-  }
+
 }
