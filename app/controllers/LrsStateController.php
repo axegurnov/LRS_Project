@@ -7,6 +7,7 @@ class LrsStateController extends Controller
 {
 	
     public function lrsStateShowAction($params){
+        $lrs ='';
         if(empty($params['view'])) {
             $id = 1;
         } else {
@@ -19,10 +20,13 @@ class LrsStateController extends Controller
         $predictor = "id=".$id;
 
         $lrss= $this->model->getValueTable("lrs",$predictor);
-        
+        foreach ($lrss as $lrs2){
+            $lrs = $lrs2;
+        }
+
         $vars =[
             'title' => 'LRS '.$id,
-            'lrs' => $lrss,
+            'lrs' => $lrs,
             'states' => $states
         ];
         $this->view->generate('lrs/state.tlp',$vars);

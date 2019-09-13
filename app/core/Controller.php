@@ -20,7 +20,7 @@ abstract class Controller
 	{
 		$this->route = $route;
 		$this->view = View::getInstance();
-		//$this->beforeAction();
+		$this->beforeAction();
 		$this->model = $this->getModel($this->route['controller']);
 	}
 

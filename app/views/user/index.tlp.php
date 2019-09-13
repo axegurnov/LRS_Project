@@ -20,7 +20,7 @@
                         <tr>
                             <th scope="row"><?= $user['id'] ?></th>
                             <td><?= $user['name'] ?></td>
-                            <td>
+                            <td class="row">
                                 <form action="<?= route('user_view_update'); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $user['id']?>">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
@@ -40,13 +40,13 @@
         </div>
         <div class="row">
             <div class="col-md-12 for-button">
-                <a class="btn btn-primary" href="/user/view/update" role="button">Add</a>
+                <a class="btn btn-primary" href="<?= route('user_view_update'); ?>" role="button">Add</a>
             </div>
         </div>
         <nav class="mt-md-3">
             <ul class="pagination">
                 <?php for ($i = 1; $i <= $pages; $i++): ?>
-                    <li class="page-item"><a class="page-link" href="/lrs/list?page=<?= $i; ?>"><?= $i; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?= route('lrs_list'); ?>?page=<?= $i; ?>"><?= $i; ?></a></li>
                 <?php endfor; ?>
             </ul>
         </nav>

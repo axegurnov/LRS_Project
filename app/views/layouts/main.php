@@ -3,20 +3,20 @@
     <div class="wrapper">
         <header>
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                <a class="navbar-brand" href="/">LRS</a>
+                <a class="navbar-brand" href="<?= route('home'); ?>">LRS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <?php if (isset($_SESSION["auth"])): ?><div class="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/">Главная<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?= route('home'); ?>">Главная<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/lrs/view/update">Добавить</a>
+                            <a class="nav-link" href="<?= route('lrs_view_update'); ?>">Добавить</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/users">Пользователи</a>
+                            <a class="nav-link" href="<?= route('users'); ?>">Пользователи</a>
                         </li>
                     </ul>
                     <?php endif; ?>

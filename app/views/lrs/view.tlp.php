@@ -1,97 +1,73 @@
-<div class="mx-md-5"><h3>LRS State</h3></div>
-<table class="table-bordered table-sm ml-md-5 mt-md-3">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Actor</th>
-        <th scope="col">Activity</th>
-        <th scope="col">Key</th>
-        <th scope="col">Value</th>
-    </tr>
-    </thead>
-    
-    <?php foreach ($states as $state): ?>
-        <tr>
-            <th scope="row"><label><?= $state['id'] ?></label></th>
-            <td><?= $state['login'] ?></td>
-            <td><?= $state['activity'] ?></td>
-            <td><?= $state['state_key'] ?></td>
-            <td><?= $state['value'] ?></td>
-        </tr>
-    <?php endforeach; ?>
-</table><br>
-<div class="mx-md-5"><h3>LRS Statements</h3></div>
 <div class="container-fluid">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-12">
-                <h1><?= $lrs['id']?></h1>
+            <div class="col-md-12 mx-md-5 mt-3 mb-3">
+                <h1><?= $lrs['name'] ?></h1>
             </div>
         </div>
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <p><?= $lrs['name'] ?></p>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" role="tab"
+                   aria-selected="true">Clients</a>
+                <a class="nav-item nav-link" href="<?= route('lrs_state'); ?>?view=<?= $lrs['id'] ?>" role="tab"
+                   aria-controls="nav-profile" aria-selected="false">State</a>
+                <a class="nav-item nav-link" href="<?= route('lrs_statements'); ?>?lrs=<?= $lrs['id'] ?>" role="tab"
+                   aria-controls="nav-contact" aria-selected="false">Statements</a>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Login</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Dx</th>
+                                <th scope="col">Edit</th>
 
-                <a class="link pages" href="state.php">State</a>
-                <a class="link pages" href="/lrs/statements?lrs=<?= $lrs['id']?>" class="link">Statements</a>
-            </div>
-        </div>
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <p><?= $lrs['name'] ?> Clients</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Login</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Dx</th>
-                        <th scope="col">Edit</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($clients as $client): ?>
-                        <tr>
-                            <th scope="row"><?= $client['id'] ?></th>
-                            <td><?= $client['login'] ?></td>
-                            <td>************</td>
-                            <td><?= $client['description'] ?></td>
-                            <td>
-                                <form action="<?= route('lrs_client_view_update'); ?>" method="post">
-                                    <input type="hidden" name="client_id" value="<?=$client['id']?>">
-                                    <input type="hidden" name="lrs_id" value="<?=$lrs['id']?>">
-                                    <button type="submit" class="btn btn-sm" style="background-color:transparent;">
-                                        <i class="far fa-edit" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                                <form action="<?= route('lrs_client_delete'); ?>" method="post">
-                                    <input type="hidden" name="client_id" value="<?=$client['id']?>">
-                                    <button type="submit" class="btn btn-sm del_confirm" style="background-color:transparent;">
-                                        <i class="fas fa-minus-circle" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 for-button">
-                <form action="<?= route('lrs_client_view_update'); ?>" method="post">
-                    <input type="hidden" name="lrs_id" value="<?= $lrs['id']?>">
-                    <button type="submit" class="btn btn-info btn-sm ml-md-5 mt-md-3">Add client LRS</button>
-                </form>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i=1; foreach ($clients as $client): ?>
+                                <tr>
+                                    <th scope="row"><?= $i ?></th>
+                                    <td><?= $client['login'] ?></td>
+                                    <td>************</td>
+                                    <td><?= $client['description'] ?></td>
+                                    <td class="row">
+                                        <form action="<?= route('lrs_client_view_update'); ?>" method="post">
+                                            <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                                            <input type="hidden" name="lrs_id" value="<?= $lrs['id'] ?>">
+                                            <button type="submit" class="btn btn-sm"
+                                                    style="background-color:transparent;">
+                                                <i class="far fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                        <form action="<?= route('lrs_client_delete'); ?>" method="post">
+                                            <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                                            <button type="submit" class="btn btn-sm del_confirm"
+                                                    style="background-color:transparent;">
+                                                <i class="fas fa-minus-circle" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php $i++; endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 for-button">
+                        <form action="<?= route('lrs_client_view_update'); ?>" method="post">
+                            <input type="hidden" name="lrs_id" value="<?= $lrs['id'] ?>">
+                            <button type="submit" class="btn btn-info mt-md-3">Add client LRS</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
