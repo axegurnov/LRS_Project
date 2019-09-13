@@ -48,7 +48,7 @@ class LrsController extends InheritanceController
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect('/lrs/list');
+        $this->redirect(route("lrs_list"));
     }
 
     public function lrsViewUpdateAction()
@@ -104,7 +104,7 @@ class LrsController extends InheritanceController
             if ($valid) {
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
-                $this->redirect('/lrs/list');
+                $this->redirect(route("lrs_list"));
             } else {
                 $vars = [
                     'title' => 'LRS form',
@@ -120,7 +120,7 @@ class LrsController extends InheritanceController
             if ($valid) {
                 $this->model->setValues($data_field);
                 $this->model->addRecord();
-                $this->redirect('/lrs/list');
+                $this->redirect(route("lrs_list"));
             } else {
                 $vars = [
                     'title' => 'LRS form',

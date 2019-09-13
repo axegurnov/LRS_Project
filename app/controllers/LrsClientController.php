@@ -42,7 +42,7 @@ class LrsClientController extends Controller
             $password = $this->hashPassword($_POST['password']);
             $this->model->setValue('password',$password);
             $this->model->updateRecord($client_id);
-            $this->redirect('/lrs/list');
+            $this->redirect(route("lrs_list"));
 
           }
           else {
@@ -62,7 +62,7 @@ class LrsClientController extends Controller
               $password = $this->hashPassword($_POST['password']);
               $this->model->setValue('password',$password);
             $this->model->addRecord();
-            $this->redirect('/lrs/list');
+            $this->redirect(route("lrs_list"));
           }
           else {
             $vars = [
@@ -82,7 +82,7 @@ class LrsClientController extends Controller
     {
         $id = $_POST['client_id'];
         $this->model->dropRecord($id);
-        $this->redirect('/lrs/list');
+        $this->redirect(route("lrs_list"));
     }
 }
 
