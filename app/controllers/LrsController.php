@@ -24,7 +24,8 @@ class LrsController extends Controller {
         $this->view->generate('lrs/list.tlp',$vars);
     }
 
-    public function lrsShowAction($params){
+    public function lrsShowAction($params)
+    {
         if(empty($params['view'])) {
             $id = 1;
         } else {

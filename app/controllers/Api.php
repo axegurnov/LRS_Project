@@ -8,9 +8,11 @@ use app\core\Controller;
 class Api extends Controller
 {
     protected $nameModel = '';
-    protected $action = '';
-    protected $requestMethod = '';
+    protected $action = ''; // экшн, который нужно вызвать в апи контроллере
+    protected $requestMethod = ''; // get post put delete
     protected $args = null;
+
+    protected $id = '';
 
     public function __construct($route)
     {
