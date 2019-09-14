@@ -7,38 +7,23 @@ class Api extends GetModelController
 {
     protected $nameModel = '';
     protected $action = ''; // экшн, который нужно вызвать в апи контроллере
-    protected $requestMethod = ''; // get post put delete
     protected $args = null;
 
-    public function __construct($route)
+    protected function getAction()
     {
-        header('Content-type: application/json');
-        $this->route = $route;
-        //$this->action = $route['action'];
-        $this->model = $this->getModel($this->nameModel);
-        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
-    }
-
-    protected function getAction($args = null)
-    {
-        $method = $this->requestMethod;
+        $method = $_SERVER['REQUEST_METHOD']; // get put post delete
         switch ($method) {
             case 'GET':
-                if($args){
+                if($this->args){
                     return $this->action = 'viewAction';
-                } else {
-                    return $this->action = 'showAllAction';
                 }
-                break;
+                return $this->action = 'showAllAction';
             case 'POST':
                 return $this->action = 'createAction';
-                break;
             case 'PUT':
                 return $this->action = 'updateAction';
-                break;
             case 'DELETE':
                 return $this->action = 'deleteAction';
-                break;
             default:
                 return null;
         }
@@ -48,10 +33,8 @@ class Api extends GetModelController
     {
         if($args) {
             $this->args = $args;
-            $this->getAction($this->args);
-        } else {
-            $this->getAction();
         }
+        $this->getAction();
 
         if(method_exists($this, $this->action)) {
             return $this->{$this->action}();
@@ -162,6 +145,7 @@ class Api extends GetModelController
 
     protected function response($data, $status = 500)
     {
+        header('Content-type: application/json');
         header("HTTP/1.1 " . $status . " " . $this->requestStatus($status));
         echo $this->convertToJson($data);
     }
