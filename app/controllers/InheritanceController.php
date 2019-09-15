@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 12.09.19
- * Time: 14:52
- */
-
 namespace app\controllers;
 
 use app\core\Controller;
 
-class InheritanceController extends Controller{
+class InheritanceController extends GetModelController {
 
     public function pagination($params,$limit,$count_id)
     {

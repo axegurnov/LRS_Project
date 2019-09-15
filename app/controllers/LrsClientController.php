@@ -1,11 +1,9 @@
 <?php
-
 namespace app\controllers;
 
 use app\core\Controller;
 
-
-class LrsClientController extends Controller
+class LrsClientController extends GetModelController
 {
   protected $nameModel = 'lrs_client';
     public function clientUpdateViewAction()

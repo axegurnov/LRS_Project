@@ -9,3 +9,4 @@ class LrsClient extends Model
     public $table = 'lrs_client';
 
 }
+?>
