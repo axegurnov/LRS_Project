@@ -27,14 +27,14 @@ class UserController extends InheritanceController {
 	public function authAction()
 	{
         if (!empty($_SESSION["auth"])) {
-            return $this->redirect(route("lrs_list"));
+            return $this->redirect("/lrs/list");
         }
 		if (isset($_POST["loginButton"])) {
 			$login = $this->filterVar($_POST['login']);
     		$password = $_POST["password"];
 			$this->model->validAuth($login, $password);
 			if (!isset($_SESSION["errors"])) {
-				return $this->redirect(route("lrs_list"));
+				return $this->redirect("/lrs/list");
 			}
 		}
 		$this->view->generate('user/auth.tlp');
@@ -68,7 +68,7 @@ class UserController extends InheritanceController {
             $this->model->setValue('password',$password);
             $this->model->updateRecord($id);
 
-            $this->redirect(route("users"));
+            $this->redirect('../users');
            }
            else {
                $userInfo = $data_field;
@@ -86,7 +86,7 @@ class UserController extends InheritanceController {
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password',$password);
                 $this->model->addRecord();
-                $this->redirect(route("users"));
+                $this->redirect('../users');
             }
             else{
                 $userInfo = $data_field;
@@ -105,14 +105,14 @@ class UserController extends InheritanceController {
     {
         $id = $_POST['id'];
         $this->model->dropRecord($id);
-        $this->redirect(route("users"));
+        $this->redirect('/users');
     }
 
 	//разлогирование и выход на экран авторизации
 	public function exitAction()
 	{
 		$this->model->exit();
-		$this->redirect(route("login"));
+		$this->redirect("/login");
 	}
 }
 ?>
