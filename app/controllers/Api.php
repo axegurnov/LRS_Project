@@ -13,7 +13,7 @@ class Api extends GetModelController
         $method = $_SERVER['REQUEST_METHOD']; // get put post delete
         switch ($method) {
             case 'GET':
-                if($this->args){
+                if(!empty($this->args['id'])){
                     return 'viewAction';
                 }
                 return 'showAllAction';
@@ -33,7 +33,17 @@ class Api extends GetModelController
         if($args) {
             $this->args = $args;
         }
-        $action = $this->getAction();
+        $api_token = $this->args['api_token'];
+        $predictor = "api_token='" . $api_token."'";
+        //debug($predictor);
+        $user = $this->model->getValueTableApi("users",$predictor);
+
+        if(!empty($user)){
+            $action = $this->getAction();
+        }
+        else{
+            return $this->response('Not authorized', 401);
+        }
 
         if(method_exists($this, $action)) {
             return $this->{$action}();
@@ -46,6 +56,7 @@ class Api extends GetModelController
         if(!empty($this->args['id'])) {
             $str = 'id = ' . $this->args['id'];
             $record = $this->model->select($str);
+
             if($record) {
                 return $this->response($this->model->select($str), 200);
             }
@@ -57,6 +68,7 @@ class Api extends GetModelController
     protected function showAllAction()
     {
         $records = $this->model->getAllRecords();
+        //debug($records);
         if(!empty($records)) {
             return $this->response($records, 200);
         }
@@ -153,6 +165,7 @@ class Api extends GetModelController
     private function requestStatus($code) {
         $status = array(
             200 => 'OK',
+            401 => 'Not authorized',
             404 => 'Not Found',
             405 => 'Method Not Allowed',
             500 => 'Internal Server Error',

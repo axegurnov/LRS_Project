@@ -154,6 +154,11 @@ class Model
 
     }
 
+    public function getValueTableApi($table, $predictor)
+    {
+        return $this->db->query("select * from $table where $predictor")->fetch_assoc();
+    }
+
     public function getValueTable($table, $predictor)
     {
         return $this->db->query("select * from $table where $predictor");

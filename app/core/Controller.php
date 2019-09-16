@@ -10,17 +10,21 @@ abstract class Controller
 
 	protected function beforeAction()
 	{
+		$api = preg_match('/(Api)/', $this->route['controller']);
+		if (($api == true)) {
+			return 0;
+		}
 		if (empty($_SESSION["auth"]) && ($this->route['controller'] != "user") && ($this->route['action'] != "auth")) {
 			$this->view->generate("errors/403.tlp");
 			exit();
-        }
+		}
 	}
 
 	public function __construct($route)
 	{
 		$this->route = $route;
 		$this->view = View::getInstance();
-		//$this->beforeAction();
+		$this->beforeAction();
 	}
 
 	//автоподключение модели
