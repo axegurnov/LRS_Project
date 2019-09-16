@@ -6,7 +6,6 @@ use app\core\Controller;
 class Api extends GetModelController
 {
     protected $nameModel = '';
-    protected $action = ''; // экшн, который нужно вызвать в апи контроллере
     protected $args = null;
 
     protected function getAction()
@@ -15,15 +14,15 @@ class Api extends GetModelController
         switch ($method) {
             case 'GET':
                 if($this->args){
-                    return $this->action = 'viewAction';
+                    return 'viewAction';
                 }
-                return $this->action = 'showAllAction';
+                return 'showAllAction';
             case 'POST':
-                return $this->action = 'createAction';
+                return 'createAction';
             case 'PUT':
-                return $this->action = 'updateAction';
+                return 'updateAction';
             case 'DELETE':
-                return $this->action = 'deleteAction';
+                return 'deleteAction';
             default:
                 return null;
         }
@@ -34,10 +33,10 @@ class Api extends GetModelController
         if($args) {
             $this->args = $args;
         }
-        $this->getAction();
+        $action = $this->getAction();
 
-        if(method_exists($this, $this->action)) {
-            return $this->{$this->action}();
+        if(method_exists($this, $action)) {
+            return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
     }
@@ -100,6 +99,7 @@ class Api extends GetModelController
 
     public function deleteAction()
     {
+        // записывает строку с переданными данными в массив $_DELETE
         parse_str(file_get_contents('php://input'), $_DELETE);
         if(!empty($_DELETE['id'])) {
             $str = 'id = ' . $_DELETE['id'];
@@ -117,6 +117,7 @@ class Api extends GetModelController
 
     public function updateAction()
     {
+        // записывает строку с переданными данными в массив $_PUT
         parse_str(file_get_contents('php://input'), $_PUT);
         $data_field = [];
         if(!empty($_PUT['id'])) {
