@@ -3,7 +3,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class GetModelController extends Controller
+abstract class GetModelController extends Controller
 {
 
 	public function __construct($route)
