@@ -131,7 +131,6 @@ class Api extends GetModelController
 
         $tables = $this->model->getFields($this->model->table)['array'];
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
-        $data_field = [];
         foreach($_PUT as $key => $value) {
             $data_field[$key] = $value;
         }
