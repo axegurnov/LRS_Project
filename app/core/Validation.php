@@ -7,7 +7,7 @@ class Validation
     {
       $fail = false;
       $error = array();
-      $config = require 'app/config/configValidate.php';
+      $config = require '../app/config/configValidate.php';
 
     foreach ($data as $key => $value) {
         $value = trim($value);

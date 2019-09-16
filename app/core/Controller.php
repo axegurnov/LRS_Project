@@ -3,8 +3,8 @@ namespace app\core;
 
 abstract class Controller
 {
-    protected $nameModel = null;
-    protected $model = null;
+  protected $nameModel = null;
+  protected $model = null;
 	protected $view = null;
 	protected $route = null;
 

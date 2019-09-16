@@ -23,8 +23,8 @@ class Router
         $this->argUri = $_GET;
         // debug($_GET);
         // debug($_GET['route']); // хранится uri
-        // debug($_GET['arg_name']); // e.g. page = 123 
-        
+        // debug($_GET['arg_name']); // e.g. page = 123
+
         // перебираем роуты и ищем совпадение с введеным uri
         // записываем параметры (controller, action)
         $foundRoute = false;

@@ -1,4 +1,4 @@
-<?php require 'app/views/layouts/header.tlp.php';?>
+<?php require '../app/views/layouts/header.tlp.php';?>
     <body>
     <div class="wrapper">
         <header>
@@ -49,4 +49,4 @@
         </main>
     </div>
     </body>
-<?php require 'app/views/layouts/footer.tlp.php';?>
+<?php require '../app/views/layouts/footer.tlp.php';?>

@@ -3,8 +3,17 @@
     // если существует файл по следующему пути, подключить его
     spl_autoload_register(function ($class) {
         $path = str_replace('\\','/',$class.'.php');
-        if (file_exists($path)){
-            require $path;
+          $test = "../".$path;
+        if (file_exists($test)){
+          // echo "Путь";echo "<br>";
+          // echo $path;echo "<br>";
+          // echo "Класс";echo "<br>";
+          // echo $class;
+          // echo "<br>";
+          //echo "Тест";echo "<br>";
+          //echo $test;
+        //  echo "<br>";echo "<br>";
+            require $test;
         }
     });
 

@@ -9,11 +9,11 @@ class Database
 
     private function __construct()
     {
-        $config = require 'app/config/Database.php';
+        $config = require '../app/config/Database.php';
         $this->db = new mysqli($config['host'], $config['user'], $config['password'],$config['base']) or die ('error');
     }
 
-    public static function getInstance() 
+    public static function getInstance()
     {
         if(self::$_instance === null) {
             self::$_instance = new DataBase();
@@ -26,7 +26,7 @@ class Database
         return $this->db->query($sql);
     }
 
-    public function __destruct() 
+    public function __destruct()
     {
         if ($this->db) {
             $this->db->close();

@@ -23,19 +23,19 @@ class View
 
     public function generate($template, $vars = [])
     {
-        if(file_exists('app/views/layouts/' . $this->_layout . '.php')) {
+        if(file_exists('../app/views/layouts/' . $this->_layout . '.php')) {
             extract($vars);
 
-            if(file_exists('app/views/' . $template . '.php')) {
+            if(file_exists('../app/views/' . $template . '.php')) {
                 ob_start();
-                require 'app/views/' . $template . '.php';
+                require '../app/views/' . $template . '.php';
                 $content = ob_get_contents();
                 ob_end_clean();
             }
             else {
-                $content = "view doesnt exist"; 
+                $content = "view doesnt exist";
             }
-            require 'app/views/layouts/' . $this->_layout . '.php';
+            require '../app/views/layouts/' . $this->_layout . '.php';
         }
         else {
             echo "file not found";
