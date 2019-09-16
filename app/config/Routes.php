@@ -117,7 +117,13 @@ class Routes
                 'name' => 'api_lrs_statements',
                 'controller' => 'LrsStatementsApi',
                 'action' => 'index',
-            ]
+            ],
+
+            'api/lrs/state' => [
+                'name' => 'api_lrs_state',
+                'controller' => 'LrsStateApi',
+                'action' => 'index',
+            ],
         ];
     }
 }

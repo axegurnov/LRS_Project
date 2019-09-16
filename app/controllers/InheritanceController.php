@@ -3,9 +3,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class InheritanceController extends GetModelController {
+abstract class InheritanceController extends GetModelController {
 
-    public function pagination($params,$limit,$count_id)
+    public function pagination($params, $limit, $count_id)
     {
         //debug($params['page']);
         if (empty($params['page'])) {
@@ -16,7 +16,7 @@ class InheritanceController extends GetModelController {
         $pages = ceil($ttl / $limit);
         $vars = [
             'offset' => $offset,
-            'pages' => $pages
+            'pages' => $pages,
         ];
         return $vars;
     }
