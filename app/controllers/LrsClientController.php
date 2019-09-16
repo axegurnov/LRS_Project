@@ -5,7 +5,8 @@ use app\core\Controller;
 
 class LrsClientController extends GetModelController
 {
-  protected $nameModel = 'lrs_client';
+    protected $nameModel = 'lrs_client';
+
     public function clientUpdateViewAction()
     {
         $clients = '';
@@ -34,44 +35,45 @@ class LrsClientController extends GetModelController
         array_pop($data_field);
         if (!empty($client_id)) {
 
-          $valid = $this->model->setValues($data_field);
+            $valid = $this->model->setValues($data_field);
 
-          if($valid){
-            $password = $this->hashPassword($_POST['password']);
-            $this->model->setValue('password',$password);
-            $this->model->updateRecord($client_id);
-            $this->redirect('/lrs/list');
+            if ($valid) {
+                $password = $this->hashPassword($_POST['password']);
+                $this->model->setValue('password', $password);
+                $this->model->updateRecord($client_id);
+                $this->redirect('/lrs/list');
 
-          }
-          else {
-            $vars = [
-                'title' => 'Client form',
-                'data_field' => $data_field,
-                'lrs_id' => $lrs_id,
-            ];
+            } else {
+                $vars = [
+                    'title' => 'Client form',
+                    'data_field' => $data_field,
+                    'lrs_id' => $lrs_id,
+                ];
 
-           $this->view->generate('lrs_client/update.tlp', $vars);
-          }unset($_SESSION['errors']);
+                $this->view->generate('lrs_client/update.tlp', $vars);
+            }
+            unset($_SESSION['errors']);
         } elseif (empty($client_id)) {
 
-          $valid = $this->model->setValues($data_field);
+            $valid = $this->model->setValues($data_field);
 
-          if($valid) {
-              $password = $this->hashPassword($_POST['password']);
-              $this->model->setValue('password',$password);
-            $this->model->addRecord();
-            $this->redirect('/lrs/list');
-          }
-          else {
-            $vars = [
-                'title' => 'Client form',
-                'data_field' => $data_field,
-                'lrs_id' => $lrs_id,
-            ];
-           $this->view->generate('lrs_client/update.tlp', $vars);
+            if ($valid) {
+                $password = $this->hashPassword($_POST['password']);
+                $api_token = $this->hashApiToken($_POST['password']);
+                $this->model->setValue('password', $password);
+                $this->model->setValue('api_token', $api_token);
+                $this->model->addRecord();
+                $this->redirect('/lrs/list');
+            } else {
+                $vars = [
+                    'title' => 'Client form',
+                    'data_field' => $data_field,
+                    'lrs_id' => $lrs_id,
+                ];
+                $this->view->generate('lrs_client/update.tlp', $vars);
 
-          }
-          unset($_SESSION['errors']);
+            }
+            unset($_SESSION['errors']);
 
         }
     }
