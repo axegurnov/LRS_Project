@@ -1,30 +1,88 @@
 <?php
-namespace app\migration;
+define('ROOT', dirname(__FILE__));
 
 $controller = new MigrationController;
-//Проверка существования параметра при старте программы
+//Проверка существования параметров при старте программы
 if (!isset($argv[1])) {
-	$controller->errorPrint();
+	$controller->errorPrintAction();
 }
 //Выполнение действия, в зависимости от параметра
 switch ($argv[1]) {
+	//создание структуры
 	case 'create':
-		$controller->abs();
+		if (isset($argv[2])) {
+			switch ($argv[2]) {
+				case 'database':
+					$controller->createDatabaseAction();
+					break;
+				case 'table':
+					if (isset($argv[3])) {
+						$controller->issetArg("structure/", $argv[3]);
+					} else {
+						$controller->createTablesAction();
+					}
+					break;
+				default:
+					$controller->errorPrintAction();
+					break;
+			}
+		} else {
+			$controller->createAction();
+		}
+		break;
 
+	//заполнение таблиц
+	case 'fill':
+		if (isset($argv[2]) && ($argv[2] == 'table')) {
+			if (isset($argv[3])) {
+				$controller->issetArg("data/", $argv[3]);
+			} else {
+				$controller->errorPrintAction();
+			}
 
+		} else {
+			$controller->fillAction();
+		}
+		break;
+
+	//полная миграция (структура + заполнение)
+	case 'migration':
+		$controller->createAction();
+		$controller->fillAction();
+		break;
+
+	//удаление таблиц или всей базы данных
+	case 'drop':
+		if (isset($argv[2])) {
+			switch ($argv[2]) {
+				case 'database':
+					$controller->dropDatabaseAction();
+					break;
+				case 'table':
+					if (isset($argv[3])) {
+						$controller->issetArg("drop/", $argv[3]);
+					} else {
+						$controller->dropTablesAction();
+					}
+					break;
+				default:
+					$controller->errorPrintAction();
+					break;
+			}
+		} else {
+			$controller->errorPrintAction();
+		}
 		break;
 	//Тестовый кейс
 	case 'test':
-		$controller->test();
+		$controller->testAction();
 		break;
-	//Вывод используемых аргументов
-	case 'print':
-		$controller->printArgv($argv);
-		break;
-    default:
-
-        break;
+	default:
+		$controller->errorPrintAction();
+	break;
 }
+
+
 
 class MigrationController
 {
@@ -32,45 +90,87 @@ class MigrationController
 
 	public function __construct()
 	{
-		$this->config = require_once(dirname(__FILE__) . '/../app/config/Database.php');
-		var_dump(dirname(__FILE__) . '/../app/config/Database.php');
-		//var_dump($this->config["host"]);
-		$sqlFolder1 = 'data/';
-		var_dump($sqlFolder1);
-		$allFiles = glob($sqlFolder1 . '*.sql');
-		var_dump($allFiles);
-        foreach ($allFiles as $file) {
-            $command = sprintf('mysql -u%s -p%s -h %s -D %s < %s', $this->config['user'], $this->config['password'], $this->config['host'], $this->config['base'], $file);
-            shell_exec($command);
-        }
-
+		$this->config = require_once(ROOT . '/../app/config/Database.php');
 	}
 
-	public function printArgv($argv)
+	public function createAction()
 	{
+		$this->createDatabaseAction();
+		$this->createTablesAction();
+	}
+
+	public function createDatabaseAction()
+	{
+		$this->templateExecute("structure/", "001*.sql", "database");
+	}
+
+	public function createTablesAction()
+	{
+		$this->templateExecute("structure/", "002*.sql", "table");
+	}
+
+	public function fillAction()
+	{
+		$this->templateExecute("data/", "002*.sql", "table");
+	}
+
+
+	public function dropDatabaseAction()
+	{
+		$this->templateExecute("drop/", "001*.sql", "database");
+	}
+
+	public function dropTablesAction()
+	{
+		$this->templateExecute("drop/", "002*.sql", "table");
+	}
+
+	public function templateExecute($sqlFolder, $expansion, $type)
+	{
+		$allFiles = glob($sqlFolder . $expansion);
+		foreach ($allFiles as $file) {
+			switch ($type) {
+				case 'database':
+					$command = sprintf('mysql -u%s -p%s -h%s <%s', $this->config['user'], $this->config['password'], $this->config['host'], $file);
+					break;
+				case 'table':
+				    $command = sprintf('mysql -u%s -p%s -h%s -D%s <%s', $this->config['user'], $this->config['password'], $this->config['host'], $this->config['base'], $file);
+					break;
+			}
+			shell_exec($command);
+		}
+	}
+
+	public function issetArg($sqlFolder, $var) {
+		switch ($var) {
+			case 'lrs':
+				$this->templateExecute($sqlFolder, "002*lrs.sql", "table");
+				break;
+			case 'lrs_client':
+				$this->templateExecute($sqlFolder, "002*lrs_client.sql", "table");
+				break;
+			case 'lrs_state':
+				$this->templateExecute($sqlFolder, "002*lrs_state.sql", "table");
+				break;
+			case 'lrs_statement':
+				$this->templateExecute($sqlFolder, "002*lrs_statement.sql", "table");
+				break;
+			case 'users':
+				$this->templateExecute($sqlFolder, "002*users.sql", "table");
+				break;
+			default:
+				$this->errorPrintAction();
+				break;
+		}
+	}
+
+	public function testAction()
+	{
+		echo "Запущен тестовый блок";
 		print_r($argv);
 	}
 
-	public static function migrationAction()
-	{
-        $config = require 'app/config/Database.php';
-        //получаем реальный путь к миграциям
-        $sqlFolder1 = realpath("migration"). '/';
-        // Получаем список всех sql-файлов
-        $allFiles = glob($sqlFolder1 . '*.sql');
-        // Выполняем миграции
-        foreach ($allFiles as $file) {
-            $command = sprintf('mysql -u%s -p%s -h %s -D %s < %s', $config['user'], $config['password'], $config['host'], $config['base'], $file);
-            shell_exec($command);
-        }
-	}
-
-	public function test()
-	{
-
-	}
-
-	public function errorPrint()
+	public function errorPrintAction()
 	{
 		exit("Ошибка параметра, воспользуйтесь справкой\n");
 	}

@@ -1,0 +1,4 @@
+INSERT INTO lrs_client (lrs_id, login, password, description) VALUE ('4','vasya','$2y$10$4/thOSfOaZSmS95DMU1vQu.GZ2y3SKWgHZIVceqJcwq32FWifd7ce','Vasya');
+INSERT INTO lrs_client (lrs_id, login, password, description) VALUE ('3','petya','$2y$10$8aTT2KkEQ5uD3YSbPs0USO9DzDCDM7jEWbt8cTueQa9NG8aYsUnEW','Petya');
+INSERT INTO lrs_client (lrs_id, login, password, description) VALUE ('2','vova','$2y$10$fQNCj.3KTYmSyLqdIWko7uo8MOleJH1R6kXX/XIc3PDgajLH31B6q','Vova');
+INSERT INTO lrs_client (lrs_id, login, password, description) VALUE ('1','nastya','$2y$10$y4LwTikT4M5M0cw6dY0Jm.UblbTUrlNruAUpsQEKaCaOUxExqsyPa','Nastya');
