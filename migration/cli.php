@@ -2,11 +2,11 @@
 define('ROOT', dirname(__FILE__));
 
 $controller = new MigrationController;
-//Проверка существования параметров при старте программы
+//проверка существования параметров при старте программы
 if (!isset($argv[1])) {
 	$controller->errorPrintAction();
 }
-//Выполнение действия, в зависимости от параметра
+//выполнение действия, в зависимости от параметра
 switch ($argv[1]) {
 	//создание структуры
 	case 'create':
@@ -39,7 +39,6 @@ switch ($argv[1]) {
 			} else {
 				$controller->errorPrintAction();
 			}
-
 		} else {
 			$controller->fillAction();
 		}
@@ -73,7 +72,7 @@ switch ($argv[1]) {
 			$controller->errorPrintAction();
 		}
 		break;
-	//Тестовый кейс
+	//тестовый кейс
 	case 'test':
 		$controller->testAction($argv);
 		break;
@@ -166,7 +165,7 @@ class MigrationController
 
 	public function testAction($argv)
 	{
-		echo "Запущен тестовый блок";
+		echo "Запущен тестовый блок\n";
 		print_r($argv);
 	}
 

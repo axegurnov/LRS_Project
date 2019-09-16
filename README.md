@@ -33,9 +33,24 @@ by ImageSpark<br>
 
 =======
 # Миграции и база данных
-1.Прописать в файле app/config/Database.php данные для подключения к базе данных.
-2.Для осуществения миграции необходимо в index.php прописать $migration = MigrationController::migrationAction(); тем самым вызвать метод migrationAction.
-
+Для осуществления миграции существует консольное приложение "cli.php" в директории "migration".<br>
+Для работы используются следующие команды:<br>
+<ul>
+  <li>1. Выполнение полной миграции (создание структуры + заполнение) - "php cli.php migration"</li>
+  <li>2. Создание структуры:</li>
+  <li>2.1. База данных + все таблицы - "php cli.php create"</li>
+  <li>2.2. База данных - "php cli.php create database"</li>
+  <li>2.3. Все таблицы - "php cli.php create table"</li>
+  <li>2.3. Конкретная таблица - "php cli.php create table <название_таблицы>"</li>
+  <li>3. Заполнение данными:</li>
+  <li>3.1. Все таблицы - "php cli.php fill"</li>
+  <li>3.2. Конкретная таблица - "php cli.php fill table <название_таблицы>"</li>
+  <li>4. Удаление:</li>
+  <li>4.1. База данных - "php cli.php drop database"</li>
+  <li>4.2. Все таблицы - "php cli.php drop table"</li>
+  <li>4.3. Конкретная таблица - "php cli.php drop table <название_таблицы>"</li>
+</ul>
+<br>
 База данных LRS.<br>
 <br>
 Таблица users - Содержит данные о пользователе<br>
