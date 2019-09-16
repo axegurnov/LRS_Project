@@ -1,2 +1,2 @@
-insert into users (login, password, name,second_name , email,api_token) value ('admin','$2y$10$a2ZFoaZVvDMyuaLJmG2WDuNz./vXAv6HUyvfytnxTNqDOCd0beJD2','alex','kekek','google@gmail.com','b794385f2d1ef7ab4d9273d1906381b44f2f6f2588a3efb96a49188331984753');
-insert into users (login, password, name,second_name , email,api_token) value ('adm2in2','$2y$10$A9Qoa.ISE.JiKmYak03NGOxuKAqdUeJE61rJYxZ2mK49sKXvhOvFS','neron','keke','gasd@gmail.com','527a183c3000377765aa913d6807e4288a2a6f4fbbee722e80c6e14c218aba41');
+insert into users (login, password, name,second_name , email) value ('admin','$2y$10$a2ZFoaZVvDMyuaLJmG2WDuNz./vXAv6HUyvfytnxTNqDOCd0beJD2','alex','kekek','google@gmail.com');
+insert into users (login, password, name,second_name , email) value ('adm2in2','$2y$10$A9Qoa.ISE.JiKmYak03NGOxuKAqdUeJE61rJYxZ2mK49sKXvhOvFS','neron','keke','gasd@gmail.com');

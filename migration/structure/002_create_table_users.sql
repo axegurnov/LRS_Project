@@ -5,7 +5,6 @@ create table if not exists users (
   name varchar (20) not null,
   second_name varchar (20) not null,
   email varchar (50) not null,
-  api_token varchar (200) null,
   primary key (id),
   UNIQUE(login)
 );
