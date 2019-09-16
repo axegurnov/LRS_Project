@@ -20,51 +20,8 @@ insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value
 insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('read','course','course 1','3','1');
 insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','2');
 insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('open','course','course 2','3','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 3','4','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('complete','course','course 3','2','4');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
-insert into lrs_statements (verb, activity, content, lrs_id,lrs_client_id) value ('watching','video','video 5','1','3');
 
 
-
-
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('2','4','432dfqw','var1','video','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('1','1','43h465','var3','text','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('3','3','432dfqw','var1','site','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('2','4','432dfqw','var1','video','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('1','1','43h465','var3','text','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('3','3','432dfqw','var1','site','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('2','4','432dfqw','var1','video','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('1','1','43h465','var3','text','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('3','3','432dfqw','var1','site','200');
-insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('3','3','432dfqw','var1','site','200');
 insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('2','4','432dfqw','var1','video','200');
 insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('1','1','43h465','var3','text','200');
 insert into lrs_state (lrs_id, lrs_client_id, state_key, value, activity, registration) value ('3','3','432dfqw','var1','site','200');
