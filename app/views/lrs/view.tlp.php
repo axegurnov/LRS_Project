@@ -19,13 +19,14 @@
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel">
                 <div class="row">
                     <div class="col-md-12">
-                        <table class="table">
+                        <table class="table table-hover text-center">
                             <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Login</th>
                                 <th scope="col">Password</th>
                                 <th scope="col">Dx</th>
+                                <th scope="col">API Token</th>
                                 <th scope="col">Edit</th>
 
                             </tr>
@@ -37,6 +38,7 @@
                                     <td><?= $client['login'] ?></td>
                                     <td>************</td>
                                     <td><?= $client['description'] ?></td>
+                                    <td><?= $client['api_token'] ?></td>
                                     <td class="row">
                                         <form action="<?= route('lrs_client_view_update'); ?>" method="post">
                                             <input type="hidden" name="client_id" value="<?= $client['id'] ?>">

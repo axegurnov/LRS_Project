@@ -15,6 +15,7 @@ class LrsController extends InheritanceController
         $vars = [
             'title' => 'Lrs List',
             'lrsr' => $lrs,
+            'limit' => $limit,
             'pages' => $pagination['pages']
         ];
         $this->view->generate('lrs/list.tlp', $vars);

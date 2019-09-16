@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $i = 1; foreach ($lrsr as $lrs): ?>
+                    <?php $i = 1+$limit*(($_GET['page']??'1')-1); foreach ($lrsr as $lrs): ?>
                         <tr>
                             <th scope="row"><?= $i ?></th>
                             <td><a href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></a></td>

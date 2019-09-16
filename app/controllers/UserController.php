@@ -17,6 +17,7 @@ class UserController extends InheritanceController {
         $vars = [
             'title' => 'User',
             'users' => $users,
+            'limit' => $limit,
             'pages' => $pagination['pages']
         ];
         $this->view->generate('user/index.tlp', $vars);

@@ -46,7 +46,7 @@ class Api extends GetModelController
             $action = $this->getAction();
         }
         else{
-            return $this->response('Not authorized', 401);
+            return $this->response('401 Unauthorized', 401);
         }
 
         if(method_exists($this, $action)) {
