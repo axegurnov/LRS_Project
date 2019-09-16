@@ -7,6 +7,8 @@ class Api extends GetModelController
 {
     protected $nameModel = '';
     protected $args = null;
+    protected $requestBody = null;
+
 
     protected function getAction()
     {
@@ -20,8 +22,10 @@ class Api extends GetModelController
             case 'POST':
                 return 'createAction';
             case 'PUT':
+                parse_str(file_get_contents('php://input'), $this->requestBody);
                 return 'updateAction';
             case 'DELETE':
+                parse_str(file_get_contents('php://input'), $this->requestBody);
                 return 'deleteAction';
             default:
                 return null;
@@ -53,22 +57,16 @@ class Api extends GetModelController
 
     public function viewAction()
     {
-        if(!empty($this->args['id'])) {
-            $str = 'id = ' . $this->args['id'];
-            $record = $this->model->select($str);
-
-            if($record) {
-                return $this->response($this->model->select($str), 200);
-            }
-            return $this->response('Record wasnt found', 404);
+        $record = $this->getRecord($this->args['id']);
+        if($record) {
+            return $this->response($record, 200);
         }
-        $this->response('id arg is empty or wrong', 404);
+        return $this->response('Record wasnt found', 404);
     }
 
     protected function showAllAction()
     {
         $records = $this->model->getAllRecords();
-        //debug($records);
         if(!empty($records)) {
             return $this->response($records, 200);
         }
@@ -112,43 +110,45 @@ class Api extends GetModelController
     public function deleteAction()
     {
         // записывает строку с переданными данными в массив $_DELETE
-        parse_str(file_get_contents('php://input'), $_DELETE);
-        if(!empty($_DELETE['id'])) {
-            $str = 'id = ' . $_DELETE['id'];
-            $record = $this->model->select($str);
+        $id = $this->requestBody['id'];
+        if(!empty($id)) {
+            $record = $this->getRecord($id);
             if($record) {
-                $id = $_DELETE['id'];
                 $this->model->dropRecord($id);
                 return $this->response('Record was deleted', 200);
-            } else {
-                return $this->response('Record wasnt found', 404);
             }
+            return $this->response('Record wasnt found', 404);
         }
         $this->response('Failed delete', 404);
     }
-
     public function updateAction()
     {
-        // записывает строку с переданными данными в массив $_PUT
-        parse_str(file_get_contents('php://input'), $_PUT);
+        $_PUT = $this->requestBody;
         $data_field = [];
         if(!empty($_PUT['id'])) {
             $data_field['id'] = $_PUT['id'];
-            $str = 'id = ' . $_PUT['id'];
-            $record = $this->model->select($str);
+            $record = $this->getRecord($_PUT['id']);
         }
         if(!$record) {
             return $this->response('Record wasnt found',404);
         }
 
-        $tables = $this->model->getFields($this->model->table)['array'];
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
+        $tables = $this->model->getFields($this->model->table)['array'];
         foreach($_PUT as $key => $value) {
             $data_field[$key] = $value;
         }
+        $toFillData = [];
+        foreach($data_field as $key => $value) {
+            foreach ($tables as $table) {
+                if($key == $table) {
+                    $toFillData[$key] = $value;
+                }
+            }
+        }
 
         if (!empty($_PUT['id'])) {
-            $this->model->setValues($data_field);
+            $this->model->setValues($toFillData);
             $this->model->updateRecord($_PUT['id']);
             return $this->response('Record was updated',200);
         }
@@ -171,6 +171,12 @@ class Api extends GetModelController
             500 => 'Internal Server Error',
         );
         return ($status[$code]) ?? $status[500];
+    }
+
+    private function getRecord($id)
+    {
+        $str = 'id = ' . $id;
+        return $this->model->select($str);
     }
 
 }
