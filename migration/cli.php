@@ -75,7 +75,7 @@ switch ($argv[1]) {
 		break;
 	//Тестовый кейс
 	case 'test':
-		$controller->testAction();
+		$controller->testAction($argv);
 		break;
 	default:
 		$controller->errorPrintAction();
@@ -164,7 +164,7 @@ class MigrationController
 		}
 	}
 
-	public function testAction()
+	public function testAction($argv)
 	{
 		echo "Запущен тестовый блок";
 		print_r($argv);
