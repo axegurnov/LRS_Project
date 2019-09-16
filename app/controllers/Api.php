@@ -40,7 +40,7 @@ class Api extends GetModelController
         $api_token = $this->args['api_token'];
         $predictor = "api_token='" . $api_token."'";
         //debug($predictor);
-        $user = $this->model->getValueTableApi("users",$predictor);
+        $user = $this->model->getValueTableApi("lrs_client",$predictor);
 
         if(!empty($user)){
             $action = $this->getAction();
