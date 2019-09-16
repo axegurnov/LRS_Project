@@ -7,13 +7,4 @@
             require $path;
         }
     });
-
-
-    // spl_autoload_register(function ($class) {
-    //     $path = 'app\controllers\\' . ucfirst($class . 'Controller');
-    //     if (class_exists($path)){
-    //         require $path;
-    //     }
-    // });
-
 ?>
