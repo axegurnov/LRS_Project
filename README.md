@@ -35,20 +35,29 @@ by ImageSpark<br>
 # Миграции и база данных
 Для осуществления миграции существует консольное приложение "cli.php" в директории "migration".<br>
 Для работы используются следующие команды:<br>
+  1. Выполнение полной миграции (создание структуры + заполнение) - "php cli.php migration"
+  2. Создание структуры:
 <ul>
-  <li>1. Выполнение полной миграции (создание структуры + заполнение) - "php cli.php migration"</li>
-  <li>2. Создание структуры:</li>
   <li>2.1. База данных + все таблицы - "php cli.php create"</li>
   <li>2.2. База данных - "php cli.php create database"</li>
   <li>2.3. Все таблицы - "php cli.php create table"</li>
   <li>2.3. Конкретная таблица - "php cli.php create table <название_таблицы>"</li>
-  <li>3. Заполнение данными:</li>
+</ul>
+  3. Заполнение данными:
+<ul>
   <li>3.1. Все таблицы - "php cli.php fill"</li>
   <li>3.2. Конкретная таблица - "php cli.php fill table <название_таблицы>"</li>
-  <li>4. Удаление:</li>
-  <li>4.1. База данных - "php cli.php drop database"</li>
-  <li>4.2. Все таблицы - "php cli.php drop table"</li>
-  <li>4.3. Конкретная таблица - "php cli.php drop table <название_таблицы>"</li>
+</ul>
+  4. Очистка данных:
+<ul>
+  <li>4.1. Все таблицы - "php cli.php clear"</li>
+  <li>4.2. Конкретная таблица - "php cli.php clear table <название_таблицы>"</li>
+</ul>
+  5. Удаление:
+<ul>
+  <li>5.1. База данных - "php cli.php drop database"</li>
+  <li>5.2. Все таблицы - "php cli.php drop table"</li>
+  <li>5.3. Конкретная таблица - "php cli.php drop table <название_таблицы>"</li>
 </ul>
 <br>
 База данных LRS.<br>
