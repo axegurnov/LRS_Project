@@ -41,7 +41,6 @@ class Api extends GetModelController
         $login = "admin";
         $password = "pass";
         if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
-            $this->response('Success auth', 200);
             $action = $this->getAction();
         } else {
             // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
