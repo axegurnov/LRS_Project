@@ -8,6 +8,12 @@ if (!isset($argv[1])) {
 }
 //выполнение действия, в зависимости от параметра
 switch ($argv[1]) {
+	//полная миграция (структура + заполнение)
+	case 'migration':
+		$controller->createAction();
+		$controller->fillAction();
+		break;
+
 	//создание структуры
 	case 'create':
 		if (isset($argv[2])) {
@@ -44,10 +50,17 @@ switch ($argv[1]) {
 		}
 		break;
 
-	//полная миграция (структура + заполнение)
-	case 'migration':
-		$controller->createAction();
-		$controller->fillAction();
+	//пересоздание таблиц (очистка от данных)
+	case 'clear':
+		if (isset($argv[2]) && ($argv[2] == 'table')) {
+			if (isset($argv[3])) {
+				$controller->issetArg("clear/", $argv[3]);
+			} else {
+				$controller->errorPrintAction();
+			}
+		} else {
+			$controller->clearAction();
+		}
 		break;
 
 	//удаление таблиц или всей базы данных
@@ -72,6 +85,8 @@ switch ($argv[1]) {
 			$controller->errorPrintAction();
 		}
 		break;
+
+
 	//тестовый кейс
 	case 'test':
 		$controller->testAction($argv);
@@ -113,6 +128,10 @@ class MigrationController
 		$this->templateExecute("data/", "002*.sql", "table");
 	}
 
+	public function clearAction()
+	{
+		$this->templateExecute("clear/", "002*.sql", "table");
+	}
 
 	public function dropDatabaseAction()
 	{
