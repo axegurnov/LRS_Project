@@ -37,6 +37,32 @@ class Api extends GetModelController
         if($args) {
             $this->args = $args;
         }
+        // логин и пароль
+        $login = "admin";
+        $password = "pass";
+        if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
+            $this->response('Success auth', 200);
+            $action = $this->getAction();
+        } else {
+            // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
+            header('WWW-Authenticate: Basic realm="Backend"');
+            header('HTTP/1.0 401 Unauthorized');
+            return $this->response('401 Unauthorized', 401);
+        }
+
+
+
+        if(method_exists($this, $action)) {
+            return $this->{$action}();
+        }
+        $this->convertToJson('Method Not Allowed', 405);
+    }
+
+    /*public function indexAction($args = null)
+    {
+        if($args) {
+            $this->args = $args;
+        }
         $api_token = $this->args['api_token'];
         $predictor = "api_token='" . $api_token."'";
         //debug($predictor);
@@ -53,7 +79,8 @@ class Api extends GetModelController
             return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
-    }
+    }*/
+
 
     public function viewAction()
     {
