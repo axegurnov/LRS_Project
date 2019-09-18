@@ -3,6 +3,6 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/script.js"></script>
 <script src="/js/fonts.js"></script>
-
+<script src="/js/showStatementJson.js"></script>
 </body>
 </html>

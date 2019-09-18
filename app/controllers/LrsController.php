@@ -80,9 +80,10 @@ class LrsController extends InheritanceController
         foreach ($lrss as $lrs2){
             $lrs = $lrs2;
         }
+
         $statementsJson = [];
         foreach($statements as $statement) {
-            $statementsJson[] = $this->convertToJson($statement);
+            $statementsJson[] = $statement;
         }
 
         $vars = [
