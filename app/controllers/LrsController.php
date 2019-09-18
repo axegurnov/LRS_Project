@@ -100,6 +100,7 @@ class LrsController extends InheritanceController
     {
 
         $id = $_POST['id'];
+        //debug($id);
         $data_field = [
             'name' => $_POST['name'],
             'description' => $_POST['description'],
@@ -123,8 +124,8 @@ class LrsController extends InheritanceController
             unset ($errors);
 
         } elseif (empty($_POST['id'])) {
-            $valid = $this->model->setValues($data_field);
-            if ($valid) {
+            $errors = $this->model->setValues($data_field);
+            if (!$errors) {
                 $this->model->setValues($data_field);
                 $this->model->addRecord();
                 $this->redirect(route("lrs_list"));
@@ -134,10 +135,11 @@ class LrsController extends InheritanceController
                     'errors'=> $errors,
                     'data_field' => $data_field
                 ];
-                $this->view->generate('lrs/update.tlp', $vars);
+               $this->view->generate('lrs/update.tlp', $vars);
+                unset ($errors);
 
             }
         }
-        unset ($errors);
+
     }
 }

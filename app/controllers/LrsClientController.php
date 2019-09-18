@@ -38,7 +38,6 @@ class LrsClientController extends GetModelController
 
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
-              echo "sdfdfdfdsdf";
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password', $password);
                 $this->model->updateRecord($client_id);
@@ -58,7 +57,6 @@ class LrsClientController extends GetModelController
         } elseif (empty($client_id)) {
 
             $errors = $this->model->setValues($data_field);
-
             if (!$errors) {
                 $password = $this->hashPassword($_POST['password']);
                 $api_token = $this->hashApiToken($_POST['password']);
