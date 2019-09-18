@@ -42,7 +42,7 @@ class LrsClientController extends GetModelController
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password', $password);
                 $this->model->updateRecord($client_id);
-                $this->redirect('/lrs/list');
+                $this->redirect(route("lrs_list"));
 
             } else {
                 $vars = [
@@ -65,7 +65,7 @@ class LrsClientController extends GetModelController
                 $this->model->setValue('password', $password);
                 $this->model->setValue('api_token', $api_token);
                 $this->model->addRecord();
-                $this->redirect('/lrs/list');
+                $this->redirect(route("lrs_list"));
             } else {
                 $vars = [
                     'title' => 'Client form',
@@ -85,7 +85,7 @@ class LrsClientController extends GetModelController
     {
         $id = $_POST['client_id'];
         $this->model->dropRecord($id);
-        $this->redirect('/lrs/list');
+        $this->redirect(route("lrs_list"));
     }
 }
 
