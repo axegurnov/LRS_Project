@@ -39,7 +39,7 @@ class LrsController extends InheritanceController
             'title' => 'LRS ' . $id,
             'lrs' => $lrs,
             'clients' => $clients,
-            'statements' => $statements
+            'statements' => $this->convertToJson($statements)
         ];
         $this->view->generate('lrs/view.tlp', $vars);
     }
@@ -81,8 +81,14 @@ class LrsController extends InheritanceController
             $lrs = $lrs2;
         }
 
+        $statementsJson = [];
+        foreach($statements as $statement) {
+            $statementsJson[] = $statement;
+        }
+
         $vars = [
             'statements' => $statements,
+            'statementsJson' => $statementsJson,
             'lrs' => $lrs
         ];
         $this->view->generate('lrs/statements.tlp', $vars);

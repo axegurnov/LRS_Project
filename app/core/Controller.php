@@ -113,7 +113,7 @@ abstract class Controller
 	//преобразование к формату json
     public function convertFromJson($array)
     {
-        return json_decode($array);
+        return json_decode($array, true);
     }
 
 	public function redirect($url)
