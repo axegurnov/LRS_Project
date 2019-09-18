@@ -63,8 +63,8 @@ class UserController extends InheritanceController {
         array_pop($data_field);
 
         if (!empty($_POST['id'])) {
-           $valid = $this->model->setValues($data_field);
-           if($valid){
+           $errors = $this->model->setValues($data_field);
+           if(!$errors){
             $password = $this->hashPassword($_POST['password']);
             $this->model->setValue('password',$password);
             $this->model->updateRecord($id);
@@ -75,15 +75,16 @@ class UserController extends InheritanceController {
                $userInfo = $data_field;
                $vars = [
                    'title' => 'User form',
+                   'errors'=> $errors,
                    'data_field' => $userInfo
                ];
               $this->view->generate('user/update.tlp',$vars);
            }
-            unset ($_SESSION['errors']);
+            unset ($errors);
         }
         elseif (empty($_POST['id'])) {
-            $valid = $this->model->setValues($data_field);
-            if($valid) {
+            $errors = $this->model->setValues($data_field);
+            if(!$errors) {
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password',$password);
                 $this->model->addRecord();
@@ -93,6 +94,7 @@ class UserController extends InheritanceController {
                 $userInfo = $data_field;
                 $vars = [
                     'title' => 'User form',
+                    'errors'=> $errors,
                     'data_field' => $userInfo
                 ];
               $this->view->generate('user/update.tlp',$vars);

@@ -100,20 +100,21 @@ class LrsController extends InheritanceController
         ];
         if (!empty($_POST['id'])) {
 
-            $valid = $this->model->setValues($data_field);
-            if ($valid) {
+            $errors = $this->model->setValues($data_field);
+            if (!$errors) {
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
                 $this->redirect('/lrs/list');
             } else {
                 $vars = [
                     'title' => 'LRS form',
+                    'errors'=> $errors,
                     'data_field' => $data_field
                 ];
                 $this->view->generate('lrs/update.tlp', $vars);
 
             }
-            unset ($_SESSION['errors']);
+            unset ($errors);
 
         } elseif (empty($_POST['id'])) {
             $valid = $this->model->setValues($data_field);
@@ -124,12 +125,13 @@ class LrsController extends InheritanceController
             } else {
                 $vars = [
                     'title' => 'LRS form',
+                    'errors'=> $errors,
                     'data_field' => $data_field
                 ];
                 $this->view->generate('lrs/update.tlp', $vars);
 
             }
         }
-        unset ($_SESSION['errors']);
+        unset ($errors);
     }
 }

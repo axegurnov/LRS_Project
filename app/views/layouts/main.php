@@ -36,9 +36,9 @@
         </header>
         <main>
             <?php
-            if(isset($_SESSION['errors'])) {
+            if(isset($errors)) {
                 echo "<div class='alert alert-danger'>";
-                foreach($_SESSION['errors'] as $value) {
+                foreach($errors as $value) {
                     echo "$value";
                     echo '<br>';
                 }

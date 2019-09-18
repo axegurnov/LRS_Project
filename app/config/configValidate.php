@@ -4,7 +4,6 @@ return
   'patterns' => [
     'login'=>"/^[a-z0-9_.\-]+$/i",
     'name' => '/^[a-z0-9_.\- ]+$/i',
-    'second_name' => '/^[a-z0-9_.\- ]+$/i',
     'email' => '/^[a-z0-9_.\-@]+$/i',
     'password' => '/^[a-zA-z]{8,25}$/i',
     'description' => '/^[a-z0-9 ]+$/i'

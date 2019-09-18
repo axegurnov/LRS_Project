@@ -125,14 +125,16 @@ class Model
 
     public function setValues($data)
     {
-        $valid = Validation::Validate($data);
-        if (empty($_SESSION['errors'])) {
+
+       $valid = Validation::Validate($data);
+       if (empty($valid)) {
             foreach ($data as $value) {
                 htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
             }
-            return $this->params_changed = $data;
+            $this->params_changed = $data;
+            return false;
         }
-        return false;
+        return $valid;
     }
 
     public function updateRecord($id)

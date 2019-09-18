@@ -32,12 +32,13 @@ class LrsClientController extends GetModelController
         $client_id = $_POST['client_id'] ?? "";
         $login = $this->filterVar($_POST['login']);
         $data_field = $_POST;
+        $errors = array();
         array_pop($data_field);
         if (!empty($client_id)) {
 
-            $valid = $this->model->setValues($data_field);
-
-            if ($valid) {
+            $errors = $this->model->setValues($data_field);
+            if (!$errors) {
+              echo "sdfdfdfdsdf";
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password', $password);
                 $this->model->updateRecord($client_id);
@@ -47,17 +48,18 @@ class LrsClientController extends GetModelController
                 $vars = [
                     'title' => 'Client form',
                     'data_field' => $data_field,
+                    'errors' => $errors,
                     'lrs_id' => $lrs_id,
                 ];
-
-                $this->view->generate('lrs_client/update.tlp', $vars);
+              $this->view->generate('lrs_client/update.tlp', $vars);
+              unset($errors);
             }
-            unset($_SESSION['errors']);
+
         } elseif (empty($client_id)) {
 
-            $valid = $this->model->setValues($data_field);
+            $errors = $this->model->setValues($data_field);
 
-            if ($valid) {
+            if (!$errors) {
                 $password = $this->hashPassword($_POST['password']);
                 $api_token = $this->hashApiToken($_POST['password']);
                 $this->model->setValue('password', $password);
@@ -68,12 +70,13 @@ class LrsClientController extends GetModelController
                 $vars = [
                     'title' => 'Client form',
                     'data_field' => $data_field,
+                    'errors' => $errors,
                     'lrs_id' => $lrs_id,
                 ];
-                $this->view->generate('lrs_client/update.tlp', $vars);
+               $this->view->generate('lrs_client/update.tlp', $vars);
+               unset($errors);
 
             }
-            unset($_SESSION['errors']);
 
         }
     }

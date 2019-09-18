@@ -25,7 +25,7 @@ class Validation
             }
         }
       }
-          return $_SESSION['errors'] = $error;
+          return $error;
    }
 }
 ?>
