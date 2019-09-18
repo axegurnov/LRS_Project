@@ -99,7 +99,7 @@ class UserController extends InheritanceController {
                 ];
               $this->view->generate('user/update.tlp',$vars);
             }
-            unset ($_SESSION['errors']);
+            unset ($errors);
         }
 
 	}
