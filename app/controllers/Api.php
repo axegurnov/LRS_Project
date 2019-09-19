@@ -9,6 +9,9 @@ class Api extends GetModelController
     protected $args = null;
     protected $requestBody = null;
 
+    protected $testRequestBody = ''; // временное хранение данных из тела запроса
+    protected $testReqData = []; // хранит асоциативный массив key => value [["actor"] => "id"]
+
 
     protected function getAction()
     {
@@ -20,6 +23,7 @@ class Api extends GetModelController
                 }
                 return 'showAllAction';
             case 'POST':
+                parse_str(file_get_contents('php://input'), $this->requestBody);
                 return 'createAction';
             case 'PUT':
                 parse_str(file_get_contents('php://input'), $this->requestBody);
@@ -32,11 +36,15 @@ class Api extends GetModelController
         }
     }
 
-    /*public function indexAction($args = null)
+    public function indexAction($args = null)
     {
-        if($args) {
-            $this->args = $args;
+        $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
+        foreach($this->testRequestBody as $key => $value) {
+            foreach($value as $v) {
+                $this->testReqData[$key] = $v;
+            }
         }
+
         // логин и пароль
         $login = "admin";
         $password = "pass";
@@ -49,15 +57,13 @@ class Api extends GetModelController
             return $this->response('401 Unauthorized', 401);
         }
 
-
-
         if(method_exists($this, $action)) {
             return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
-    }*/
+    }
 
-    public function indexAction($args = null)
+    /*public function indexAction($args = null)
     {
         if($args) {
             $this->args = $args;
@@ -79,6 +85,7 @@ class Api extends GetModelController
         }
         $this->convertToJson('Method Not Allowed', 405);
     }
+    */
 
 
     public function viewAction()
@@ -149,6 +156,7 @@ class Api extends GetModelController
     }
     public function updateAction()
     {
+
         $_PUT = $this->requestBody;
         $data_field = [];
         if(!empty($_PUT['id'])) {
