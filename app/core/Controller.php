@@ -95,8 +95,8 @@ abstract class Controller
         return password_hash($var, PASSWORD_BCRYPT);
     }
 
-    protected function hashApiToken($var){
-		return hash('sha256',$var);
+    protected function encodeApiToken($var){
+		return base64_encode($var);
 	}
 
     protected function filterVar($var)
