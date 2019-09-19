@@ -105,7 +105,7 @@ class Handler
 	private function hasError($vars)
 	{
 		$this->view = View::getInstance();
-		return $this->view->generate("", $vars);
+		return $this->view->generateHandle($vars);
 	}
 
 	//Способы вызвать ошибку или исключение внутри кода:
