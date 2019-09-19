@@ -21,7 +21,6 @@
                     echo "</div>";
                 }
                 ?>
-                <?=$content;?>
             </main>
         </div>
     </body>
