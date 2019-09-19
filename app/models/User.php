@@ -16,45 +16,48 @@ class User extends Model
     	$this->login = $login;
     	$this->password = $password;
     	if (($this->login == "") || ($this->password == "")) {
-    		$_SESSION["errors"]["nodata"] = "Please, fill in the fields";
-    	} 
+    	   $errors["empty"] = "Please, fill in the fields";
+    	}
     	else {
-    		$this->oneUserCheck();
+    	   $errors = $this->oneUserCheck();
 		}
+    return $errors;
     }
 
     //проверка существования пользователя
-    public function oneUserCheck() 
+    public function oneUserCheck()
     {
 		$namecheckquery = "SELECT login, password FROM lrs.users WHERE login='" . $this->login . "'; ";
 		$this->namecheck = $this->db->query($namecheckquery);
 
 		if (!$this->namecheck) {
-			$_SESSION["errors"]["nores"] = "Name check query failed";
-		} 
+		    $errors["name"] = "Name check query failed";
+		}
 		else {
             if (mysqli_num_rows($this->namecheck) != 1) {
-                    $_SESSION["errors"]["noname"] = "Either no user with name, or more than one";
+                  $errors["auth"] = "Either no user with name, or more than one";
                 }
             else {
-                $this->passwordCheck();
+                $errors = $this->passwordCheck();
             }
 		}
+    return $errors;
 	}
 
 	//хеширование паролей и их сверка
-	public function passwordCheck() 
+	public function passwordCheck()
 	{
 		//get login info from query
 		$existinginfo = $this->namecheck->fetch_array(MYSQLI_ASSOC);
 		$hash = $existinginfo["password"];
 		if (!password_verify($this->password, $hash)) {
-			$_SESSION["errors"]["nopass"] = "Incorrect password";
-		} 
-		else {
-		    unset($_SESSION["errors"]);
-			$_SESSION["auth"] =  $existinginfo["login"];
+		    $errors["auth"] = "Incorrect password";
 		}
+		else {
+		    unset($errors);
+		    $_SESSION["auth"] =  $existinginfo["login"];
+		}
+    return $errors;
 	}
 
     public function exit()

@@ -1,5 +1,4 @@
 <?php
-
 namespace app\core;
 
 class View
@@ -25,7 +24,6 @@ class View
     {
         if(file_exists('../app/views/layouts/' . $this->_layout . '.php')) {
             extract($vars);
-
             if(file_exists('../app/views/' . $template . '.php')) {
                 ob_start();
                 require '../app/views/' . $template . '.php';
@@ -36,6 +34,17 @@ class View
                 $content = "view doesnt exist";
             }
             require '../app/views/layouts/' . $this->_layout . '.php';
+        }
+        else {
+            echo "file not found";
+        }
+    }
+
+    public function generateHandle($vars = [])
+    {
+        if(file_exists('../app/views/errors/handler.tlp.php')) {
+            extract($vars);
+            require '../app/views/errors/handler.tlp.php';
         }
         else {
             echo "file not found";

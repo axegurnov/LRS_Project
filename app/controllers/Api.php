@@ -32,7 +32,7 @@ class Api extends GetModelController
         }
     }
 
-    public function indexAction($args = null)
+    /*public function indexAction($args = null)
     {
         if($args) {
             $this->args = $args;
@@ -55,9 +55,9 @@ class Api extends GetModelController
             return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
-    }
+    }*/
 
-    /*public function indexAction($args = null)
+    public function indexAction($args = null)
     {
         if($args) {
             $this->args = $args;
@@ -78,7 +78,7 @@ class Api extends GetModelController
             return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
-    }*/
+    }
 
 
     public function viewAction()
