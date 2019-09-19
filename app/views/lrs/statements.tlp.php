@@ -19,7 +19,7 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Actor</th>
                                 <th scope="col">Verb</th>
                                 <th scope="col">Activity</th>
@@ -30,7 +30,7 @@
                             <tbody>
                             <?php $i=1; foreach ($statements as $statement): ?>
                                 <tr>
-                                    <th scope="row"><label><?= $i?></label></th>
+                                    <th scope="row"><label><?= $statement['id'] ?></label></th>
                                     <td id="statementLogin" class="statementInfo" statementId="<?=$i?>"><?= $statement['login'] ?></td>
                                     <td id="statementVerb" class="statementInfo" statementId="<?=$i?>"><?= $statement['verb'] ?></td>
                                     <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['activity'] ?></td>

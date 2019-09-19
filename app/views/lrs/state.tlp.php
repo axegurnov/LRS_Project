@@ -19,7 +19,7 @@
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Actor</th>
                                 <th scope="col">Activity</th>
                                 <th scope="col">Key</th>
@@ -29,7 +29,7 @@
                             <tbody>
                             <?php $i=1; foreach ($states as $state): ?>
                                 <tr>
-                                    <th scope="row"><?= $i ?></th>
+                                    <th scope="row"><?= $state['id'] ?></th>
                                     <td><?= $state['login'] ?></td>
                                     <td><?= $state['activity'] ?></td>
                                     <td><?= $state['state_key'] ?></td>
