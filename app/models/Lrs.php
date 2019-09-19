@@ -23,13 +23,14 @@ class Lrs extends Model
         return $this->db->query($sql);
     }
 
-    public function Statements($id)
+    public function statements($id)
     {
-        $sql = "SELECT lrs.id,lrs_client.login, lrs_statements.verb, lrs_statements.activity, lrs_statements.content
+        $sql = "SELECT lrs.id, lrs_client.id, lrs_client.login, lrs_statements.verb, lrs_statements.activity, lrs_statements.content
                 FROM lrs 
                 JOIN lrs_statements  ON lrs.id = lrs_statements.lrs_id JOIN lrs_client
                 ON lrs_statements.lrs_client_id = lrs_client.id
                 WHERE lrs_statements.lrs_id = " . $id;
+
         return $this->db->query($sql);
     }
     public function innerJoins($data)

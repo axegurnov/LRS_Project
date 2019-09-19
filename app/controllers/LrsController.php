@@ -29,7 +29,7 @@ class LrsController extends InheritanceController
             $id = $params['view'];
         }
 
-        $statements = $this->model->Statements($id);
+        $statements = $this->model->statements($id);
 
         $predictor = "lrs_id=" . $id;
         $lrs_id = "id=" . $id;
@@ -73,7 +73,7 @@ class LrsController extends InheritanceController
         } else {
             $id = $params['lrs'];
         }
-        $statements = $this->model->Statements($id);
+        $statements = $this->model->statements($id);
         $predictor = "id=".$id;
 
         $lrss= $this->model->getValueTable("lrs",$predictor);
@@ -85,6 +85,7 @@ class LrsController extends InheritanceController
         foreach($statements as $statement) {
             $statementsJson[] = $statement;
         }
+
 
         $vars = [
             'statements' => $statements,
