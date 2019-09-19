@@ -27,18 +27,21 @@ class UserController extends InheritanceController {
 	//форма авторизации и попытка залогиниться
 	public function authAction()
 	{
+    $var = array();
+    $errors = array();
         if (!empty($_SESSION["auth"])) {
             return $this->redirect(route("lrs_list"));
         }
 		if (isset($_POST["loginButton"])) {
 			$login = $this->filterVar($_POST['login']);
-    		$password = $_POST["password"];
-			$this->model->validAuth($login, $password);
-			if (!isset($_SESSION["errors"])) {
+    	$password = $_POST["password"];
+			$errors = $this->model->validAuth($login, $password);
+      $var = array('errors' => $errors);
+			if (!isset($errors)) {
 				return $this->redirect(route("lrs_list"));
 			}
 		}
-		$this->view->generate('user/auth.tlp');
+		$this->view->generate('user/auth.tlp',$var);
 	}
 
 	public function userViewUpdateAction()
