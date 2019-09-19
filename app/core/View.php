@@ -1,5 +1,4 @@
 <?php
-
 namespace app\core;
 
 class View
@@ -25,15 +24,16 @@ class View
     {
         if(file_exists('../app/views/layouts/' . $this->_layout . '.php')) {
             extract($vars);
-
-            if(file_exists('../app/views/' . $template . '.php')) {
-                ob_start();
-                require '../app/views/' . $template . '.php';
-                $content = ob_get_contents();
-                ob_end_clean();
-            }
-            else {
-                $content = "view doesnt exist";
+            if ($temlate != "") {
+                if(file_exists('../app/views/' . $template . '.php')) {
+                    ob_start();
+                    require '../app/views/' . $template . '.php';
+                    $content = ob_get_contents();
+                    ob_end_clean();
+                }
+                else {
+                    $content = "view doesnt exist";
+                }
             }
             require '../app/views/layouts/' . $this->_layout . '.php';
         }
