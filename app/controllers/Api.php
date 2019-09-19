@@ -38,13 +38,15 @@ class Api extends GetModelController
 
     public function indexAction($args = null)
     {
-        $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
-        foreach($this->testRequestBody as $key => $value) {
-            foreach($value as $v) {
-                $this->testReqData[$key] = $v;
+        if(!empty($this->testRequestBody)) {
+            $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
+            foreach($this->testRequestBody as $key => $value) {
+                foreach($value as $v) {
+                    $this->testReqData[$key] = $v;
+                }
             }
         }
-
+        
         // логин и пароль
         $login = "admin";
         $password = "pass";
