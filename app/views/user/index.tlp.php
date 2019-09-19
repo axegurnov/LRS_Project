@@ -43,6 +43,7 @@
                 <a class="btn btn-primary" href="<?= route('user_view_update'); ?>" role="button">Add</a>
             </div>
         </div>
+        <?php if($pages != 1):?>
         <nav class="mt-md-3">
             <ul class="pagination">
                 <?php for ($i = 1; $i <= $pages; $i++): ?>
@@ -50,5 +51,6 @@
                 <?php endfor; ?>
             </ul>
         </nav>
+        <?php endif?>
     </div>
 </div>
