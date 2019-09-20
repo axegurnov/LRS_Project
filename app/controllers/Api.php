@@ -30,56 +30,46 @@ class Api extends GetModelController
                 return null;
         }
     }
-    // public function indexAction($args = null)
-    // {
-    //     if(!empty($this->testRequestBody)) {
-    //         $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
-    //         foreach($this->testRequestBody as $key => $value) {
-    //             foreach($value as $v) {
-    //                 $this->testReqData[$key] = $v;
-    //             }
-    //         }
-    //     }
-    //     if(!empty($args)) {
-    //         foreach($args as $key => $value) {
-    //             $this->args[$key] = $value;
-    //         }
-    //     }
-    //     // логин и пароль
-    //     $login = "admin";
-    //     $password = "pass";
-    //     $str = $login.';'.$password;
-    //     $token = $this->encodeApiToken($str);
-    //     if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
-    //         $action = $this->getAction();
-    //         header('WWW-Authenticate:'.$token);
-    //     } else {
-    //         // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
-    //         header('WWW-Authenticate: Basic realm="Backend"');
-    //         header('HTTP/1.0 401 Unauthorized');
-    //         return $this->response('401 Unauthorized', 401);
-    //     }
-    //     if(method_exists($this, $action)) {
-    //         return $this->{$action}();
-    //     }
-    //     $this->convertToJson('Method Not Allowed', 405);
-    // }
     public function indexAction($args = null)
     {
-        $api_token = NULL;
-        if (isset($args['api_token'])) {
-            $this->args = $args;
-            $api_token = $this->args['api_token'];
-          }
-        elseif (isset($_SERVER['HTTP_AUTHORIZATION'])){
-            $this->args = $args;
-            $temp = $_SERVER['HTTP_AUTHORIZATION'];
-            $api_token = str_replace('Bearer ','',$temp);
-
+        if(!empty($this->testRequestBody)) {
+            $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
+            foreach($this->testRequestBody as $key => $value) {
+                foreach($value as $v) {
+                    $this->testReqData[$key] = $v;
+                }
+            }
         }
-            $predictor = "api_token='" . $api_token."'";
-            $user = $this->model->getValueTableApi("lrs_client",$predictor);
-
+        if(!empty($args)) {
+            foreach($args as $key => $value) {
+                $this->args[$key] = $value;
+            }
+        }
+        // логин и пароль
+        $login = "admin";
+        $password = "pass";
+        if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
+            $action = $this->getAction();
+        } else {
+            // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
+            header('WWW-Authenticate: Basic realm="Backend"');
+            header('HTTP/1.0 401 Unauthorized');
+            return $this->response('401 Unauthorized', 401);
+        }
+        if(method_exists($this, $action)) {
+            return $this->{$action}();
+        }
+        $this->convertToJson('Method Not Allowed', 405);
+    }
+    /*public function indexAction($args = null)
+    {
+        if($args) {
+            $this->args = $args;
+        }
+        $api_token = $this->args['api_token'];
+        $predictor = "api_token='" . $api_token."'";
+        //debug($predictor);
+        $user = $this->model->getValueTableApi("lrs_client",$predictor);
         if(!empty($user)){
             $action = $this->getAction();
         }
@@ -91,7 +81,7 @@ class Api extends GetModelController
         }
         $this->convertToJson('Method Not Allowed', 405);
     }
-
+    */
     public function viewAction()
     {
         if(!empty($this->args)) {
