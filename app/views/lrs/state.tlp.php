@@ -27,7 +27,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i=1; foreach ($states as $state): ?>
+                            <?php foreach ($states as $state): ?>
                                 <tr>
                                     <th scope="row"><?= $state['id'] ?></th>
                                     <td><?= $state['login'] ?></td>
@@ -35,7 +35,7 @@
                                     <td><?= $state['state_key'] ?></td>
                                     <td><?= $state['value'] ?></td>
                                 </tr>
-                                <?php $i++; endforeach; ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

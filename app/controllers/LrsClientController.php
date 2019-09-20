@@ -35,7 +35,8 @@ class LrsClientController extends GetModelController
                 $this->model->setValue('password', $password);
                 $this->model->updateRecord($client_id);
                 $this->redirect(route("lrs_list"));
-            } else {
+            }
+            else {
                 $vars = [
                     'title' => 'Client form',
                     'data_field' => $data_field,
@@ -45,7 +46,8 @@ class LrsClientController extends GetModelController
                 $this->view->generate('lrs_client/update.tlp', $vars);
                 unset($errors);
             }
-        } elseif (empty($client_id)) {
+        }
+        else if (empty($client_id)) {
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
                 $password = $this->hashPassword($_POST['password']);
@@ -54,7 +56,8 @@ class LrsClientController extends GetModelController
                 $this->model->setValue('api_token', $api_token);
                 $this->model->addRecord();
                 $this->redirect(route("lrs_list"));
-            } else {
+            }
+            else {
                 $vars = [
                     'title' => 'Client form',
                     'data_field' => $data_field,
@@ -67,7 +70,8 @@ class LrsClientController extends GetModelController
         }
     }
 
-    public function clientDelAction() {
+    public function clientDelAction()
+    {
         $id = $_POST['client_id'];
         $this->model->dropRecord($id);
         $this->redirect(route("lrs_list"));

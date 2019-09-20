@@ -1,4 +1,5 @@
 <?php
+
 namespace app\controllers;
 
 use app\core\Controller;
@@ -6,19 +7,18 @@ use app\core\Controller;
 class Api extends GetModelController
 {
     protected $nameModel = '';
-    protected $args = null;
-    protected $requestBody = null;
+    protected $args = NULL;
+    protected $requestBody = NULL;
 
     protected $testRequestBody = ''; // временное хранение данных из тела запроса
     protected $testReqData = []; // хранит асоциативный массив key => value [["actor"] => "id"]
-
 
     protected function getAction()
     {
         $method = $_SERVER['REQUEST_METHOD']; // get put post delete
         switch ($method) {
             case 'GET':
-                if(!empty($this->args)){
+                if (!empty($this->args)) {
                     return 'viewAction';
                 }
                 return 'showAllAction';
@@ -32,59 +32,81 @@ class Api extends GetModelController
                 parse_str(file_get_contents('php://input'), $this->requestBody);
                 return 'deleteAction';
             default:
-                return null;
+                return NULL;
         }
     }
 
-    public function indexAction($args = null)
+    public function indexAction($args = NULL)
     {
         $api_token = NULL;
-        if (isset($args['api_token'])) {
-            $this->args = $args;
-            $api_token = $this->args['api_token'];
-        }
-        elseif (isset($_SERVER['HTTP_AUTHORIZATION'])){
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $this->args = $args;
             $temp = $_SERVER['HTTP_AUTHORIZATION'];
-            $api_token = str_replace('Bearer ','',$temp);
+            $api_token = str_replace('Bearer ', '', $temp);
         }
-        $predictor = "api_token='" . $api_token."'";
-        $user = $this->model->getValueTableApi("lrs_client",$predictor);
-        if(!empty($user)){
+        $predictor = "api_token='" . $api_token . "'";
+        $user = $this->model->getValueTableApi("lrs_client", $predictor);
+        if (!empty($user)) {
             $action = $this->getAction();
         }
-        else{
+        else {
             return $this->response('401 Unauthorized', 401);
         }
-        if(method_exists($this, $action)) {
-        return $this->{$action}();
-    }
+        if (method_exists($this, $action)) {
+            return $this->{$action}();
+        }
         $this->convertToJson('Method Not Allowed', 405);
     }
 
     public function viewAction()
     {
-        if(!empty($this->args)) {
+        if (!empty($this->args)) {
             extract($this->args);
         }
-        if(isset($id)) {
+        if (isset($id)) {
             $record = $this->getRecord($id);
         }
-        if(isset($record)) {
+        if (isset($record)) {
             return $this->response($record, 200);
         }
-
-        if(isset($activity)) {
+        if(isset($verb)) {
+            $predictor = "verb = '$verb'";
+            $resp = $this->model->getMultipleByPredictor($predictor);
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
+        }
+        if (isset($since) && isset($until)) {
+            $predictor = "create_data BETWEEN " . $since . " AND " . $until;
+            $resp = $this->model->getMultipleByPredictor($predictor);
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
+        }
+        if(isset($offset) && isset($limit)) {
+            $query = $this->model->pagination($offset, $limit);
+            $resp = [];
+            foreach($query as $value) {
+                $resp[] = $value;
+            }
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
+        }
+        if (isset($activity)) {
             $predictor = "activity = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
-        if(isset($agent)) {
+        if (isset($agent)) {
             $query = $this->model->statementsJoinClients($this->convertFromJson($agent));
-            if(!isset($query)) {
+            if (!isset($query)) {
                 return $this->response('Not found');
             }
             $resp = [];
-            foreach($query as $value) {
+            foreach ($query as $value) {
                 $resp[] = $value;
             }
             return $this->response($resp, 200);
@@ -95,10 +117,10 @@ class Api extends GetModelController
     protected function showAllAction()
     {
         $records = $this->model->getAllRecords();
-        if(!empty($records)) {
+        if (!empty($records)) {
             return $this->response($records, 200);
         }
-        if($records === null) {
+        if ($records === NULL) {
             return $this->response('Something going wrong', 404);
         }
         $this->response('Table is empty', 404);
@@ -110,8 +132,8 @@ class Api extends GetModelController
         $tables = $this->model->getFields($this->model->table)['array'];
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $data_field = [];
-        foreach($_POST as $key => $value) {
-            if($key == 'id') {
+        foreach ($_POST as $key => $value) {
+            if ($key == 'id') {
                 unset($_POST[$key]);
                 continue;
             }
@@ -120,9 +142,9 @@ class Api extends GetModelController
         //  проверка если переданный столбец существует в таблице
         //  заносит в массив данные для добавления
         $toFillData = [];
-        foreach($data_field as $key => $value) {
+        foreach ($data_field as $key => $value) {
             foreach ($tables as $table) {
-                if($key == $table) {
+                if ($key == $table) {
                     $toFillData[$key] = $value;
                 }
             }
@@ -130,7 +152,7 @@ class Api extends GetModelController
         if (!empty($toFillData)) {
             $this->model->setValues($toFillData);
             $this->model->addRecord();
-            return $this->response('Object was created',200);
+            return $this->response('Object was created', 200);
         }
         $this->response('Failed create', 404);
     }
@@ -139,9 +161,9 @@ class Api extends GetModelController
     {
         // записывает строку с переданными данными в массив $_DELETE
         $id = $this->requestBody['id'];
-        if(!empty($id)) {
+        if (!empty($id)) {
             $record = $this->getRecord($id);
-            if($record) {
+            if ($record) {
                 $this->model->dropRecord($id);
                 return $this->response('Record was deleted', 200);
             }
@@ -149,39 +171,37 @@ class Api extends GetModelController
         }
         $this->response('Failed delete', 404);
     }
+
     public function updateAction()
     {
-
         $_PUT = $this->requestBody;
         $data_field = [];
-        if(!empty($_PUT['id'])) {
+        if (!empty($_PUT['id'])) {
             $data_field['id'] = $_PUT['id'];
             $record = $this->getRecord($_PUT['id']);
         }
-        if(!$record) {
-            return $this->response('Record wasnt found',404);
+        if (!$record) {
+            return $this->response('Record wasnt found', 404);
         }
-
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $tables = $this->model->getFields($this->model->table)['array'];
-        foreach($_PUT as $key => $value) {
+        foreach ($_PUT as $key => $value) {
             $data_field[$key] = $value;
         }
         $toFillData = [];
-        foreach($data_field as $key => $value) {
+        foreach ($data_field as $key => $value) {
             foreach ($tables as $table) {
-                if($key == $table) {
+                if ($key == $table) {
                     $toFillData[$key] = $value;
                 }
             }
         }
-
         if (!empty($_PUT['id'])) {
             $this->model->setValues($toFillData);
             $this->model->updateRecord($_PUT['id']);
-            return $this->response('Record was updated',200);
+            return $this->response('Record was updated', 200);
         }
-        $this->response('Failed update',404);
+        $this->response('Failed update', 404);
     }
 
     protected function response($data, $status = 500)
@@ -191,7 +211,8 @@ class Api extends GetModelController
         echo $this->convertToJson($data);
     }
 
-    private function requestStatus($code) {
+    private function requestStatus($code)
+    {
         $status = array(
             200 => 'OK',
             401 => 'Unauthorized',

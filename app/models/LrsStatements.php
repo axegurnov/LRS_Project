@@ -1,6 +1,6 @@
 <?php
-namespace app\models;
 
+namespace app\models;
 
 use app\core\Model;
 
@@ -17,6 +17,6 @@ class LrsStatements extends Model
                 WHERE cl.login = " . "'$agent[login]'";
         return $this->db->query($sql);
     }
-
 }
+
 ?>

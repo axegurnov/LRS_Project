@@ -1,1 +1,0 @@
-DROP TABLE `lrs`.`lrs_statements`;

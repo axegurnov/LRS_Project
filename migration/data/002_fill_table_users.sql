@@ -1,2 +1,0 @@
-insert into users (login, password, name,second_name , email) value ('admin','$2y$10$a2ZFoaZVvDMyuaLJmG2WDuNz./vXAv6HUyvfytnxTNqDOCd0beJD2','alex','kekek','google@gmail.com');
-insert into users (login, password, name,second_name , email) value ('adm2in2','$2y$10$A9Qoa.ISE.JiKmYak03NGOxuKAqdUeJE61rJYxZ2mK49sKXvhOvFS','neron','keke','gasd@gmail.com');

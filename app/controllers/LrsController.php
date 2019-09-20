@@ -1,11 +1,11 @@
 <?php
+
 namespace app\controllers;
 
 use app\core\Controller;
 
 class LrsController extends InheritanceController
 {
-
     public function lrsListAction($params)
     {
         $limit = 3;
@@ -16,7 +16,7 @@ class LrsController extends InheritanceController
             'title' => 'Lrs List',
             'lrsr' => $lrs,
             'limit' => $limit,
-            'pages' => $pagination['pages']
+            'pages' => $pagination['pages'],
         ];
         $this->view->generate('lrs/list.tlp', $vars);
     }
@@ -25,12 +25,11 @@ class LrsController extends InheritanceController
     {
         if (empty($params['view'])) {
             $id = 1;
-        } else {
+        }
+        else {
             $id = $params['view'];
         }
-
         $statements = $this->model->statements($id);
-
         $predictor = "lrs_id=" . $id;
         $lrs_id = "id=" . $id;
         $clients = $this->model->getValueTable("lrs_client", $predictor);
@@ -39,7 +38,7 @@ class LrsController extends InheritanceController
             'title' => 'LRS ' . $id,
             'lrs' => $lrs,
             'clients' => $clients,
-            'statements' => $this->convertToJson($statements)
+            'statements' => $this->convertToJson($statements),
         ];
         $this->view->generate('lrs/view.tlp', $vars);
     }
@@ -60,46 +59,40 @@ class LrsController extends InheritanceController
         }
         $vars = [
             'title' => 'LRS form',
-            'data_field' => $lrs
+            'data_field' => $lrs,
         ];
         $this->view->generate('lrs/update.tlp', $vars);
     }
 
     public function lrsStatementsAction($params)
     {
-        $lrs ='';
+        $lrs = '';
         if (empty($params['lrs'])) {
             $id = 1;
-        } else {
+        }
+        else {
             $id = $params['lrs'];
         }
         $statements = $this->model->statements($id);
-        $predictor = "id=".$id;
-
-        $lrss= $this->model->getValueTable("lrs",$predictor);
-        foreach ($lrss as $lrs2){
+        $predictor = "id=" . $id;
+        $lrss = $this->model->getValueTable("lrs", $predictor);
+        foreach ($lrss as $lrs2) {
             $lrs = $lrs2;
         }
-
         $statementsJson = [];
-        foreach($statements as $statement) {
+        foreach ($statements as $statement) {
             $statementsJson[] = $statement;
         }
-
-
         $vars = [
             'statements' => $statements,
             'statementsJson' => $statementsJson,
-            'lrs' => $lrs
+            'lrs' => $lrs,
         ];
         $this->view->generate('lrs/statements.tlp', $vars);
-
-
     }
 
     public function lrsUpdateAction()
     {
-
         $id = $_POST['id'];
         //debug($id);
         $data_field = [
@@ -107,40 +100,38 @@ class LrsController extends InheritanceController
             'description' => $_POST['description'],
         ];
         if (!empty($_POST['id'])) {
-
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
                 $this->redirect(route("lrs_list"));
-            } else {
+            }
+            else {
                 $vars = [
                     'title' => 'LRS form',
-                    'errors'=> $errors,
-                    'data_field' => $data_field
+                    'errors' => $errors,
+                    'data_field' => $data_field,
                 ];
                 $this->view->generate('lrs/update.tlp', $vars);
-
             }
             unset ($errors);
-
-        } elseif (empty($_POST['id'])) {
+        }
+        else if (empty($_POST['id'])) {
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
                 $this->model->setValues($data_field);
                 $this->model->addRecord();
                 $this->redirect(route("lrs_list"));
-            } else {
+            }
+            else {
                 $vars = [
                     'title' => 'LRS form',
-                    'errors'=> $errors,
-                    'data_field' => $data_field
+                    'errors' => $errors,
+                    'data_field' => $data_field,
                 ];
-               $this->view->generate('lrs/update.tlp', $vars);
+                $this->view->generate('lrs/update.tlp', $vars);
                 unset ($errors);
-
             }
         }
-
     }
 }
