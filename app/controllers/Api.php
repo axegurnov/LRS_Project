@@ -18,7 +18,7 @@ class Api extends GetModelController
         $method = $_SERVER['REQUEST_METHOD']; // get put post delete
         switch ($method) {
             case 'GET':
-                if(!empty($this->args['id'])){
+                if(!empty($this->args)){
                     return 'viewAction';
                 }
                 return 'showAllAction';
@@ -38,10 +38,17 @@ class Api extends GetModelController
 
     public function indexAction($args = null)
     {
-        $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
-        foreach($this->testRequestBody as $key => $value) {
-            foreach($value as $v) {
-                $this->testReqData[$key] = $v;
+        if(!empty($this->testRequestBody)) {
+            $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
+            foreach($this->testRequestBody as $key => $value) {
+                foreach($value as $v) {
+                    $this->testReqData[$key] = $v;
+                }
+            }
+        }
+        if(!empty($args)) {
+            foreach($args as $key => $value) {
+                $this->args[$key] = $value;
             }
         }
 
@@ -90,9 +97,19 @@ class Api extends GetModelController
 
     public function viewAction()
     {
-        $record = $this->getRecord($this->args['id']);
-        if($record) {
+        if(!empty($this->args)) {
+            extract($this->args);
+        }
+        if(isset($id)) {
+            $record = $this->getRecord($id);
+        }
+        if(isset($record)) {
             return $this->response($record, 200);
+        }
+
+        if(isset($activity)) {
+            $predictor = "activity = '$activity'";
+            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
         return $this->response('Record wasnt found', 404);
     }

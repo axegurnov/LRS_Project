@@ -109,6 +109,20 @@ class Model
         echo "Отсутствует условие!";
     }
 
+    function getMultipleByPredictor($predictor, $fields = '*')
+    {
+        if ($predictor) {
+            $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
+            $object = $this->db->query($sql);
+            $arr = null;
+            foreach($object as $key => $value) {
+                $arr[$key] = $value;
+            }
+            return $arr;
+        }
+        echo "Отсутствует условие!";
+    }
+
     public function getValue($item)
     {
         if (!empty($this->params)) {
