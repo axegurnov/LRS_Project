@@ -32,7 +32,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i=1; foreach ($clients as $client): ?>
+                            <?php foreach ($clients as $client): ?>
                                 <tr>
                                     <th scope="row"><?= $client['id'] ?></th>
                                     <td><?= $client['login'] ?></td>
@@ -57,7 +57,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                            <?php $i++; endforeach; ?>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

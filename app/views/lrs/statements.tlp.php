@@ -24,17 +24,20 @@
                                 <th scope="col">Verb</th>
                                 <th scope="col">Activity</th>
                                 <th scope="col">Content</th>
+                                <th scope="col">Date</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i=1; foreach ($statements as $statement): ?>
+                            <?php foreach ($statements as $statement): ?>
                                 <tr>
                                     <th scope="row"><label><?= $statement['id'] ?></label></th>
                                     <td id="statementLogin" class="statementInfo" statementId="<?=$i?>"><?= $statement['login'] ?></td>
                                     <td id="statementVerb" class="statementInfo" statementId="<?=$i?>"><?= $statement['verb'] ?></td>
                                     <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['activity'] ?></td>
                                     <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['content'] ?></td>
+                                    <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['create_data'] ?></td>
+
                                     <td>
                                         <button id="btnStatementId" class="btn btn-info float-right showStatementInJson" btnStatementid="<?=$i?>" data-toggle="modal" data-target=".modal-single-statement">JSON</button>
                                         <div id="statementId" class="statementInJson" divStatementId="<?=$i?>" hidden="hidden">
@@ -45,7 +48,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <?php $i++; endforeach; ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

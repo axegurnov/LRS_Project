@@ -36,60 +36,6 @@ abstract class Controller
         }
     }
 
-    //LIST
-    public function listAction()
-    {
-        $page = 0;
-        if (isset($_GET["page"])) {
-            $page = $_GET["page"];
-        }
-        $this->convertToJson($this->model->index($page));
-    }
-
-    //ADD
-    public function addAction()
-    {
-        $vars = [];
-        if (count($_GET) > 1) {
-            array_shift($_GET);
-            $vars = $_GET;
-        }
-        $this->convertToJson($this->model->add($vars));
-    }
-
-    //DELETE
-    public function deleteAction()
-    {
-        $id = 0;
-        if (isset($_GET["id"])) {
-            $id = $_GET["id"];
-        }
-        $this->convertToJson($this->model->delete($id));
-    }
-
-    //EDITGET
-    public function editgetAction()
-    {
-        $id = 0;
-        if (isset($_GET["id"])) {
-            $id = $_GET["id"];
-        }
-        $this->convertToJson($this->model->editget($id));
-    }
-
-    //EDITPUT
-    public function updateAction()
-    {
-        $id = 0;
-        $vars = [];
-        if (isset($_GET["id"]) && (count($_GET) > 2)) {
-            array_shift($_GET);
-            $id = array_shift($_GET);
-            $vars = $_GET;
-        }
-        $this->convertToJson($this->model->editput($id, $vars));
-    }
-
     protected function hashPassword($var)
     {
         return password_hash($var, PASSWORD_BCRYPT);
@@ -111,7 +57,7 @@ abstract class Controller
         return json_encode($array);
     }
 
-    //преобразование к формату json
+    //преобразование из формата json
     public function convertFromJson($array)
     {
         return json_decode($array, TRUE);

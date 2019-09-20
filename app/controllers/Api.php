@@ -73,6 +73,22 @@ class Api extends GetModelController
         if (isset($record)) {
             return $this->response($record, 200);
         }
+        if(isset($verb)) {
+            $predictor = "verb = '$verb'";
+            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
+        }
+        if(isset($offset) && isset($limit)) {
+            $query = $this->model->pagination($offset, $limit);
+            foreach($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+        }
+
+        if (isset($since) && isset($until)) {
+            $predictor = "create_data BETWEEN " . $since . " AND " . $until;
+            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
+        }
         if (isset($activity)) {
             $predictor = "activity = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
