@@ -170,8 +170,8 @@ class MigrationController
 			case 'lrs_state':
 				$this->templateExecute($sqlFolder, "002*lrs_state.sql", "table");
 				break;
-			case 'lrs_statement':
-				$this->templateExecute($sqlFolder, "002*lrs_statement.sql", "table");
+			case 'lrs_statements':
+				$this->templateExecute($sqlFolder, "002*lrs_statements.sql", "table");
 				break;
 			case 'users':
 				$this->templateExecute($sqlFolder, "002*users.sql", "table");

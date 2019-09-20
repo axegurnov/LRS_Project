@@ -75,19 +75,30 @@ class Api extends GetModelController
         }
         if(isset($verb)) {
             $predictor = "verb = '$verb'";
-            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
-        }
-        if(isset($offset) && isset($limit)) {
-            $query = $this->model->pagination($offset, $limit);
-            foreach($query as $value) {
-                $resp[] = $value;
+            $resp = $this->model->getMultipleByPredictor($predictor);
+            if ($resp == null) {
+                return $this->response('Not found');
             }
             return $this->response($resp, 200);
         }
-
         if (isset($since) && isset($until)) {
             $predictor = "create_data BETWEEN " . $since . " AND " . $until;
-            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
+            $resp = $this->model->getMultipleByPredictor($predictor);
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
+        }
+        if(isset($offset) && isset($limit)) {
+            $query = $this->model->pagination($offset, $limit);
+            $resp = [];
+            foreach($query as $value) {
+                $resp[] = $value;
+            }
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
         }
         if (isset($activity)) {
             $predictor = "activity = '$activity'";
