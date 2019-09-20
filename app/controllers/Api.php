@@ -39,11 +39,7 @@ class Api extends GetModelController
     public function indexAction($args = NULL)
     {
         $api_token = NULL;
-        if (isset($args['api_token'])) {
-            $this->args = $args;
-            $api_token = $this->args['api_token'];
-        }
-        else if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $this->args = $args;
             $temp = $_SERVER['HTTP_AUTHORIZATION'];
             $api_token = str_replace('Bearer ', '', $temp);
@@ -52,8 +48,7 @@ class Api extends GetModelController
         $user = $this->model->getValueTableApi("lrs_client", $predictor);
         if (!empty($user)) {
             $action = $this->getAction();
-        }
-        else {
+        } else {
             return $this->response('401 Unauthorized', 401);
         }
         if (method_exists($this, $action)) {
@@ -73,7 +68,7 @@ class Api extends GetModelController
         if (isset($record)) {
             return $this->response($record, 200);
         }
-        if(isset($verb)) {
+        if (isset($verb)) {
             $predictor = "verb = '$verb'";
             $resp = $this->model->getMultipleByPredictor($predictor);
             if ($resp == null) {
@@ -89,10 +84,10 @@ class Api extends GetModelController
             }
             return $this->response($resp, 200);
         }
-        if(isset($offset) && isset($limit)) {
+        if (isset($offset) && isset($limit)) {
             $query = $this->model->pagination($offset, $limit);
             $resp = [];
-            foreach($query as $value) {
+            foreach ($query as $value) {
                 $resp[] = $value;
             }
             if ($resp == null) {
