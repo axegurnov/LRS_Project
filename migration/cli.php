@@ -99,7 +99,7 @@ switch ($argv[1]) {
 
 
 class MigrationController
-{
+ {
 	private $config = null;
 
 	public function __construct()
@@ -175,6 +175,12 @@ class MigrationController
 				break;
 			case 'users':
 				$this->templateExecute($sqlFolder, "002*users.sql", "table");
+				break;
+			case 'activity':
+				$this->templateExecute($sqlFolder, "002*activity.sql", "table");
+				break;
+			case 'verb':
+				$this->templateExecute($sqlFolder, "002*verb.sql", "table");
 				break;
 			default:
 				$this->errorPrintAction();

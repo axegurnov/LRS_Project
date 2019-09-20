@@ -1,4 +1,10 @@
-INSERT INTO lrs_statements (verb, activity, content, lrs_id,lrs_client_id) VALUE ('watching','video','video 1','2','4');
-INSERT INTO lrs_statements (verb, activity, content, lrs_id,lrs_client_id) VALUE ('read','course','course 1','3','1');
-INSERT INTO lrs_statements (verb, activity, content, lrs_id,lrs_client_id) VALUE ('complete','course','course 3','2','2');
-INSERT INTO lrs_statements (verb, activity, content, lrs_id,lrs_client_id) VALUE ('open','course','course 2','3','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('1','2','video 1','2','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 1','3','1');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('3','3','course 3','2','2');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 2','3','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 5','3','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 9','3','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 15','3','4');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 1','3','3');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 17','3','3');
+INSERT INTO lrs_statements (verb_id, act_id, content, lrs_id,lrs_client_id) VALUE ('2','1','course 115','3','5');
