@@ -6,12 +6,12 @@ use app\core\Validation;
 
 class Model
 {
-    public $table = null;
+    public $table = NULL;
     public $params = array();
     public $params_changed = array();
     public $db;
 
-    private static $_instance = null;
+    private static $_instance = NULL;
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class Model
     public static function getInstance($nameModel)
     {
         $path = 'app\models\\' . $nameModel;
-        if (self::$_instance == null) {
+        if (self::$_instance == NULL) {
             self::$_instance = new $path();
         }
         return self::$_instance;
@@ -36,7 +36,6 @@ class Model
             $columns .= $column . "=";
             $holders .= $holders;
             $columns .= "'" . $value . "'" . $holders;
-
         }
         $sql = "UPDATE $table SET $columns WHERE id= $id;";
         return $sql;
@@ -74,7 +73,8 @@ class Model
             $fields[$i] = $row[0];
             if ($i == 0) {
                 $fieldsStr = "$row[0]";
-            } else {
+            }
+            else {
                 $fieldsStr = "$fieldsStr" . ', ' . "$row[0]";
             }
             $i++;
@@ -114,8 +114,8 @@ class Model
         if ($predictor) {
             $sql = "SELECT $fields FROM $this->table WHERE " . $predictor . ";";
             $object = $this->db->query($sql);
-            $arr = null;
-            foreach($object as $key => $value) {
+            $arr = NULL;
+            foreach ($object as $key => $value) {
                 $arr[$key] = $value;
             }
             return $arr;
@@ -139,14 +139,13 @@ class Model
 
     public function setValues($data)
     {
-
-       $valid = Validation::Validate($data);
-       if (empty($valid)) {
+        $valid = Validation::Validate($data);
+        if (empty($valid)) {
             foreach ($data as $value) {
                 htmlspecialchars(urldecode(trim($value)), ENT_QUOTES | ENT_HTML401);
             }
             $this->params_changed = $data;
-            return false;
+            return FALSE;
         }
         return $valid;
     }
@@ -167,7 +166,6 @@ class Model
     {
         $sql = "DELETE FROM $this->table WHERE id=$id";
         $this->db->query($sql);
-
     }
 
     public function getValueTableApi($table, $predictor)
@@ -190,4 +188,5 @@ class Model
         return $this->db->query("SELECT COUNT(id) from {$this->table}")->fetch_row();
     }
 }
+
 ?>

@@ -27,17 +27,17 @@ class Router
 
         // перебираем роуты и ищем совпадение с введеным uri
         // записываем параметры (controller, action)
-        $foundRoute = false;
+        $foundRoute = FALSE;
         foreach ($routesList as $key => $value) {
-            if($routeUri == $key) {
+            if ($routeUri == $key) {
                 $this->params = $value;
-                $foundRoute = true;
+                $foundRoute = TRUE;
                 $this->run();
                 // break;
                 // debug($this->params);
             }
         }
-        if(!$foundRoute) {
+        if (!$foundRoute) {
             $this->params['controller'] = "error";
             $this->params['action'] = "notFound";
             $this->run();
@@ -50,11 +50,11 @@ class Router
         // $this->params содержит название контроллера и экшна
         $path = 'app\controllers\\' . ucfirst($this->params['controller'] . 'Controller');
         // если класс объявлен, создаем контроллер, передав в него параметры
-        if(class_exists($path)) {
+        if (class_exists($path)) {
             $controller = new $path($this->params);
             $action = $this->params['action'] . 'Action';
-            if(method_exists($path, $action)) {
-                if(!isset($this->argUri)) { // если аргументы не заданы, вызываем экшн контроллера
+            if (method_exists($path, $action)) {
+                if (!isset($this->argUri)) { // если аргументы не заданы, вызываем экшн контроллера
                     $controller->$action();
                 }
                 else { // передаем в экшн, массив аргументов для последующей обработки
@@ -70,4 +70,5 @@ class Router
         }
     }
 }
+
 ?>

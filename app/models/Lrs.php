@@ -7,6 +7,7 @@
  */
 
 namespace app\models;
+
 use app\core\Model;
 
 class Lrs extends Model
@@ -15,7 +16,7 @@ class Lrs extends Model
 
     public function innerJoin($id)
     {
-    	$sql = "SELECT a.login, b.id, b.state_key, b.value, b.activity
+        $sql = "SELECT a.login, b.id, b.state_key, b.value, b.activity
                 FROM lrs_client a
                 JOIN lrs_state b
                 ON a.id = b.lrs_client_id
@@ -33,16 +34,15 @@ class Lrs extends Model
 
         return $this->db->query($sql);
     }
+
     public function innerJoins($data)
     {
-        $sql = "SELECT".$data['fields']."FROM".$data['first_table']." a
-                JOIN ".$data['second_table']." b
-                ON".$data['join_predictor']."
-                WHERE".$data['predictor'];
+        $sql = "SELECT" . $data['fields'] . "FROM" . $data['first_table'] . " a
+                JOIN " . $data['second_table'] . " b
+                ON" . $data['join_predictor'] . "
+                WHERE" . $data['predictor'];
         return $this->db->query($sql);
     }
-
-
-
 }
+
 ?>

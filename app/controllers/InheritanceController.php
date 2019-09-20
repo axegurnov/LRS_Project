@@ -1,10 +1,11 @@
 <?php
+
 namespace app\controllers;
 
 use app\core\Controller;
 
-abstract class InheritanceController extends GetModelController {
-
+abstract class InheritanceController extends GetModelController
+{
     public function pagination($params, $limit, $count_id)
     {
         //debug($params['page']);

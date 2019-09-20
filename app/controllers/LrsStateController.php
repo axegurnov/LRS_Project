@@ -3,33 +3,29 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-class LrsStateController extends GetModelController 
+class LrsStateController extends GetModelController
 {
-	
-    public function lrsStateShowAction($params){
-        $lrs ='';
-        if(empty($params['view'])) {
+    public function lrsStateShowAction($params)
+    {
+        $lrs = '';
+        if (empty($params['view'])) {
             $id = 1;
-        } else {
+        }
+        else {
             $id = $params['view'];
         }
-
         $states = $this->model->innerJoin($id);
-
-
-        $predictor = "id=".$id;
-
-        $lrss= $this->model->getValueTable("lrs", $predictor);
-        foreach ($lrss as $lrs2){
+        $predictor = "id=" . $id;
+        $lrss = $this->model->getValueTable("lrs", $predictor);
+        foreach ($lrss as $lrs2) {
             $lrs = $lrs2;
         }
-
-        $vars =[
-            'title' => 'LRS '.$id,
+        $vars = [
+            'title' => 'LRS ' . $id,
             'lrs' => $lrs,
-            'states' => $states
+            'states' => $states,
         ];
-        $this->view->generate('lrs/state.tlp',$vars);
+        $this->view->generate('lrs/state.tlp', $vars);
     }
 
 }
