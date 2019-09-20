@@ -84,15 +84,6 @@ class Api extends GetModelController
             }
             return $this->response($resp, 200);
         }
-        if (isset($act_id) && isset($client_id)){
-          $predictor = "act_id = '$act_id' AND client_id = '$client_id'";
-          $resp = $this->model->getMultipleByPredictor($predictor);
-          if ($resp == null) {
-              return $this->response('Not found');
-          }
-          return $this->response($resp, 200);
-
-        }
         if (isset($offset) && isset($limit)) {
             $query = $this->model->pagination($offset, $limit);
             $resp = [];
