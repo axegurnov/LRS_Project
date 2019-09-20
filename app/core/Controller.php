@@ -3,8 +3,8 @@ namespace app\core;
 
 abstract class Controller
 {
-  protected $nameModel = null;
-  protected $model = null;
+ 	protected $nameModel = null;
+	protected $model = null;
 	protected $view = null;
 	protected $route = null;
 
@@ -14,7 +14,7 @@ abstract class Controller
 		if (($api == true)) {
 			return 0;
 		}
-		if (empty($_SESSION["auth"]) && ($this->route['controller'] != "user") && ($this->route['action'] != "auth")) {
+		    if (empty($_SESSION["auth"]) && (($this->route['controller'] != "user") || ($this->route['action'] != "auth"))) {
 			$this->view->generate("errors/403.tlp");
 			exit();
 		}

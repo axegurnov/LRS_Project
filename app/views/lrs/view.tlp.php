@@ -22,7 +22,7 @@
                         <table class="table table-hover text-center">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Login</th>
                                 <th scope="col">Password</th>
                                 <th scope="col">Dx</th>
@@ -34,7 +34,7 @@
                             <tbody>
                             <?php $i=1; foreach ($clients as $client): ?>
                                 <tr>
-                                    <th scope="row"><?= $i ?></th>
+                                    <th scope="row"><?= $client['id'] ?></th>
                                     <td><?= $client['login'] ?></td>
                                     <td>************</td>
                                     <td><?= $client['description'] ?></td>
