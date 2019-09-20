@@ -32,15 +32,15 @@
                             <?php foreach ($statements as $statement): ?>
                                 <tr>
                                     <th scope="row"><label><?= $statement['id'] ?></label></th>
-                                    <td id="statementLogin" class="statementInfo" statementId="<?=$i?>"><?= $statement['login'] ?></td>
-                                    <td id="statementVerb" class="statementInfo" statementId="<?=$i?>"><?= $statement['verb'] ?></td>
-                                    <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['activity'] ?></td>
-                                    <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['content'] ?></td>
-                                    <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['create_data'] ?></td>
+                                    <td id="statementLogin" class="statementInfo"><?= $statement['login'] ?></td>
+                                    <td id="statementVerb" class="statementInfo"><?= $statement['verb'] ?></td>
+                                    <td id="statementActivity" class="statementInfo"><?= $statement['activity'] ?></td>
+                                    <td id="statementContent" class="statementInfo"><?= $statement['content'] ?></td>
+                                    <td id="statementContent" class="statementInfo"><?= $statement['create_data'] ?></td>
 
                                     <td>
-                                        <button id="btnStatementId" class="btn btn-info float-right showStatementInJson" btnStatementid="<?=$i?>" data-toggle="modal" data-target=".modal-single-statement">JSON</button>
-                                        <div id="statementId" class="statementInJson" divStatementId="<?=$i?>" hidden="hidden">
+                                        <button id="btnStatementId" class="btn btn-info float-right showStatementInJson" data-toggle="modal" data-target=".modal-single-statement">JSON</button>
+                                        <div id="statementId" class="statementInJson" hidden="hidden">
                                             <pre><?php
                                                     echo json_encode($statement, JSON_PRETTY_PRINT);
                                                 ?>
