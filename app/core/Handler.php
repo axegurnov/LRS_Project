@@ -19,7 +19,7 @@ class Handler
 
 	public function exceptionHandler($exception) {
 		$this->title = "Internal exception";
-		$errors[] = "Неперехваченное исключение: " . $exception->getMessage() . "\n";
+		$errors[] = "<b>Неперехваченное исключение: в файле " . $exception->getFile() . ", строка " . $exception->getLine() . "!</b><br> [" . $exception->getCode() . "] " . $exception->getMessage() . "<br>\n";
 		$vars = $this->assignError($errors);
 		return $this->hasError($vars);
 	}
