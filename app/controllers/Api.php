@@ -38,7 +38,7 @@ class Api extends GetModelController
 
     public function indexAction($args = null)
     {
-        if(empty($this->testRequestBody)) {
+        if(!empty($this->testRequestBody)) {
             $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
             foreach($this->testRequestBody as $key => $value) {
                 foreach($value as $v) {
@@ -106,6 +106,7 @@ class Api extends GetModelController
         if(isset($record)) {
             return $this->response($record, 200);
         }
+
         if(isset($activity)) {
             $predictor = "activity = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
@@ -138,7 +139,6 @@ class Api extends GetModelController
 
     public function createAction()
     {
-        debug($this->testReqData);
         // получаем названия столбцов в таблице
         $tables = $this->model->getFields($this->model->table)['array'];
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
