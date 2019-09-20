@@ -1,25 +1,24 @@
 <?php
 namespace app\controllers;
-
 use app\core\Controller;
-
 class Api extends GetModelController
 {
     protected $nameModel = '';
     protected $args = null;
     protected $requestBody = null;
-
-
+    protected $testRequestBody = ''; // временное хранение данных из тела запроса
+    protected $testReqData = []; // хранит асоциативный массив key => value [["actor"] => "id"]
     protected function getAction()
     {
         $method = $_SERVER['REQUEST_METHOD']; // get put post delete
         switch ($method) {
             case 'GET':
-                if(!empty($this->args['id'])){
+                if(!empty($this->args)){
                     return 'viewAction';
                 }
                 return 'showAllAction';
             case 'POST':
+                parse_str(file_get_contents('php://input'), $this->requestBody);
                 return 'createAction';
             case 'PUT':
                 parse_str(file_get_contents('php://input'), $this->requestBody);
@@ -31,41 +30,55 @@ class Api extends GetModelController
                 return null;
         }
     }
-
-    /*public function indexAction($args = null)
-    {
-        if($args) {
-            $this->args = $args;
-        }
-        // логин и пароль
-        $login = "admin";
-        $password = "pass";
-        if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
-            $action = $this->getAction();
-        } else {
-            // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
-            header('WWW-Authenticate: Basic realm="Backend"');
-            header('HTTP/1.0 401 Unauthorized');
-            return $this->response('401 Unauthorized', 401);
-        }
-
-
-
-        if(method_exists($this, $action)) {
-            return $this->{$action}();
-        }
-        $this->convertToJson('Method Not Allowed', 405);
-    }*/
-
+    // public function indexAction($args = null)
+    // {
+    //     if(!empty($this->testRequestBody)) {
+    //         $this->testRequestBody = $this->convertFromJson(file_get_contents('php://input'));
+    //         foreach($this->testRequestBody as $key => $value) {
+    //             foreach($value as $v) {
+    //                 $this->testReqData[$key] = $v;
+    //             }
+    //         }
+    //     }
+    //     if(!empty($args)) {
+    //         foreach($args as $key => $value) {
+    //             $this->args[$key] = $value;
+    //         }
+    //     }
+    //     // логин и пароль
+    //     $login = "admin";
+    //     $password = "pass";
+    //     $str = $login.';'.$password;
+    //     $token = $this->encodeApiToken($str);
+    //     if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_PW']==$password) && (strtolower($_SERVER['PHP_AUTH_USER'])==$login)){
+    //         $action = $this->getAction();
+    //         header('WWW-Authenticate:'.$token);
+    //     } else {
+    //         // если ошибка при авторизации, выводим соответствующие заголовки и сообщение
+    //         header('WWW-Authenticate: Basic realm="Backend"');
+    //         header('HTTP/1.0 401 Unauthorized');
+    //         return $this->response('401 Unauthorized', 401);
+    //     }
+    //     if(method_exists($this, $action)) {
+    //         return $this->{$action}();
+    //     }
+    //     $this->convertToJson('Method Not Allowed', 405);
+    // }
     public function indexAction($args = null)
     {
-        if($args) {
+        $api_token = NULL;
+        if (isset($args['api_token'])) {
             $this->args = $args;
+            $api_token = $this->args['api_token'];
+          }
+        elseif (isset($_SERVER['HTTP_AUTHORIZATION'])){
+            $this->args = $args;
+            $temp = $_SERVER['HTTP_AUTHORIZATION'];
+            $api_token = str_replace('Bearer ','',$temp);
+
         }
-        $api_token = $this->args['api_token'];
-        $predictor = "api_token='" . $api_token."'";
-        //debug($predictor);
-        $user = $this->model->getValueTableApi("lrs_client",$predictor);
+            $predictor = "api_token='" . $api_token."'";
+            $user = $this->model->getValueTableApi("lrs_client",$predictor);
 
         if(!empty($user)){
             $action = $this->getAction();
@@ -73,23 +86,29 @@ class Api extends GetModelController
         else{
             return $this->response('401 Unauthorized', 401);
         }
-
         if(method_exists($this, $action)) {
             return $this->{$action}();
         }
         $this->convertToJson('Method Not Allowed', 405);
     }
 
-
     public function viewAction()
     {
-        $record = $this->getRecord($this->args['id']);
-        if($record) {
+        if(!empty($this->args)) {
+            extract($this->args);
+        }
+        if(isset($id)) {
+            $record = $this->getRecord($id);
+        }
+        if(isset($record)) {
             return $this->response($record, 200);
+        }
+        if(isset($activity)) {
+            $predictor = "activity = '$activity'";
+            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
         return $this->response('Record wasnt found', 404);
     }
-
     protected function showAllAction()
     {
         $records = $this->model->getAllRecords();
@@ -101,7 +120,6 @@ class Api extends GetModelController
         }
         $this->response('Table is empty', 404);
     }
-
     public function createAction()
     {
         // получаем названия столбцов в таблице
@@ -132,7 +150,6 @@ class Api extends GetModelController
         }
         $this->response('Failed create', 404);
     }
-
     public function deleteAction()
     {
         // записывает строку с переданными данными в массив $_DELETE
@@ -158,7 +175,6 @@ class Api extends GetModelController
         if(!$record) {
             return $this->response('Record wasnt found',404);
         }
-
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $tables = $this->model->getFields($this->model->table)['array'];
         foreach($_PUT as $key => $value) {
@@ -172,7 +188,6 @@ class Api extends GetModelController
                 }
             }
         }
-
         if (!empty($_PUT['id'])) {
             $this->model->setValues($toFillData);
             $this->model->updateRecord($_PUT['id']);
@@ -180,14 +195,12 @@ class Api extends GetModelController
         }
         $this->response('Failed update',404);
     }
-
     protected function response($data, $status = 500)
     {
         header('Content-type: application/json');
         header("HTTP/1.1 " . $status . " " . $this->requestStatus($status));
         echo $this->convertToJson($data);
     }
-
     private function requestStatus($code) {
         $status = array(
             200 => 'OK',
@@ -198,11 +211,9 @@ class Api extends GetModelController
         );
         return ($status[$code]) ?? $status[500];
     }
-
     private function getRecord($id)
     {
         $str = 'id = ' . $id;
         return $this->model->select($str);
     }
-
 }
