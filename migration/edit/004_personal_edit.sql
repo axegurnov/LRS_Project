@@ -1,3 +1,5 @@
+DELETE FROM `lrs`.`lrs_state`;
+
 ALTER TABLE lrs.lrs_state
 CHANGE COLUMN activity activity_id INT(200) NOT NULL ,
 ADD INDEX fk_lrs_state_1_idx (activity_id ASC);
