@@ -101,14 +101,14 @@ switch ($argv[1]) {
         break;
 
     //дополнительные персонализированные миграции, незапланированные заранее
-    case 'personal':
+    case 'edit':
         if (isset($argv[2]) && isset($argv[3])) {
             switch ($argv[2]) {
                 case 'database':
-                    $controller->personalDatabaseAction($argv[3]);
+                    $controller->editDatabaseAction($argv[3]);
                     break;
                 case 'table':
-                    $controller->personalTableAction($argv[3]);
+                    $controller->editTableAction($argv[3]);
                     break;
                 default:
                     $controller->errorCommandAction();
@@ -175,12 +175,12 @@ class MigrationController
         $this->templateExecute("drop/", "*table*.sql", "table");
     }
 
-    public function personalDatabaseAction($sqlFile)
+    public function editDatabaseAction($sqlFile)
     {
         $this->templateExecute("personal/", $sqlFile, "database");
     }
 
-    public function personalTableAction($sqlFile)
+    public function editTableAction($sqlFile)
     {
         $this->templateExecute("personal/", $sqlFile, "table");
     }
