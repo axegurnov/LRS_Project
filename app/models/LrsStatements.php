@@ -8,7 +8,7 @@ class LrsStatements extends Model
 {
     public $table = 'lrs_statements';
 
-    public function statementsw($agent)
+    public function statementsJoinClients($agent)
     {
         $sql = "SELECT st.id, verb.name, act.name, st.content, st.lrs_id, st.lrs_client_id
                 FROM lrs_statements st
