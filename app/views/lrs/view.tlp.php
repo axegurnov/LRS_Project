@@ -7,11 +7,11 @@
         </div>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" role="tab"
+                <a class="nav-item nav-link active" href="<?= route('lrs',$lrs['id']); ?>" role="tab"
                    aria-selected="true">Clients</a>
-                <a class="nav-item nav-link" href="<?= route('lrs_state'); ?>?view=<?= $lrs['id'] ?>" role="tab"
+                <a class="nav-item nav-link" href="<?= route('lrs_state',$lrs['id']); ?>" role="tab"
                    aria-controls="nav-profile" aria-selected="false">State</a>
-                <a class="nav-item nav-link" href="<?= route('lrs_statements'); ?>?lrs=<?= $lrs['id'] ?>" role="tab"
+                <a class="nav-item nav-link" href="<?= route('lrs_statements',$lrs['id']); ?>" role="tab"
                    aria-controls="nav-contact" aria-selected="false">Statements</a>
             </div>
         </nav>
@@ -40,16 +40,14 @@
                                     <td><?= $client['description'] ?></td>
                                     <td><?= $client['api_token'] ?></td>
                                     <td class="row">
-                                        <form action="<?= route('lrs_client_view_update'); ?>" method="post">
-                                            <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                                        <form action="<?= route('lrs_client_view_update',$client['id']); ?>" method="post">
                                             <input type="hidden" name="lrs_id" value="<?= $lrs['id'] ?>">
                                             <button type="submit" class="btn btn-sm"
                                                     style="background-color:transparent;">
                                                 <i class="far fa-edit" aria-hidden="true"></i>
                                             </button>
                                         </form>
-                                        <form action="<?= route('lrs_client_delete'); ?>" method="post">
-                                            <input type="hidden" name="client_id" value="<?= $client['id'] ?>">
+                                        <form action="<?= route('lrs_client_delete',$client['id']); ?>" method="post">
                                             <button type="submit" class="btn btn-sm del_confirm"
                                                     style="background-color:transparent;">
                                                 <i class="fas fa-minus-circle" aria-hidden="true"></i>
@@ -64,7 +62,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 for-button">
-                        <form action="<?= route('lrs_client_view_update'); ?>" method="post">
+                        <form action="<?= route('lrs_client_add'); ?>" method="post">
                             <input type="hidden" name="lrs_id" value="<?= $lrs['id'] ?>">
                             <button type="submit" class="btn btn-info mt-md-3">Add client LRS</button>
                         </form>

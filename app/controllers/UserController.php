@@ -5,8 +5,6 @@ use app\core\Controller;
 
 class UserController extends InheritanceController
 {
-    //protected $nameModel = 'users';
-
     public function indexAction($params)
     {
         $limit = 3;
@@ -42,11 +40,11 @@ class UserController extends InheritanceController
         $this->view->generate('user/auth.tlp', $var);
     }
 
-    public function userViewUpdateAction()
+    public function userViewUpdateAction($params)
     {
         $userInfo = '';
-        if (isset($_POST['id'])) {
-            $str = "id=" . $_POST['id'];
+        if (isset($params['id'])) {
+            $str = "id=" . $params['id'];
             $userInfo = $this->model->select($str);
         }
         $vars = [
@@ -59,7 +57,6 @@ class UserController extends InheritanceController
     public function userUpdateAction()
     {
         $id = $_POST['id'];
-        $login = $this->filterVar($_POST['login']);
         $data_field = $_POST;
         array_pop($data_field);
 
@@ -103,9 +100,9 @@ class UserController extends InheritanceController
         }
     }
 
-    public function userDelAction()
+    public function userDelAction($params)
     {
-        $id = $_POST['id'];
+        $id = $params['id'];
         $this->model->dropRecord($id);
         $this->redirect(route("users"));
     }

@@ -21,13 +21,11 @@
                             <th scope="row"><?= $user['id'] ?></th>
                             <td><?= $user['name'] ?></td>
                             <td class="row">
-                                <form action="<?= route('user_view_update'); ?>" method="post">
-                                    <input type="hidden" name="id" value="<?= $user['id']?>">
+                                <form action="<?= route('user_view_update',$user['id']); ?>" method="post">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
                                                 class="far fa-edit" aria-hidden="true"></i></button>
                                 </form>
-                                <form action="<?= route('user_del'); ?>" method="post">
-                                    <input type="hidden" name="id" value="<?= $user['id']?>">
+                                <form action="<?= route('user_delete',$user['id']); ?>" method="post">
                                     <button type="submit" class="btn btn-sm del_confirm" style="background-color:transparent;"><i
                                                 class="fas fa-minus-circle" aria-hidden="true"></i></button>
                                 </form>
@@ -40,17 +38,17 @@
         </div>
         <div class="row">
             <div class="col-md-12 for-button">
-                <a class="btn btn-primary" href="<?= route('user_view_update'); ?>" role="button">Add</a>
+                <a class="btn btn-primary" href="<?= route('user_view_create'); ?>" role="button">Add</a>
             </div>
         </div>
         <?php if($pages != 1):?>
-        <nav class="mt-md-3">
-            <ul class="pagination">
-                <?php for ($i = 1; $i <= $pages; $i++): ?>
-                    <li class="page-item"><a class="page-link" href="<?= route('users'); ?>?page=<?= $i; ?>"><?= $i; ?></a></li>
-                <?php endfor; ?>
-            </ul>
-        </nav>
+            <nav class="mt-md-3">
+                <ul class="pagination">
+                    <?php for ($i = 1; $i <= $pages; $i++): ?>
+                        <li class="page-item"><a class="page-link" href="<?= route('users'); ?>?page=<?= $i; ?>"><?= $i; ?></a></li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
         <?php endif?>
     </div>
 </div>

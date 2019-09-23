@@ -29,18 +29,6 @@ class Routes
                 'action' => 'userUpdate'
             ],
 
-            'user/view/update' => [
-                'name' => 'user_view_update',
-                'controller' => 'user',
-                'action' => 'userViewUpdate'
-            ],
-
-            'user/del' => [
-                'name' => 'user_del',
-                'controller' => 'user',
-                'action' => 'userDel'
-            ],
-
             'user/exit' => [
                 'name' => 'user_exit',
                 'controller' => 'user',
@@ -53,66 +41,6 @@ class Routes
                 'action' => 'lrsList'
             ],
 
-            'lrs/state' => [
-                'name' => 'lrs_state',
-                'controller' => 'lrsState',
-                'action' => 'lrsStateShow'
-            ],
-
-            'lrs/statements' => [
-                'name' => 'lrs_statements',
-                'controller' => 'lrs',
-                'action' => 'lrsStatements'
-            ],
-
-            'lrs' => [
-                'name' => 'lrs',
-                'controller' => 'lrs',
-                'action' => 'lrsShow'
-            ],
-
-
-            'lrs/del'  => [
-                'name' => 'lrs_del',
-                'controller' => 'lrs',
-                'action' => 'lrsDel'
-            ],
-
-            'lrs/view/update'  => [
-                'name' => 'lrs_view_update',
-                'controller' => 'lrs',
-                'action' => 'lrsViewUpdate'
-            ],
-
-            'lrs/update'  => [
-                'name' => 'lrs_update',
-                'controller' => 'lrs',
-                'action' => 'lrsUpdate'
-            ],
-
-            'lrs/client/add' => [
-                'name' => 'lrs_client_add',
-                'controller' => 'lrsClient',
-                'action' => 'clientAdd'
-            ],
-
-            'lrs/client/update' => [
-                'name' => 'lrs_client_update',
-                'controller' => 'lrsClient',
-                'action' => 'clientUpdate'
-            ],
-
-            'lrs/client/view/update' => [
-                'name' => 'lrs_client_view_update',
-                'controller' => 'lrsClient',
-                'action' => 'clientUpdateView'
-            ],
-
-            'lrs/client/delete' => [
-                'name' => 'lrs_client_delete',
-                'controller' => 'lrsClient',
-                'action' => 'clientDel'
-            ],
 
             'api/lrs/statements' => [
                 'name' => 'api_lrs_statements',
@@ -135,16 +63,39 @@ class Routes
                 'action' => 'lrsShow'
             ],
 
-            //обновление информации lrs
+            //create новой lrs
+            'lrs/create'  => [
+                'name' => 'lrs_view_create',
+                'controller' => 'lrs',
+                'action' => 'lrsViewUpdate'
+            ],
+
+            //create view информации lrs
+            'lrs/create/view'  => [
+                'name' => 'lrs_view_create_new',
+                'controller' => 'lrs',
+                'action' => 'lrsUpdate'
+            ],
+
+            //обновление информации lrs view
             'lrs/{id:\d+}/update' => [
                 'name' => 'lrs_view_update',
                 'controller' => 'lrs',
                 'action' => 'lrsViewUpdate'
             ],
 
+            //обновление информации lrs
+            'lrs/{id:\d+}/update/view'  => [
+                'name' => 'lrs_update',
+                'controller' => 'lrs',
+                'action' => 'lrsUpdate'
+            ],
+
+
+
             //удаление lrs
             'lrs/{id:\d+}/delete'  => [
-                'name' => 'lrs_del',
+                'name' => 'lrs_delete',
                 'controller' => 'lrs',
                 'action' => 'lrsDel'
             ],
@@ -163,11 +114,32 @@ class Routes
                 'action' => 'lrsStatements'
             ],
 
+            //создание нового клиента lrs
+            'lrs/client/add' => [
+                'name' => 'lrs_client_add',
+                'controller' => 'lrsClient',
+                'action' => 'clientUpdateView'
+            ],
+
             //обновление информации клиента lrs
-            'lrs/client/{id:\d+}/view/update' => [
+            'lrs/create/add/view'  => [
+                'name' => 'lrs_client_create_new',
+                'controller' => 'lrsClient',
+                'action' => 'clientUpdate'
+            ],
+
+            //обновление информации клиента lrs
+            'lrs/client/{id:\d+}/update' => [
                 'name' => 'lrs_client_view_update',
                 'controller' => 'lrsClient',
                 'action' => 'clientUpdateView'
+            ],
+
+            //обновление информации клиента lrs
+            'lrs/client/{id:\d+}/update/view' => [
+                'name' => 'lrs_client_update',
+                'controller' => 'lrsClient',
+                'action' => 'clientUpdate'
             ],
 
             //удаление клиента lrs
@@ -177,8 +149,15 @@ class Routes
                 'action' => 'clientDel'
             ],
 
+            //создание user
+            'user/view/create' => [
+                'name' => 'user_view_create',
+                'controller' => 'user',
+                'action' => 'userViewUpdate'
+            ],
+
             //обновление user update
-            'user/{id:\d+}/view/update' => [
+            'user/{id:\d+}/update' => [
                 'name' => 'user_view_update',
                 'controller' => 'user',
                 'action' => 'userViewUpdate'
@@ -186,12 +165,10 @@ class Routes
 
             //del user
             'user/{id:\d+}/delete' => [
-                'name' => 'user_del',
+                'name' => 'user_delete',
                 'controller' => 'user',
                 'action' => 'userDel'
             ],
-
-
         ];
     }
 }

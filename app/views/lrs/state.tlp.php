@@ -7,9 +7,12 @@
         </div>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link" href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" role="tab" aria-selected="true">Clients</a>
-                <a class="nav-item nav-link active" href="<?= route('lrs_state'); ?>?view=<?= $lrs['id'] ?>" role="tab" aria-controls="nav-profile" aria-selected="false">State</a>
-                <a class="nav-item nav-link" href="<?= route('lrs_statements'); ?>?lrs=<?= $lrs['id'] ?>" role="tab" aria-controls="nav-contact" aria-selected="false">Statements</a>
+                <a class="nav-item nav-link" href="<?= route('lrs',$lrs['id']); ?>" role="tab"
+                   aria-selected="true">Clients</a>
+                <a class="nav-item nav-link active" href="<?= route('lrs_state',$lrs['id']); ?>" role="tab"
+                   aria-controls="nav-profile" aria-selected="false">State</a>
+                <a class="nav-item nav-link" href="<?= route('lrs_statements',$lrs['id']); ?>" role="tab"
+                   aria-controls="nav-contact" aria-selected="false">Statements</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -35,7 +38,7 @@
                                     <td><?= $state['state_key'] ?></td>
                                     <td><?= $state['value'] ?></td>
                                 </tr>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

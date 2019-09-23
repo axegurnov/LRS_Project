@@ -16,7 +16,7 @@
                                         class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= route('lrs_view_update'); ?>">Добавить</a>
+                            <a class="nav-link" href="<?= route('lrs_view_create'); ?>">Добавить</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= route('users'); ?>">Пользователи</a>

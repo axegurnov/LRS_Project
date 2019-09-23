@@ -82,7 +82,6 @@ class Router
     // задаем контроллер и экшн, вызываем контроллер
     public function run()
     {
-        //var_dump($this->argUri);
         // $this->params содержит название контроллера и экшна
         $path = 'app\controllers\\' . ucfirst($this->params['controller'] . 'Controller');
         // если класс объявлен, создаем контроллер, передав в него параметры
