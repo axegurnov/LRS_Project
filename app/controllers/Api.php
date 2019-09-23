@@ -39,14 +39,10 @@ class Api extends GetModelController
     public function indexAction($args = NULL)
     {
         $api_token = NULL;
-        if (isset($args['api_token'])) {
-            $this->args = $args;
-            $api_token = $this->args['api_token'];
-        }
         if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $this->args = $args;
             $temp = $_SERVER['HTTP_AUTHORIZATION'];
-            $api_token = str_replace('Bearer ', '', $temp);
+            $api_token = str_replace('Basic ', '', $temp);
         }
         $predictor = "api_token='" . $api_token . "'";
         $user = $this->model->getValueTableApi("lrs_client", $predictor);
@@ -114,12 +110,13 @@ class Api extends GetModelController
 //            }
 //            return $this->response($resp, 200);
 //        }
-        if (isset($activityId)){
-            $query = $this->model->stateActivityAgent($this->args);
+        //TEST Activity/State GET Index
+        if (isset($activityId) && isset($agent)) {
+            $query = $this->model->indexState($this->args);
             if (!isset($query)) {
                 return $this->response('Not found');
             }
-            debug($query);
+            //debug($query);
             $resp = [];
             foreach ($query as $value) {
                 $resp[] = $value;
@@ -127,6 +124,22 @@ class Api extends GetModelController
             return $this->response($resp, 200);
 
         }
+        //TEST Activity/State GET Show
+        if (isset($activityId) && isset($agent) && isset($stateId)) {
+            $query = $this->model->showState($this->args);
+            if (!isset($query)) {
+                return $this->response('Not found');
+            }
+            //debug($query);
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+
+        }
+
+
         return $this->response('Record wasnt found', 404);
     }
 
@@ -176,7 +189,12 @@ class Api extends GetModelController
     public function deleteAction()
     {
         // записывает строку с переданными данными в массив $_DELETE
-        $id = $this->requestBody['id'];
+        if (!empty($this->args)) {
+            extract($this->args);
+        }
+        if (isset($this->requestBody['id'])) {
+            $id = $this->requestBody['id'];
+        }
         if (!empty($id)) {
             $record = $this->getRecord($id);
             if ($record) {
@@ -184,6 +202,15 @@ class Api extends GetModelController
                 return $this->response('Record was deleted', 200);
             }
             return $this->response('Record wasnt found', 404);
+        }
+        if (isset($this->args['stateId']) && isset($this->args['activityId'])) {
+            $predictor = "lrs_state.id = " . "'$stateId' " . "AND activity_id = " . "'$activityId'";
+            $record = $this->model->select($predictor);
+            if ($record) {
+                $this->model->deleteByPredict($predictor);
+                return $this->response('Record was deleted', 200);
+            }
+
         }
         $this->response('Failed delete', 404);
     }
@@ -243,6 +270,12 @@ class Api extends GetModelController
     {
         $str = 'id = ' . $id;
         return $this->model->select($str);
+    }
+
+    public function deleteByPredict($predictor)
+    {
+        $sql = "DELETE FROM $this->table WHERE " . $predictor;
+        $this->db->query($sql);
     }
 
 }

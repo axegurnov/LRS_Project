@@ -18,19 +18,35 @@ class LrsState extends Model
         return $this->db->query($sql);
     }
 
-    public function stateActivityAgent($data){
-        //$login = $data['agent']['login'];
-        $act = $data['activityId'];
+    public function indexState($data){
+        //debug($data['agent']);
         $sql = "SELECT *
                 FROM lrs_client cl
                 JOIN $this->table st
                 ON cl.id = st.lrs_client_id
                 JOIN activity act 
                 ON st.activity_id = act.id
-                WHERE  st.activity_id ="."'$data[activityId]';";
+                WHERE  st.activity_id ="."'$data[activityId]' AND cl.login = '$data[agent]';";
        //debug($sql);
         return $this->db->query($sql);
 
+    }
+    public function showState($data){
+        //debug($data['agent']);
+        $sql = "SELECT *
+                FROM lrs_client cl
+                JOIN $this->table st
+                ON cl.id = st.lrs_client_id
+                JOIN activity act 
+                ON st.activity_id = act.id
+                WHERE  st.activity_id ="."'$data[activityId]' AND cl.login = '$data[agent]' AND st.id ="."$data[stateId];";
+        //debug($sql);
+        return $this->db->query($sql);
+
+    }
+    public function deleteByPredict($predictor){
+        $sql = "DELETE FROM $this->table WHERE ".$predictor;
+        $this->db->query($sql);
     }
 }
 
