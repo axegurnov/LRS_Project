@@ -8,6 +8,6 @@ create table if not exists lrs_state (
     registration varchar (100) not null,
     primary key (id),
     FOREIGN KEY (lrs_id) REFERENCES lrs (id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (activity_id) REFERENCES actvity (id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (lrs_client_id) REFERENCES lrs_client (id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (lrs_client_id) REFERENCES lrs_client (id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (activity_id) REFERENCES activity (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
