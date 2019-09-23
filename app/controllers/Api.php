@@ -23,13 +23,13 @@ class Api extends GetModelController
                 }
                 return 'showAllAction';
             case 'POST':
-                parse_str(file_get_contents('php://input'), $this->requestBody);
+                $this->requestBody = file_get_contents('php://input');
                 return 'createAction';
             case 'PUT':
-                parse_str(file_get_contents('php://input'), $this->requestBody);
+                $this->requestBody = file_get_contents('php://input');
                 return 'updateAction';
             case 'DELETE':
-                parse_str(file_get_contents('php://input'), $this->requestBody);
+                $this->requestBody = file_get_contents('php://input');
                 return 'deleteAction';
             default:
                 return NULL;
@@ -157,16 +157,31 @@ class Api extends GetModelController
 
     public function createAction()
     {
+        $data = $this->convertFromJson($this->requestBody);
+
         // получаем названия столбцов в таблице
         $tables = $this->model->getFields($this->model->table)['array'];
+
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $data_field = [];
-        foreach ($_POST as $key => $value) {
-            if ($key == 'id') {
-                unset($_POST[$key]);
-                continue;
+        foreach ($data as $key => $value) {
+            foreach($value as $v) {
+                if($key == 'actor') {
+                    $agent = $this->model->getClientLoginById($v);
+                    foreach($agent as $login) {
+                        $data_field['lrs_client_id'] = $login['id'];
+                    }
+                }
+                if($key == 'verb') {
+                    $data_field['verb_id'] = $v;
+                }
+                if($key == 'object') {
+                    $data_field['activity_id'] = $v;
+                }
+                if($key == 'lrs') {
+                    $data_field['lrs_id'] = $v;
+                }
             }
-            $data_field[$key] = $value;
         }
         //  проверка если переданный столбец существует в таблице
         //  заносит в массив данные для добавления
@@ -185,6 +200,7 @@ class Api extends GetModelController
         }
         $this->response('Failed create', 404);
     }
+
 
     public function deleteAction()
     {
@@ -266,7 +282,7 @@ class Api extends GetModelController
         return ($status[$code]) ?? $status[500];
     }
 
-    private function getRecord($id)
+    protected function getRecord($id)
     {
         $str = 'id = ' . $id;
         return $this->model->select($str);

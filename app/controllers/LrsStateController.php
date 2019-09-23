@@ -8,11 +8,11 @@ class LrsStateController extends GetModelController
     public function lrsStateShowAction($params)
     {
         $lrs = '';
-        if (empty($params['view'])) {
+        if (empty($params['id'])) {
             $id = 1;
         }
         else {
-            $id = $params['view'];
+            $id = $params['id'];
         }
         $states = $this->model->innerJoin($id);
         $predictor = "id=" . $id;
@@ -27,7 +27,6 @@ class LrsStateController extends GetModelController
         ];
         $this->view->generate('lrs/state.tlp', $vars);
     }
-
 }
 
 ?>

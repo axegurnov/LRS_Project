@@ -7,9 +7,12 @@
         </div>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link" href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" role="tab" aria-selected="true">Clients</a>
-                <a class="nav-item nav-link" href="<?= route('lrs_state'); ?>?view=<?= $lrs['id'] ?>" role="tab" aria-controls="nav-profile" aria-selected="false">State</a>
-                <a class="nav-item nav-link active" href="<?= route('lrs_statements'); ?>?lrs=<?= $lrs['id'] ?>" role="tab" aria-controls="nav-contact" aria-selected="false">Statements</a>
+                <a class="nav-item nav-link" href="<?= route('lrs',$lrs['id']); ?>" role="tab"
+                   aria-selected="true">Clients</a>
+                <a class="nav-item nav-link" href="<?= route('lrs_state',$lrs['id']); ?>" role="tab"
+                   aria-controls="nav-profile" aria-selected="false">State</a>
+                <a class="nav-item nav-link active" href="<?= route('lrs_statements',$lrs['id']); ?>" role="tab"
+                   aria-controls="nav-contact" aria-selected="false">Statements</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -34,9 +37,9 @@
                                     <th scope="row"><label><?= $statement['id'] ?></label></th>
                                     <td id="statementLogin" class="statementInfo" statementId="<?=$i?>"><?= $statement['login'] ?></td>
                                     <td id="statementVerb" class="statementInfo" statementId="<?=$i?>"><?= $statement['verb'] ?></td>
-                                    <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['name'] ?></td>
+                                    <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['activity'] ?></td>
                                     <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['content'] ?></td>
-                                    <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['create_date'] ?></td>
+                                    <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['create_data'] ?></td>
                                     <td>
                                         <button id="btnStatementId" class="btn btn-info float-right showStatementInJson" btnStatementid="<?=$i?>" data-toggle="modal" data-target=".modal-single-statement">JSON</button>
                                         <div id="statementId" class="statementInJson" divStatementId="<?=$i?>" hidden="hidden">

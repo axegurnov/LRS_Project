@@ -23,19 +23,13 @@ class LrsController extends InheritanceController
 
     public function lrsShowAction($params)
     {
-        if (empty($params['view'])) {
-            $id = 1;
-        }
-        else {
-            $id = $params['view'];
-        }
-        $statements = $this->model->statements($id);
-        $predictor = "lrs_id=" . $id;
-        $lrs_id = "id=" . $id;
+        $statements = $this->model->statements($params['id']);
+        $predictor = "lrs_id=" . $params['id'];
+        $lrs_id = "id=" . $params['id'];
         $clients = $this->model->getValueTable("lrs_client", $predictor);
         $lrs = $this->model->select($lrs_id);
         $vars = [
-            'title' => 'LRS ' . $id,
+            'title' => 'LRS ' . $params['id'],
             'lrs' => $lrs,
             'clients' => $clients,
             'statements' => $this->convertToJson($statements),
@@ -43,58 +37,31 @@ class LrsController extends InheritanceController
         $this->view->generate('lrs/view.tlp', $vars);
     }
 
-    public function lrsDelAction()
+    public function lrsDelAction($params)
     {
-        $id = $_POST['id'];
+        $id = $params['id'];
         $this->model->dropRecord($id);
         $this->redirect(route("lrs_list"));
     }
 
-    public function lrsViewUpdateAction()
+    public function lrsViewUpdateAction($params)
     {
         $lrs = '';
-        if (isset($_POST['id'])) {
-            $str = "id=" . $_POST['id'];
+        if (isset($params['id'])) {
+            $str = "id=" . $params['id'];
             $lrs = $this->model->select($str);
         }
         $vars = [
             'title' => 'LRS form',
             'data_field' => $lrs,
+            'params' => $params
         ];
         $this->view->generate('lrs/update.tlp', $vars);
     }
 
-    public function lrsStatementsAction($params)
-    {
-        $lrs = '';
-        if (empty($params['lrs'])) {
-            $id = 1;
-        }
-        else {
-            $id = $params['lrs'];
-        }
-        $statements = $this->model->statements($id);
-        $predictor = "id=" . $id;
-        $lrss = $this->model->getValueTable("lrs", $predictor);
-        foreach ($lrss as $lrs2) {
-            $lrs = $lrs2;
-        }
-        $statementsJson = [];
-        foreach ($statements as $statement) {
-            $statementsJson[] = $statement;
-        }
-        $vars = [
-            'statements' => $statements,
-            'statementsJson' => $statementsJson,
-            'lrs' => $lrs,
-        ];
-        $this->view->generate('lrs/statements.tlp', $vars);
-    }
-
-    public function lrsUpdateAction()
+    public function lrsUpdateAction($params)
     {
         $id = $_POST['id'];
-        //debug($id);
         $data_field = [
             'name' => $_POST['name'],
             'description' => $_POST['description'],
@@ -109,6 +76,7 @@ class LrsController extends InheritanceController
             else {
                 $vars = [
                     'title' => 'LRS form',
+                    'params' => $params,
                     'errors' => $errors,
                     'data_field' => $data_field,
                 ];
@@ -127,11 +95,40 @@ class LrsController extends InheritanceController
                 $vars = [
                     'title' => 'LRS form',
                     'errors' => $errors,
+                    'params' => $params,
                     'data_field' => $data_field,
                 ];
                 $this->view->generate('lrs/update.tlp', $vars);
                 unset ($errors);
             }
         }
+    }
+
+    public function lrsStatementsAction($params)
+    {
+        $lrs = '';
+        if (empty($params['id'])) {
+            $id = 1;
+        }
+        else {
+            $id = $params['id'];
+        }
+        $statements = $this->model->statements($id);
+        $predictor = "id=" . $id;
+        $lrss = $this->model->getValueTable("lrs", $predictor);
+        foreach ($lrss as $lrs2) {
+            $lrs = $lrs2;
+        }
+        $statementsJson = [];
+        foreach ($statements as $statement) {
+            $statementsJson[] = $statement;
+        }
+        $vars = [
+            'title' => 'LRS '.$params['id'],
+            'statements' => $statements,
+            'statementsJson' => $statementsJson,
+            'lrs' => $lrs,
+        ];
+        $this->view->generate('lrs/statements.tlp', $vars);
     }
 }

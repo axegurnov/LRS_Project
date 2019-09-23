@@ -21,30 +21,29 @@
                     <?php $i = 1+$limit*(($_GET['page']??'1')-1); foreach ($lrsr as $lrs): ?>
                         <tr>
                             <th scope="row"><?= $i ?></th>
-                            <td><a href="<?= route('lrs'); ?>?view=<?= $lrs['id'] ?>" class="link"><?= $lrs['id'] ?></a></td>
+                            <td><a href="<?= route('lrs',$lrs['id']); ?>" class="link"><?= $lrs['id'] ?></a></td>
                             <td><?= $lrs['name'] ?></td>
                             <td><?= $lrs['description'] ?></td>
                             <td class="row">
-                                <form action="<?= route('lrs_view_update'); ?>" method="post">
-                                    <input type="hidden" name="id" value="<?= $lrs['id'] ?>">
+                                <form action="<?= route('lrs_view_update', $lrs['id']); ?>" method="post">
                                     <button type="submit" class="btn btn-sm" style="background-color:transparent;"><i
                                                 class="far fa-edit" aria-hidden="true"></i></button>
                                 </form>
-                                <form action="<?= route('lrs_del'); ?>" method="post">
+                                <form action="<?= route('lrs_delete',$lrs['id']); ?>" method="post">
                                     <input type="hidden" name="id" value="<?= $lrs['id'] ?>">
                                     <button type="submit" class="btn btn-sm del_confirm" style="background-color:transparent;"><i
                                                 class="fas fa-minus-circle" aria-hidden="true"></i></button>
                                 </form>
                             </td>
                         </tr>
-                    <?php $i++; endforeach; ?>
+                        <?php $i++; endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 for-button">
-                <a class="btn btn-primary" href="<?= route('lrs_view_update'); ?>" role="button">Add</a>
+                <a class="btn btn-primary" href="<?= route('lrs_view_create'); ?>" role="button">Add</a>
             </div>
         </div>
         <nav class="mt-md-3">
