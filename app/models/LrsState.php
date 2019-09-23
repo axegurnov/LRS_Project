@@ -17,6 +17,21 @@ class LrsState extends Model
                 WHERE b.lrs_id = $id";
         return $this->db->query($sql);
     }
+
+    public function stateActivityAgent($data){
+        //$login = $data['agent']['login'];
+        $act = $data['activityId'];
+        $sql = "SELECT *
+                FROM lrs_client cl
+                JOIN $this->table st
+                ON cl.id = st.lrs_client_id
+                JOIN activity act 
+                ON st.activity_id = act.id
+                WHERE  st.activity_id ="."'$data[activityId]';";
+       //debug($sql);
+        return $this->db->query($sql);
+
+    }
 }
 
 ?>

@@ -39,6 +39,10 @@ class Api extends GetModelController
     public function indexAction($args = NULL)
     {
         $api_token = NULL;
+        if (isset($args['api_token'])) {
+            $this->args = $args;
+            $api_token = $this->args['api_token'];
+        }
         if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $this->args = $args;
             $temp = $_SERVER['HTTP_AUTHORIZATION'];
@@ -99,16 +103,29 @@ class Api extends GetModelController
             $predictor = "activity = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
-        if (isset($agent)) {
-            $query = $this->model->statementsJoinClients($this->convertFromJson($agent));
+//        if (isset($agent)) {
+//            $query = $this->model->statementsJoinClients($this->convertFromJson($agent));
+//            if (!isset($query)) {
+//                return $this->response('Not found');
+//            }
+//            $resp = [];
+//            foreach ($query as $value) {
+//                $resp[] = $value;
+//            }
+//            return $this->response($resp, 200);
+//        }
+        if (isset($activityId)){
+            $query = $this->model->stateActivityAgent($this->args);
             if (!isset($query)) {
                 return $this->response('Not found');
             }
+            debug($query);
             $resp = [];
             foreach ($query as $value) {
                 $resp[] = $value;
             }
             return $this->response($resp, 200);
+
         }
         return $this->response('Record wasnt found', 404);
     }
