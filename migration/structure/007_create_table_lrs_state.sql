@@ -5,7 +5,7 @@ create table if not exists lrs_state (
     state_key varchar (100) not null,
     value varchar (100) not null,
     activity_id int (100) not null,
-    registration varchar (100) not null,
+    registration varchar (100) null,
     primary key (id),
     FOREIGN KEY (lrs_id) REFERENCES lrs (id) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (lrs_client_id) REFERENCES lrs_client (id) ON UPDATE CASCADE ON DELETE CASCADE,
