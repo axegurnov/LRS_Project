@@ -1,0 +1,4 @@
+INSERT INTO lrs_client (lrs_id, login, password, description, api_token) VALUE ('4','vasya','$2y$10$4/thOSfOaZSmS95DMU1vQu.GZ2y3SKWgHZIVceqJcwq32FWifd7ce','Vasya','b794385f2d1ef7ab4d9273d1906381b44f2f6f2588a3efb96a49188331984753');
+INSERT INTO lrs_client (lrs_id, login, password, description, api_token) VALUE ('3','petya','$2y$10$8aTT2KkEQ5uD3YSbPs0USO9DzDCDM7jEWbt8cTueQa9NG8aYsUnEW','Petya','688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6');
+INSERT INTO lrs_client (lrs_id, login, password, description, api_token) VALUE ('2','vova','$2y$10$fQNCj.3KTYmSyLqdIWko7uo8MOleJH1R6kXX/XIc3PDgajLH31B6q','Vova','688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6');
+INSERT INTO lrs_client (lrs_id, login, password, description, api_token) VALUE ('1','nastya','$2y$10$y4LwTikT4M5M0cw6dY0Jm.UblbTUrlNruAUpsQEKaCaOUxExqsyPa','Nastya','688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6');
