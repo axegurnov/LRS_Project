@@ -1,4 +1,3 @@
-<?php var_dump($vars)?>
 <div class="container-fluid">
     <div class="container">
         <div class="row align-items-center">

@@ -10,13 +10,14 @@ class LrsStateController extends GetModelController
         $lrs = '';
         if (empty($params['id'])) {
             $id = 1;
-        }
-        else {
+        } else {
             $id = $params['id'];
         }
         $states = $this->model->innerJoin($id);
         $predictor = "id=" . $id;
+
         $lrss = $this->model->getValueTable("lrs", $predictor);
+
         foreach ($lrss as $lrs2) {
             $lrs = $lrs2;
         }
