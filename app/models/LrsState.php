@@ -33,6 +33,7 @@ class LrsState extends Model
         return $this->db->query($sql);
 
     }
+
     public function showState($data){
         //debug($data['agent']);
         $sql = "SELECT *
@@ -46,10 +47,16 @@ class LrsState extends Model
         return $this->db->query($sql);
 
     }
+
     public function deleteByPredict($predictor){
         $sql = "DELETE FROM $this->table WHERE ".$predictor;
         $this->db->query($sql);
     }
-}
 
+    public function getClientLoginById($login)
+    {
+        $sql = "SELECT id FROM lrs_client WHERE login='$login'";
+        return $this->db->query($sql);
+    }
+}
 ?>
