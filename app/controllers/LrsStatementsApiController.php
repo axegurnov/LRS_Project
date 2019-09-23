@@ -55,7 +55,6 @@ class LrsStatementsApiController extends Api
         $data = $this->convertFromJson($this->requestBody);
         $data_field = [];
         if (!empty($_GET['id'])) {
-            $data_field['id'] = $_GET['id'];
             $record = $this->getRecord($_GET['id']);
         }
         if (!$record) {
@@ -90,7 +89,6 @@ class LrsStatementsApiController extends Api
                 }
             }
         }
-
         if (!empty($_GET['id'])) {
             $this->model->setValues($toFillData);
             $this->model->updateRecord($_GET['id']);
