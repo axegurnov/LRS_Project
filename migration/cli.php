@@ -177,12 +177,12 @@ class MigrationController
 
     public function editDatabaseAction($sqlFile)
     {
-        $this->templateExecute("personal/", $sqlFile, "database");
+        $this->templateExecute("edit/", $sqlFile, "database");
     }
 
     public function editTableAction($sqlFile)
     {
-        $this->templateExecute("personal/", $sqlFile, "table");
+        $this->templateExecute("edit/", $sqlFile, "table");
     }
 
     public function templateExecute($sqlFolder, $expansion, $type)
