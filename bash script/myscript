@@ -58,6 +58,13 @@ cd /var/www/html
 rm -rf /var/www/html/*
 #Clone repository
 git clone https://git.devspark.ru/m_kultyshev/stage-lrs /var/www/html
+git add .
+#First commit
+git commit -a -m "First commit"
+#Connect  DevSpark
+git remote add origin https://git.devspark.ru/m_kultyshev/stage-lrs.git
+#Git pull
+$git pull origin master https://git.devspark.ru/m_kultyshev/stage-lrs.git
 
 touch /var/www/html/app/config/Database.php
 cd /var/www/html/app/config
