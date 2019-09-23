@@ -17,6 +17,12 @@ class LrsStatements extends Model
                 WHERE cl.login = " . "'$agent[login]'";
         return $this->db->query($sql);
     }
+
+    public function getClientLoginById($login)
+    {
+        $sql = "SELECT id FROM lrs_client WHERE login='$login'";
+        return $this->db->query($sql);
+    }
 }
 
 ?>
