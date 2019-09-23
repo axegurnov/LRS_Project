@@ -8,7 +8,7 @@ class Lrs extends Model
 
     public function statements($id)
     {
-        $sql = "SELECT lrs.id, lrs_client.id, lrs_client.login, lrs_statements.verb, lrs_statements.activity, lrs_statements.content, lrs_statements.create_data
+        $sql = "SELECT lrs.id, lrs_client.id, lrs_client.login, lrs_statements.verb, lrs_statements.activity, lrs_statements.content, lrs_statements.create_date
                 FROM lrs 
                 JOIN lrs_statements ON lrs.id = lrs_statements.lrs_id JOIN lrs_client
                 ON lrs_statements.lrs_client_id = lrs_client.id

@@ -1,1 +1,1 @@
-TRUNCATE TABLE `lrs`.`lrs`;
+DELETE FROM `lrs`.`lrs`;

@@ -77,7 +77,7 @@ class Api extends GetModelController
             return $this->response($resp, 200);
         }
         if (isset($since) && isset($until)) {
-            $predictor = "create_data BETWEEN " . $since . " AND " . $until;
+            $predictor = "create_date BETWEEN " . $since . " AND " . $until;
             $resp = $this->model->getMultipleByPredictor($predictor);
             if ($resp == null) {
                 return $this->response('Not found');
