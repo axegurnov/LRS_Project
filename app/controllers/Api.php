@@ -158,7 +158,6 @@ class Api extends GetModelController
     public function createAction()
     {
         $data = $this->convertFromJson($this->requestBody);
-
         // получаем названия столбцов в таблице
         $tables = $this->model->getFields($this->model->table)['array'];
 
