@@ -10,10 +10,12 @@ class LrsState extends Model
 
     public function innerJoin($id)
     {
-        $sql = "SELECT a.login, b.id, b.state_key, b.value, b.activity
+        $sql = "SELECT a.login, b.id, b.state_key, b.value, act.name
                 FROM lrs_client a
                 JOIN $this->table b
                 ON a.id = b.lrs_client_id
+                JOIN activity act 
+                ON b.activity_id = act.id
                 WHERE b.lrs_id = $id";
         return $this->db->query($sql);
     }

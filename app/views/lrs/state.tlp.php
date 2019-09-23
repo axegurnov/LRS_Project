@@ -34,7 +34,7 @@
                                 <tr>
                                     <th scope="row"><?= $state['id'] ?></th>
                                     <td><?= $state['login'] ?></td>
-                                    <td><?= $state['activity'] ?></td>
+                                    <td><?= $state['name'] ?></td>
                                     <td><?= $state['state_key'] ?></td>
                                     <td><?= $state['value'] ?></td>
                                 </tr>
