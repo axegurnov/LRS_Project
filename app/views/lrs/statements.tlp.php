@@ -34,7 +34,7 @@
                                     <th scope="row"><label><?= $statement['id'] ?></label></th>
                                     <td id="statementLogin" class="statementInfo" statementId="<?=$i?>"><?= $statement['login'] ?></td>
                                     <td id="statementVerb" class="statementInfo" statementId="<?=$i?>"><?= $statement['verb'] ?></td>
-                                    <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['activity'] ?></td>
+                                    <td id="statementActivity" class="statementInfo" statementId="<?=$i?>"><?= $statement['name'] ?></td>
                                     <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['content'] ?></td>
                                     <td id="statementContent" class="statementInfo" statementId="<?=$i?>"><?= $statement['create_date'] ?></td>
                                     <td>
