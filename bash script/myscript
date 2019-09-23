@@ -1,0 +1,75 @@
+#!/bin/bash
+#Update
+#sudo apt-get update
+#sudo apt-get upgrade
+#Install NGINX
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+#Configuration NGINx
+sudo echo '
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+ 
+    root /var/www/html/public;
+
+    index index.php index.html index.htm index.nginx-debian.html;
+ 
+    server_name _;
+       
+   
+    location / {
+        try_files $uri $uri/ /index.php?route=$uri&$args;
+    }
+   
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        #fastcgi_pass 127.0.0.1:9000;
+    }
+	
+    location ~ /\.ht {
+        deny all;
+    }
+}
+' > /etc/nginx/sites-available/default
+sudo rm -rf /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+#Update creator
+sudo chown -R admin2:www-data /var/www/html
+#Install PHP-FPM PHP-MYSQL
+sudo apt install -y php-fpm php-mysql php-cli
+#Install Mysql
+sudo apt-get -y install mysql-server
+#Creating new user
+sudo mysql_secure_installation
+sudo mysql -D mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123';"
+#Install Mysql-Workbench
+sudo apt-get -y install mysql-workbench 
+#Install GIT
+sudo apt-get -y install git
+#Add user
+git config --global user.name "Admin"
+git config --global user.email anastasiya.hahanova@mail.ru
+cd /var/www/html
+rm -rf /var/www/html/*
+#Clone repository
+git clone https://git.devspark.ru/m_kultyshev/stage-lrs /var/www/html
+
+touch /var/www/html/app/config/Database.php
+cd /var/www/html/app/config
+echo '<?php
+return [
+    "host" => "localhost",
+    "user" => "root",
+    "password" => "123",
+    "base" => "lrs"
+];
+?>' > Database.php
+cd /var/www/html/migration
+php cli.php migration
+
+echo 'done!!!'
