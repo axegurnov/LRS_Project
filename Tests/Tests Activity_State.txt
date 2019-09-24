@@ -1,0 +1,35 @@
+#Learning Locker
+http://v1docs.learninglocker.net/postman/
+
+I. LL xAPI/statements
+1.Show
+http://lrs_project/api/lrs/statements?id=1
+2.Index
+http://lrs_project/api/lrs/statements
+3.Index?verb
+http://lrs_project/api/lrs/statements?verb=read
+4.Index?since,until
+http://lrs_project/api/lrs/statements?until='2020-01-01'&since='2000-01-01'
+5.Index?limit,offset
+http://lrs_project/api/lrs/statements?limit=2&offset=2
+
+II. LL xAPI/activities/state
+1.Index
+http://lrs_project/api/lrs/state?activityId=2&agent=nastya
+2.Show
+http://lrs_project/api/lrs/state?activityId=2&stateId=1&agent=nastya
+3.Store
+http://lrs_project/api/lrs/state?object=2&stateId=243h465&actor=petya
+{
+"lrs": "2",
+"value": "Store"
+}
+4.Update
+http://lrs_project/api/lrs/state?object=2&stateId=243h465&actor=petya
+{
+"id": "5",
+"lrs": "2",
+"value": "Store3"
+}
+5.Delete
+http://lrs_project/api/lrs/state?activityId=2&stateId=1
