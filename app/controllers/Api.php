@@ -25,7 +25,6 @@ class Api extends GetModelController
 
     public function indexAction()
     {
-        $api_token = NULL;
         if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
             $temp = $_SERVER['HTTP_AUTHORIZATION'];
             $api_token = str_replace('Basic ', '', $temp);

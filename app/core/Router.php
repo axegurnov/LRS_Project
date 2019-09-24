@@ -78,8 +78,9 @@ class Router
                 if (preg_match('/(api)/', $this->routeUri, $matches)) {
                     switch ($this->method) {
                         case 'GET':
-                            if (!empty($this->args)) {
+                            if (!empty($this->argUri)) {
                                 $this->params['action'] = 'view';
+                                break;
                             }
                             $this->params['action'] = 'showAll';
                             break;
