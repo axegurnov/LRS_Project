@@ -18,7 +18,7 @@ class LrsStatements extends Model
                 ON st.activity_id = act.id
                 JOIN verb
                 ON st.verb_id = verb.id
-                WHERE cl.login = " . "'$agent[login]'";
+                WHERE cl.login = " . "'$agent'";
         return $this->db->query($sql);
     }
 

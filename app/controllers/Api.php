@@ -62,6 +62,10 @@ class Api extends GetModelController
         if (!empty($this->args)) {
             extract($this->args);
         }
+        if (isset($agent)) {
+           $agent = $this->args['agent'] = $this->convertFromJson($agent)['login'];
+
+        }
         if (isset($id)) {
             $record = $this->getRecord($id);
         }
@@ -99,31 +103,7 @@ class Api extends GetModelController
             $predictor = "activity = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
-//        if (isset($agent)) {
-//            $query = $this->model->statementsJoinClients($this->convertFromJson($agent));
-//            if (!isset($query)) {
-//                return $this->response('Not found');
-//            }
-//            $resp = [];
-//            foreach ($query as $value) {
-//                $resp[] = $value;
-//            }
-//            return $this->response($resp, 200);
-//        }
-        //TEST Activity/State GET Index
-        if (isset($activityId) && isset($agent)) {
-            $query = $this->model->indexState($this->args);
-            if (!isset($query)) {
-                return $this->response('Not found');
-            }
-            //debug($query);
-            $resp = [];
-            foreach ($query as $value) {
-                $resp[] = $value;
-            }
-            return $this->response($resp, 200);
 
-        }
         //TEST Activity/State GET Show
         if (isset($activityId) && isset($agent) && isset($stateId)) {
             $query = $this->model->showState($this->args);
@@ -138,8 +118,36 @@ class Api extends GetModelController
             return $this->response($resp, 200);
 
         }
+        //TEST Activity/State GET Index
+        if (isset($activityId) && isset($agent)) {
+            $query = $this->model->indexState($this->args);
+            if (!isset($query)) {
+                return $this->response('Not found');
+            }
+            //debug($query);
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
 
+        }
 
+        if (isset($agent)) {
+            $query = $this->model->statementsJoinClients($agent);
+            $body = [];
+            foreach($query as $value) {
+                $body[] = $value;
+            }
+            if (empty($body)) {
+                return $this->response('Not found');
+            }
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+        }
         return $this->response('Record wasnt found', 404);
     }
 

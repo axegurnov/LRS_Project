@@ -35,7 +35,6 @@ class LrsState extends Model
     }
 
     public function showState($data){
-        //debug($data['agent']);
         $sql = "SELECT *
                 FROM lrs_client cl
                 JOIN $this->table st
@@ -43,7 +42,6 @@ class LrsState extends Model
                 JOIN activity act 
                 ON st.activity_id = act.id
                 WHERE  st.activity_id ="."'$data[activityId]' AND cl.login = '$data[agent]' AND st.id ="."$data[stateId];";
-        //debug($sql);
         return $this->db->query($sql);
 
     }
