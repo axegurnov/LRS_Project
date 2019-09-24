@@ -148,7 +148,7 @@ class Api extends GetModelController
             }
             return $this->response($resp, 200);
         }
-        return $this->response('Record wasnt found', 404);
+        return $this->response('Record was not found', 404);
     }
 
     protected function showAllAction()
