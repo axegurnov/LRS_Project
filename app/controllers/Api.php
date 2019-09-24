@@ -13,7 +13,7 @@ class Api extends GetModelController
     public function __construct($route)
     {
         parent::__construct($route);
-        //$this->requestBody = file_get_contents('php://input');
+        $this->requestBody = file_get_contents('php://input');
         $this->indexAction();
     }
 
