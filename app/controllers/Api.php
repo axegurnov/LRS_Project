@@ -47,12 +47,12 @@ class Api extends GetModelController
         }
         if (isset($verb)) {
             $query = $this->model->statementsJoinVerb($verb);
-            if (!isset($query)) {
-                return $this->response('Not found');
-            }
-            $resp = [];
+            $resp = null;
             foreach ($query as $value) {
                 $resp[] = $value;
+            }
+            if ($resp == null) {
+                return $this->response('Not found');
             }
             return $this->response($resp, 200);
         }
@@ -77,12 +77,12 @@ class Api extends GetModelController
         }
         if (isset($activity)) {
             $query = $this->model->statementsJoinActivity($activity);
-            if (!isset($query)) {
-                return $this->response('Not found');
-            }
-            $resp = [];
+            $resp = null;
             foreach ($query as $value) {
                 $resp[] = $value;
+            }
+            if ($resp == null) {
+                return $this->response('Not found');
             }
             return $this->response($resp, 200);
         }
