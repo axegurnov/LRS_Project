@@ -31,17 +31,12 @@ class Router
         //записываем метод
         $this->method = $_SERVER['REQUEST_METHOD'];
 
-        // debug($_GET);
-        // debug($_GET['route']); // хранится uri
-        // debug($_GET['arg_name']); // e.g. page = 123
-
         //добавляем pattern к ротуам
         foreach ($routesList as $key => $val) {
             $this->add($key, $val);
         }
         //ищем совпадения
         $this->match();
-
     }
 
     public function add($route, $params)
@@ -56,7 +51,6 @@ class Router
 
     public function match()
     {
-        //debug($this->routes);
         foreach ($this->routes as $route => $params) {
             //ищем совпадения по pattern'у
             if (preg_match($route, $this->routeUri, $matches)) {

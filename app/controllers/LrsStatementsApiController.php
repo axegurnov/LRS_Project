@@ -40,20 +40,20 @@ class LrsStatementsApiController extends Api
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $tables = $this->model->getFields($this->model->table)['array'];
         foreach ($data as $key => $value) {
-            foreach($value as $v) {
-                if($key == 'actor') {
+            foreach ($value as $v) {
+                if ($key == 'actor') {
                     $agent = $this->model->getClientLoginById($v);
-                    foreach($agent as $login) {
+                    foreach ($agent as $login) {
                         $data_field['lrs_client_id'] = $login['id'];
                     }
                 }
-                if($key == 'verb') {
+                if ($key == 'verb') {
                     $data_field['verb_id'] = $v;
                 }
-                if($key == 'object') {
+                if ($key == 'object') {
                     $data_field['activity_id'] = $v;
                 }
-                if($key == 'lrs') {
+                if ($key == 'lrs') {
                     $data_field['lrs_id'] = $v;
                 }
             }

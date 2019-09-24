@@ -15,11 +15,10 @@ class LrsStateController extends GetModelController
         }
         $states = $this->model->innerJoin($id);
         $predictor = "id=" . $id;
-
         $lrss = $this->model->getValueTable("lrs", $predictor);
 
-        foreach ($lrss as $lrs2) {
-            $lrs = $lrs2;
+        foreach ($lrss as $value) {
+            $lrs = $value;
         }
         $vars = [
             'title' => 'LRS ' . $id,

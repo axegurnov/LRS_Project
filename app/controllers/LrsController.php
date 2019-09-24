@@ -54,7 +54,7 @@ class LrsController extends InheritanceController
         $vars = [
             'title' => 'LRS form',
             'data_field' => $lrs,
-            'params' => $params
+            'params' => $params,
         ];
         $this->view->generate('lrs/update.tlp', $vars);
     }
@@ -72,8 +72,7 @@ class LrsController extends InheritanceController
                 $this->model->setValues($data_field);
                 $this->model->updateRecord($id);
                 $this->redirect(route("lrs_list"));
-            }
-            else {
+            } else {
                 $vars = [
                     'title' => 'LRS form',
                     'params' => $params,
@@ -83,15 +82,13 @@ class LrsController extends InheritanceController
                 $this->view->generate('lrs/update.tlp', $vars);
             }
             unset ($errors);
-        }
-        else if (empty($_POST['id'])) {
+        } else if (empty($_POST['id'])) {
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
                 $this->model->setValues($data_field);
                 $this->model->addRecord();
                 $this->redirect(route("lrs_list"));
-            }
-            else {
+            } else {
                 $vars = [
                     'title' => 'LRS form',
                     'errors' => $errors,
@@ -109,8 +106,7 @@ class LrsController extends InheritanceController
         $lrs = '';
         if (empty($params['id'])) {
             $id = 1;
-        }
-        else {
+        } else {
             $id = $params['id'];
         }
         $statements = $this->model->statements($id);
@@ -124,7 +120,7 @@ class LrsController extends InheritanceController
             $statementsJson[] = $statement;
         }
         $vars = [
-            'title' => 'LRS '.$params['id'],
+            'title' => 'LRS ' . $params['id'],
             'statements' => $statements,
             'statementsJson' => $statementsJson,
             'lrs' => $lrs,

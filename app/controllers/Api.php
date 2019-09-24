@@ -7,12 +7,8 @@ use app\core\Controller;
 class Api extends GetModelController
 {
     protected $nameModel = '';
-    protected $args = NULL;
     protected $requestBody = NULL;
     protected $action = NULL;
-
-    protected $testRequestBody = ''; // временное хранение данных из тела запроса
-    protected $testReqData = []; // хранит асоциативный массив key => value [["actor"] => "id"]
 
     public function __construct($route)
     {
@@ -20,7 +16,6 @@ class Api extends GetModelController
         //$this->requestBody = file_get_contents('php://input');
         $this->indexAction();
     }
-
 
     public function indexAction()
     {
@@ -42,8 +37,7 @@ class Api extends GetModelController
             extract($args);
         }
         if (isset($agent)) {
-            $agent = $args['agent'] = $this->convertFromJson($agent)['login'];
-
+            $agent = $this->convertFromJson($agent)['login'];
         }
         if (isset($id)) {
             $record = $this->getRecord($id);
@@ -65,7 +59,7 @@ class Api extends GetModelController
         if (isset($since) && isset($until)) {
             $predictor = "create_date BETWEEN " . $since . " AND " . $until;
             $resp = $this->model->getMultipleByPredictor($predictor);
-            if ($resp == null) {
+            if ($resp == NULL) {
                 return $this->response('Not found');
             }
             return $this->response($resp, 200);
@@ -76,16 +70,13 @@ class Api extends GetModelController
             foreach ($query as $value) {
                 $resp[] = $value;
             }
-            if ($resp == null) {
+            if ($resp == NULL) {
                 return $this->response('Not found');
             }
             return $this->response($resp, 200);
         }
         if (isset($activity)) {
-
-            $predictor = "activity_id = '$activity'";
             $query = $this->model->statementsJoinActivity($activity);
-
             if (!isset($query)) {
                 return $this->response('Not found');
             }
@@ -99,7 +90,6 @@ class Api extends GetModelController
         //TEST Activity/State GET Show
         if (isset($activityId) && isset($agent) && isset($stateId)) {
             $query = $this->model->showState($activityId, $agent, $stateId);
-            //debug($activityId);
             if (!isset($query)) {
                 return $this->response('Not found');
             }
@@ -109,8 +99,8 @@ class Api extends GetModelController
                 $resp[] = $value;
             }
             return $this->response($resp, 200);
-
         }
+
         //TEST Activity/State GET Index
         if (isset($activityId) && isset($agent)) {
             $query = $this->model->indexState($activityId, $agent);
@@ -122,7 +112,6 @@ class Api extends GetModelController
                 $resp[] = $value;
             }
             return $this->response($resp, 200);
-
         }
 
         if (isset($agent)) {
@@ -156,10 +145,8 @@ class Api extends GetModelController
         $this->response('Table is empty', 404);
     }
 
-
     public function deleteAction($args)
     {
-        // записывает строку с переданными данными в массив $_DELETE
         if (!empty($args)) {
             extract($args);
         }
@@ -181,7 +168,6 @@ class Api extends GetModelController
                 $this->model->deleteByPredict($predictor);
                 return $this->response('Record was deleted', 200);
             }
-
         }
         $this->response('Failed delete', 404);
     }
