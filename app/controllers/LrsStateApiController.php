@@ -51,7 +51,7 @@ class LrsStateApiController extends Api
         $this->response('Failed create', 404);
     }
 
-    public function update1Action()
+    public function updateAction()
     {
         $data = $this->convertFromJson($this->requestBody);
         $data_field = [];
@@ -71,6 +71,9 @@ class LrsStateApiController extends Api
         }
         if(isset($_GET['object'])) {
             $data_field['activity_id'] = $_GET['object'];
+        }
+        if(isset($_GET['activityId'])) {
+            $data_field['activity_id'] = $_GET['activityId'];
         }
         if(isset($_GET['actor'])) {
             $agent = $this->model->getClientLoginById($_GET['actor']);

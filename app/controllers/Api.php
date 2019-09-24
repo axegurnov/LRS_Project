@@ -73,7 +73,7 @@ class Api extends GetModelController
             return $this->response($record, 200);
         }
         if (isset($verb)) {
-            $predictor = "verb = '$verb'";
+            $predictor = "verb_id = '$verb'";
             $resp = $this->model->getMultipleByPredictor($predictor);
             if ($resp == null) {
                 return $this->response('Not found');
@@ -100,7 +100,7 @@ class Api extends GetModelController
             return $this->response($resp, 200);
         }
         if (isset($activity)) {
-            $predictor = "activity = '$activity'";
+            $predictor = "activity_id = '$activity'";
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
 
