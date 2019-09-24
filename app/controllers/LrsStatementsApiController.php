@@ -52,7 +52,8 @@ class LrsStatementsApiController extends Api
 
     public function updateAction()
     {
-        $data = $this->convertFromJson($this->requestBody);
+        //$data = $this->convertFromJson($this->requestBody);
+        $data = $this->convertFromJson(file_get_contents("php://input"));
         $data_field = [];
         if (!empty($_GET['id'])) {
             $record = $this->getRecord($_GET['id']);

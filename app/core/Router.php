@@ -1,4 +1,5 @@
 <?php
+
 namespace app\core;
 
 use app\config\Dev;
@@ -14,17 +15,21 @@ class Router
     public $argUri = [];
     //хратит все роуты с параметрами
     public $routes = [];
+    //хранит метод
+    public $method = '';
 
     public function __construct()
     {
         // получаем список роутов
         $routesList = Routes::getRoutes();
-
         // хранится uri
         $this->routeUri = trim(@array_shift($_GET), '/');
 
         // записываем аргументы (гет запроса)
         $this->argUri = $_GET;
+
+        //записываем метод
+        $this->method = $_SERVER['REQUEST_METHOD'];
 
         // debug($_GET);
         // debug($_GET['route']); // хранится uri
@@ -36,6 +41,7 @@ class Router
         }
         //ищем совпадения
         $this->match();
+
     }
 
     public function add($route, $params)
@@ -68,6 +74,28 @@ class Router
                 }
                 //добавляем название контроллера и экшна в params
                 $this->params = $params;
+                //если api добавляем actions
+                if (preg_match('/(api)/', $this->routeUri, $matches)) {
+                    switch ($this->method) {
+                        case 'GET':
+                            if (!empty($this->args)) {
+                                $this->params['action'] = 'view';
+                            }
+                            $this->params['action'] = 'showAll';
+                            break;
+                        case 'POST':
+                            $this->params['action'] = 'create';
+                            break;
+                        case 'PUT':
+                            $this->params['action'] = 'update';
+                            break;
+                        case 'DELETE':
+                            $this->params['action'] = 'delete';
+                            break;
+                        default:
+                            return NULL;
+                    }
+                }
                 return $this->run();
             }
         }
@@ -82,6 +110,7 @@ class Router
     // задаем контроллер и экшн, вызываем контроллер
     public function run()
     {
+        //debug($this->params);
         // $this->params содержит название контроллера и экшна
         $path = 'app\controllers\\' . ucfirst($this->params['controller'] . 'Controller');
         // если класс объявлен, создаем контроллер, передав в него параметры
