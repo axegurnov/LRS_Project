@@ -15,6 +15,7 @@ class UserController extends InheritanceController
             'title' => 'User',
             'users' => $users,
             'limit' => $limit,
+            'params' => $params,
             'pages' => $pagination['pages'],
         ];
         $this->view->generate('user/index.tlp', $vars);
@@ -50,11 +51,12 @@ class UserController extends InheritanceController
         $vars = [
             'title' => 'User form',
             'data_field' => $userInfo,
+            'params' => $params
         ];
         $this->view->generate('user/update.tlp', $vars);
     }
 
-    public function userUpdateAction()
+    public function userUpdateAction($params)
     {
         $id = $_POST['id'];
         $data_field = $_POST;
@@ -73,6 +75,7 @@ class UserController extends InheritanceController
                     'title' => 'User form',
                     'errors' => $errors,
                     'data_field' => $userInfo,
+                    'params' => $params
                 ];
                 $this->view->generate('user/update.tlp', $vars);
             }
