@@ -38,7 +38,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 for-button">
-                <a class="btn btn-primary" href="<?= route('user_view_create'); ?>" role="button">Add</a>
+                <a class="btn btn-primary" href="<?= route('user_view_create_new'); ?>" role="button">Add</a>
             </div>
         </div>
         <?php if($pages != 1):?>

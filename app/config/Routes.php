@@ -23,12 +23,6 @@ class Routes
                 'action' => 'index'
             ],
 
-            'user/update' => [
-                'name' => 'user_update',
-                'controller' => 'user',
-                'action' => 'userUpdate'
-            ],
-
             'user/exit' => [
                 'name' => 'user_exit',
                 'controller' => 'user',
@@ -150,10 +144,17 @@ class Routes
             ],
 
             //создание user
-            'user/view/create' => [
-                'name' => 'user_view_create',
+            'user/create' => [
+                'name' => 'user_view_create_new',
                 'controller' => 'user',
                 'action' => 'userViewUpdate'
+            ],
+
+            //создание user
+            'user/create/view' => [
+                'name' => 'user_create',
+                'controller' => 'user',
+                'action' => 'userUpdate'
             ],
 
             //обновление user update
@@ -161,6 +162,13 @@ class Routes
                 'name' => 'user_view_update',
                 'controller' => 'user',
                 'action' => 'userViewUpdate'
+            ],
+
+            //обновление создание user
+            'user/{id:\d+}/update/view' => [
+                'name' => 'user_update',
+                'controller' => 'user',
+                'action' => 'userUpdate'
             ],
 
             //del user
