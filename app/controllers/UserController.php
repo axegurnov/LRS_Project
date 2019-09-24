@@ -67,8 +67,7 @@ class UserController extends InheritanceController
                 $this->model->setValue('password', $password);
                 $this->model->updateRecord($id);
                 $this->redirect(route("users"));
-            }
-            else {
+            } else {
                 $userInfo = $data_field;
                 $vars = [
                     'title' => 'User form',
@@ -78,16 +77,14 @@ class UserController extends InheritanceController
                 $this->view->generate('user/update.tlp', $vars);
             }
             unset ($errors);
-        }
-        else if (empty($_POST['id'])) {
+        } else if (empty($_POST['id'])) {
             $errors = $this->model->setValues($data_field);
             if (!$errors) {
                 $password = $this->hashPassword($_POST['password']);
                 $this->model->setValue('password', $password);
                 $this->model->addRecord();
                 $this->redirect(route("users"));
-            }
-            else {
+            } else {
                 $userInfo = $data_field;
                 $vars = [
                     'title' => 'User form',

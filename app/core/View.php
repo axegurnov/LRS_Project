@@ -29,13 +29,11 @@ class View
                 require '../app/views/' . $template . '.php';
                 $content = ob_get_contents();
                 ob_end_clean();
-            }
-            else {
+            } else {
                 $content = "view doesnt exist";
             }
             require '../app/views/layouts/' . $this->_layout . '.php';
-        }
-        else {
+        } else {
             echo "file not found";
         }
     }
@@ -45,8 +43,7 @@ class View
         if (file_exists('../app/views/errors/handler.tlp.php')) {
             extract($vars);
             require '../app/views/errors/handler.tlp.php';
-        }
-        else {
+        } else {
             echo "file not found";
         }
     }

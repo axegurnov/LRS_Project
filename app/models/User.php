@@ -18,8 +18,7 @@ class User extends Model
         $this->password = $password;
         if (($this->login == "") || ($this->password == "")) {
             $errors["empty"] = "Please, fill in the fields";
-        }
-        else {
+        } else {
             $errors = $this->oneUserCheck();
         }
         return $errors;
@@ -32,12 +31,10 @@ class User extends Model
         $this->namecheck = $this->db->query($namecheckquery);
         if (!$this->namecheck) {
             $errors["name"] = "Name check query failed";
-        }
-        else {
+        } else {
             if (mysqli_num_rows($this->namecheck) != 1) {
                 $errors["auth"] = "Either no user with name, or more than one";
-            }
-            else {
+            } else {
                 $errors = $this->passwordCheck();
             }
         }
@@ -52,8 +49,7 @@ class User extends Model
         $hash = $existinginfo["password"];
         if (!password_verify($this->password, $hash)) {
             $errors["auth"] = "Incorrect password";
-        }
-        else {
+        } else {
             unset($errors);
             $_SESSION["auth"] = $existinginfo["login"];
         }

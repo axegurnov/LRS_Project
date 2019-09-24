@@ -17,7 +17,7 @@ class LrsClientController extends GetModelController
             'title' => 'Client form',
             'data_field' => $clients,
             'lrs_id' => $lrs_id,
-            'params' => $params
+            'params' => $params,
         ];
         $this->view->generate('lrs_client/update.tlp', $vars);
     }

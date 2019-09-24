@@ -18,27 +18,27 @@ class LrsStateApiController extends Api
         $data_field = [];
         $flag = 0;
         foreach ($data as $key => $value) {
-        	if($key == 'lrs') {
+            if ($key == 'lrs') {
                 $data_field['lrs_id'] = $value;
                 $flag++;
             }
-            if($key == 'value') {
+            if ($key == 'value') {
                 $data_field['value'] = $value;
                 $flag++;
             }
         }
-        if(isset($_GET['object'])) {
+        if (isset($_GET['object'])) {
             $data_field['activity_id'] = $_GET['object'];
             $flag++;
         }
-        if(isset($_GET['actor'])) {
+        if (isset($_GET['actor'])) {
             $agent = $this->model->getClientLoginById($_GET['actor']);
-            foreach($agent as $login) {
+            foreach ($agent as $login) {
                 $data_field['lrs_client_id'] = $login['id'];
             }
             $flag++;
         }
-        if(isset($_GET['stateId'])) {
+        if (isset($_GET['stateId'])) {
             $data_field['state_key'] = $_GET['stateId'];
             $flag++;
         }
@@ -58,31 +58,31 @@ class LrsStateApiController extends Api
         $data_field = [];
         $flag = 0;
         foreach ($data as $key => $value) {
-            if($key == 'id') {
+            if ($key == 'id') {
                 $id = $value;
                 $record = $this->getRecord($id);
                 $flag++;
             }
-            if($key == 'lrs') {
+            if ($key == 'lrs') {
                 $data_field['lrs_id'] = $value;
             }
-            if($key == 'value') {
+            if ($key == 'value') {
                 $data_field['value'] = $value;
             }
         }
-        if(isset($_GET['object'])) {
+        if (isset($_GET['object'])) {
             $data_field['activity_id'] = $_GET['object'];
         }
-        if(isset($_GET['activityId'])) {
+        if (isset($_GET['activityId'])) {
             $data_field['activity_id'] = $_GET['activityId'];
         }
-        if(isset($_GET['actor'])) {
+        if (isset($_GET['actor'])) {
             $agent = $this->model->getClientLoginById($_GET['actor']);
-            foreach($agent as $login) {
+            foreach ($agent as $login) {
                 $data_field['lrs_client_id'] = $login['id'];
             }
         }
-        if(isset($_GET['stateId'])) {
+        if (isset($_GET['stateId'])) {
             $data_field['state_key'] = $_GET['stateId'];
         }
 
@@ -108,4 +108,5 @@ class LrsStateApiController extends Api
         $this->response('Failed update', 404);
     }
 }
+
 ?>
