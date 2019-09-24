@@ -8,7 +8,7 @@ class LrsStateApiController extends Api
 
     public function createAction()
     {
-        $data = $this->convertFromJson($this->requestBody);
+        $data = $this->convertFromJson($this->requestBody = file_get_contents('php://input'));
 
         // получаем названия столбцов в таблице
         $tables = $this->model->getFields($this->model->table)['array'];
@@ -53,7 +53,7 @@ class LrsStateApiController extends Api
 
     public function updateAction()
     {
-        $data = $this->convertFromJson($this->requestBody);
+        $data = $this->convertFromJson($this->requestBody = file_get_contents('php://input'));
         $data_field = [];
         $flag = 0;
         foreach ($data as $key => $value) {
