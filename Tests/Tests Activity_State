@@ -6,6 +6,7 @@ http://lrs_project/api/lrs/state?activityId=2&stateId=1&agent=nastya
 
 #Test DELETE
 http://lrs_project/api/lrs/state?activityId=2&stateId=1
+http://{{baseUrl}}/api/lrs/state?activityId=1&stateId=2&agent=nastya
 
 #Test PUT Update after update
 

@@ -219,7 +219,7 @@ class Api extends GetModelController
             return $this->response('Record wasnt found', 404);
         }
         if (isset($this->args['stateId']) && isset($this->args['activityId'])) {
-            $predictor = "lrs_state.id = " . "'$stateId' " . "AND activity_id = " . "'$activityId'";
+            $predictor = "id = " . "'$stateId' " . "AND activity_id = " . "'$activityId'";
             $record = $this->model->select($predictor);
             if ($record) {
                 $this->model->deleteByPredict($predictor);
@@ -241,7 +241,7 @@ class Api extends GetModelController
         if (!$record) {
             return $this->response('Record wasnt found', 404);
         }
-        // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
+        // создаем ассоциативный массив, заполненный столбцами таблицы [key => value]
         $tables = $this->model->getFields($this->model->table)['array'];
         foreach ($_PUT as $key => $value) {
             $data_field[$key] = $value;
