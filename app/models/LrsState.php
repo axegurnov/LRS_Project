@@ -20,7 +20,7 @@ class LrsState extends Model
         return $this->db->query($sql);
     }
 
-    public function indexState($data){
+    public function indexState($activityId,$agent){
         //debug($data['agent']);
         $sql = "SELECT *
                 FROM lrs_client cl
@@ -28,20 +28,20 @@ class LrsState extends Model
                 ON cl.id = st.lrs_client_id
                 JOIN activity act 
                 ON st.activity_id = act.id
-                WHERE  st.activity_id ="."'$data[activityId]' AND cl.login = '$data[agent]';";
+                WHERE  st.activity_id ="."'$activityId' AND cl.login = '$agent';";
        //debug($sql);
         return $this->db->query($sql);
 
     }
 
-    public function showState($data){
+    public function showState($activityId,$agent,$stateId){
         $sql = "SELECT *
                 FROM lrs_client cl
                 JOIN $this->table st
                 ON cl.id = st.lrs_client_id
                 JOIN activity act 
                 ON st.activity_id = act.id
-                WHERE  st.activity_id ="."'$data[activityId]' AND cl.login = '$data[agent]' AND st.id ="."$data[stateId];";
+                WHERE  st.activity_id ="."'$activityId' AND cl.login = '$agent' AND st.id ="."$stateId;";
         return $this->db->query($sql);
 
     }

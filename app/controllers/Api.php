@@ -53,7 +53,7 @@ class Api extends GetModelController
         }
         if (isset($verb)) {
             $query = $this->model->statementsJoinVerb($verb);
-            if(!isset($query)) {
+            if (!isset($query)) {
                 return $this->response('Not found');
             }
             $resp = [];
@@ -63,88 +63,85 @@ class Api extends GetModelController
             return $this->response($resp, 200);
         }
         if (isset($since) && isset($until)) {
-                $predictor = "create_date BETWEEN " . $since . " AND " . $until;
-                $resp = $this->model->getMultipleByPredictor($predictor);
-                if ($resp == null) {
-                    return $this->response('Not found');
-                }
-                return $this->response($resp, 200);
+            $predictor = "create_date BETWEEN " . $since . " AND " . $until;
+            $resp = $this->model->getMultipleByPredictor($predictor);
+            if ($resp == null) {
+                return $this->response('Not found');
             }
+            return $this->response($resp, 200);
+        }
         if (isset($offset) && isset($limit)) {
-                $query = $this->model->pagination($offset, $limit);
-                $resp = [];
-                foreach ($query as $value) {
-                    $resp[] = $value;
-                }
-                if ($resp == null) {
-                    return $this->response('Not found');
-                }
-                return $this->response($resp, 200);
+            $query = $this->model->pagination($offset, $limit);
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
             }
+            if ($resp == null) {
+                return $this->response('Not found');
+            }
+            return $this->response($resp, 200);
+        }
         if (isset($activity)) {
 
-                $predictor = "activity_id = '$activity'";
-                $query = $this->model->statementsJoinActivity($activity);
+            $predictor = "activity_id = '$activity'";
+            $query = $this->model->statementsJoinActivity($activity);
 
-                if (!isset($query)) {
-                    return $this->response('Not found');
-                }
-                $resp = [];
-                foreach ($query as $value) {
-                    $resp[] = $value;
-                }
-                debug($resp);
-
-                return $this->response($resp, 200);
+            if (!isset($query)) {
+                return $this->response('Not found');
             }
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+        }
 
-            //TEST Activity/State GET Show
+        //TEST Activity/State GET Show
         if (isset($activityId) && isset($agent) && isset($stateId)) {
-                $query = $this->model->showState($this->args);
-                debug();
-                if (!isset($query)) {
-                    return $this->response('Not found');
-                }
-                //debug($query);
-                $resp = [];
-                foreach ($query as $value) {
-                    $resp[] = $value;
-                }
-                return $this->response($resp, 200);
-
+            $query = $this->model->showState($activityId, $agent, $stateId);
+            //debug($activityId);
+            if (!isset($query)) {
+                return $this->response('Not found');
             }
-            //TEST Activity/State GET Index
+            //debug($query);
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+
+        }
+        //TEST Activity/State GET Index
         if (isset($activityId) && isset($agent)) {
-                $query = $this->model->indexState($args);
-                if (!isset($query)) {
-                    return $this->response('Not found');
-                }
-                //debug($query);
-                $resp = [];
-                foreach ($query as $value) {
-                    $resp[] = $value;
-                }
-                return $this->response($resp, 200);
-
+            $query = $this->model->indexState($activityId, $agent);
+            if (!isset($query)) {
+                return $this->response('Not found');
             }
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
+
+        }
 
         if (isset($agent)) {
-                $query = $this->model->statementsJoinClients($agent);
-                $body = [];
-                foreach ($query as $value) {
-                    $body[] = $value;
-                }
-                if (empty($body)) {
-                    return $this->response('Not found');
-                }
-                $resp = [];
-                foreach ($query as $value) {
-                    $resp[] = $value;
-                }
-                return $this->response($resp, 200);
+            $query = $this->model->statementsJoinClients($agent);
+            $body = [];
+            foreach ($query as $value) {
+                $body[] = $value;
             }
-            return $this->response('Record was not found', 404);
+            if (empty($body)) {
+                return $this->response('Not found');
+            }
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            return $this->response($resp, 200);
         }
+        return $this->response('Record was not found', 404);
+    }
 
 
     public function showAllAction($args)
