@@ -54,12 +54,17 @@ class Api extends GetModelController
             return $this->response($record, 200);
         }
         if (isset($verb)) {
-            $predictor = "verb = '$verb'";
-            $resp = $this->model->getMultipleByPredictor($predictor);
-            if ($resp == null) {
+            $query = $this->model->statementsJoinVerb($verb);
+
+            if(!isset($query)) {
                 return $this->response('Not found');
             }
-            return $this->response($resp, 200);
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            debug($resp);
+            return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
         if (isset($since) && isset($until)) {
             $predictor = "create_date BETWEEN " . $since . " AND " . $until;
@@ -81,7 +86,16 @@ class Api extends GetModelController
             return $this->response($resp, 200);
         }
         if (isset($activity)) {
-            $predictor = "activity = '$activity'";
+            $query = $this->model->statementsJoinActivity($activity);
+
+            if(!isset($query)) {
+                return $this->response('Not found');
+            }
+            $resp = [];
+            foreach ($query as $value) {
+                $resp[] = $value;
+            }
+            debug($resp);
             return $this->response($this->model->getMultipleByPredictor($predictor), 200);
         }
 
