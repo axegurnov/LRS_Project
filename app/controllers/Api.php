@@ -17,7 +17,7 @@ class Api extends GetModelController
     public function __construct($route)
     {
         parent::__construct($route);
-        //$this->requestBody = file_get_contents('php://input');
+        $this->requestBody = file_get_contents('php://input');
         $this->indexAction();
     }
 
@@ -82,10 +82,8 @@ class Api extends GetModelController
             return $this->response($resp, 200);
         }
         if (isset($activity)) {
-
             $predictor = "activity_id = '$activity'";
             $query = $this->model->statementsJoinActivity($activity);
-
             if (!isset($query)) {
                 return $this->response('Not found');
             }
@@ -99,11 +97,13 @@ class Api extends GetModelController
         //TEST Activity/State GET Show
         if (isset($activityId) && isset($agent) && isset($stateId)) {
             $query = $this->model->showState($activityId, $agent, $stateId);
-            //debug($activityId);
-            if (!isset($query)) {
+            $body = [];
+            foreach ($query as $value) {
+                $body[] = $value;
+            }
+            if (empty($body)) {
                 return $this->response('Not found');
             }
-            //debug($query);
             $resp = [];
             foreach ($query as $value) {
                 $resp[] = $value;
@@ -114,7 +114,11 @@ class Api extends GetModelController
         //TEST Activity/State GET Index
         if (isset($activityId) && isset($agent)) {
             $query = $this->model->indexState($activityId, $agent);
-            if (!isset($query)) {
+            $body = [];
+            foreach ($query as $value) {
+                $body[] = $value;
+            }
+            if (empty($body)) {
                 return $this->response('Not found');
             }
             $resp = [];

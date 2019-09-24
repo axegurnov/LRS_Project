@@ -8,7 +8,8 @@ class LrsStateApiController extends Api
 
     public function createAction()
     {
-        $data = $this->convertFromJson($this->requestBody);
+        $data = $this->convertFromJson($this->requestBody = file_get_contents('php://input'));
+        //debug($data);
 
         // получаем названия столбцов в таблице
         $tables = $this->model->getFields($this->model->table)['array'];

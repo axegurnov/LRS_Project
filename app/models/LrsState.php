@@ -41,7 +41,8 @@ class LrsState extends Model
                 ON cl.id = st.lrs_client_id
                 JOIN activity act 
                 ON st.activity_id = act.id
-                WHERE  st.activity_id ="."'$activityId' AND cl.login = '$agent' AND st.id ="."$stateId;";
+                WHERE  st.activity_id ="."'$activityId' AND cl.login = '$agent' AND st.id ="."'$stateId';";
+        //debug($sql);
         return $this->db->query($sql);
 
     }
