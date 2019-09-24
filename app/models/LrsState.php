@@ -35,7 +35,7 @@ class LrsState extends Model
     }
 
     public function showState($activityId,$agent,$stateId){
-        $sql = "SELECT *
+        $sql = "SELECT st.id,act.id,act.name,cl.login
                 FROM lrs_client cl
                 JOIN $this->table st
                 ON cl.id = st.lrs_client_id
