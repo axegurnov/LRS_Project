@@ -35,7 +35,7 @@ class LrsStatementsApiController extends Api
 
     private function getData()
     {
-        $data = $this->convertFromJson($this->requestBody);
+        $data = $this->convertFromJson(file_get_contents("php://input"));
         $data_field = [];
         // создаем асоциативный массив, заполненный столбцами таблицы [key => value]
         $tables = $this->model->getFields($this->model->table)['array'];
